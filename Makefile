@@ -327,8 +327,19 @@ k8s-namespace: ## create the kubernetes namespace
 		export MY_VAR="$(echo "\${PWD}" | envsubst)"; \
 		echo "My_VAR is: $$MY_VAR"; \
 		echo "asdfghjkl"; \
-		echo "\${PWD}" | envsubst; \
+		echo "${PWD}" | envsubst; \
 		if [ $$? -eq 0 ]; then echo "envsubst successful"; else echo "envsubst failed"; fi; \
-		cat ./resources/namespace.yml | envsubst | kubectl apply 2>/dev/null -f -; \
+		echo "one"; \
+		cat ./resources/namespace.yml; \
+		echo "two"; \
+		cat $$PWD/resources/namespace.yml; \
+		echo "three"; \
+		cat ./resources/namespace.yml | envsubst; \
+		echo "four"; \
+		cat $$PWD/resources/namespace.yml | envsubst; \
+		echo "five"; \
+		cat ./resources/namespace.yml | envsubst | kubectl apply -f -; \
 		echo "Done!"; \
 	fi;
+
+	@cat ./resources/namespace.yml | envsubst
