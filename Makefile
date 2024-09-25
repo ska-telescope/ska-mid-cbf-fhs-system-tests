@@ -301,17 +301,17 @@ k8s-namespace: ## create the kubernetes namespace
 	else \
 		. $(K8S_SUPPORT); \
 		KUBE_NAMESPACE=$(KUBE_NAMESPACE); \
-		echo "KUBE_NAMESPACE: ${KUBE_NAMESPACE}"; \
-		if [ "$(CI)" != "true" ]; then \
+		echo "KUBE_NAMESPACE: $$KUBE_NAMESPACE"; \
+		if [ "$$CI" != "true" ]; then \
 			echo "CI is true"; \
-			kubectl get namespace ${KUBE_NAMESPACE} > /dev/null 2>&1; \
-			if [ $? -eq 0 ]; then \
+			kubectl get namespace $$KUBE_NAMESPACE > /dev/null 2>&1; \
+			if [ $$? -eq 0 ]; then \
 				echo "Kubectl get succeeded"; \
-				kubectl describe namespace ${KUBE_NAMESPACE}; \
+				kubectl describe namespace $$KUBE_NAMESPACE; \
 				echo "Described"; \
 				return; \
 			fi;
-			kubectl create namespace ${KUBE_NAMESPACE}; \
+			kubectl create namespace $$KUBE_NAMESPACE; \
 			echo "Created"; \
 			return; \
 		fi; \
@@ -327,3 +327,4 @@ k8s-namespace: ## create the kubernetes namespace
 		cat ${SCRIPT_DIR}/resources/namespace.yml | envsubst | kubectl apply 2>/dev/null -f -; \
 		echo "Done!"; \
 	fi;
+
