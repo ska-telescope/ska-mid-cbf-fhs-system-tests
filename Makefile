@@ -21,7 +21,7 @@ TARANTA ?= true # Enable Taranta
 TARANTA_AUTH ?= false # Enable Taranta
 MINIKUBE ?= false ## Minikube or not
 
-#LOADBALANCER_IP ?= 142.73.34.170# psi mid head node
+LOADBALANCER_IP ?= 10.164.0.10
 INGRESS_PROTOCOL ?= https
 ifeq ($(strip $(MINIKUBE)),true)
 LOADBALANCER_IP ?= $(shell minikube ip)
@@ -229,17 +229,17 @@ python-pre-test:
 # @echo "Update dish_packet_capture_$(TARGET_SITE).yaml using ENGINEERING_CONSOLE_IMAGE_VER set to $(ENGINEERING_CONSOLE_IMAGE_VER)"
 # @if [ "$(USE_DEV_BUILD)" == "false" ]; then \
 # 	echo "and image set to $(EC_CAR_REGISTRY)"; \
-# 	cat charts/ska-mid-cbf-system-tests/resources/dish_packet_capture_$(TARGET_SITE).yaml | sed -e "s|${EC_REGISTRY_REPO}/ska-mid-cbf-engineering-console|${EC_CAR_REGISTRY}|" -e "s|ENGINEERING_CONSOLE_IMAGE_VER|${ENGINEERING_CONSOLE_IMAGE_VER}|" > dish_packet_capture_temp.yaml; \
+# 	cat charts/ska-mid-cbf-fhs-system-tests/resources/dish_packet_capture_$(TARGET_SITE).yaml | sed -e "s|${EC_REGISTRY_REPO}/ska-mid-cbf-engineering-console|${EC_CAR_REGISTRY}|" -e "s|ENGINEERING_CONSOLE_IMAGE_VER|${ENGINEERING_CONSOLE_IMAGE_VER}|" > dish_packet_capture_temp.yaml; \
 # else \
-# 	cat charts/ska-mid-cbf-system-tests/resources/dish_packet_capture_$(TARGET_SITE).yaml | sed -e "s|ENGINEERING_CONSOLE_IMAGE_VER|${ENGINEERING_CONSOLE_IMAGE_VER}|" > dish_packet_capture_temp.yaml; \
+# 	cat charts/ska-mid-cbf-fhs-system-tests/resources/dish_packet_capture_$(TARGET_SITE).yaml | sed -e "s|ENGINEERING_CONSOLE_IMAGE_VER|${ENGINEERING_CONSOLE_IMAGE_VER}|" > dish_packet_capture_temp.yaml; \
 # fi
 # cat dish_packet_capture_temp.yaml
 # @echo "Update visibilities_pod_$(TARGET_SITE).yaml using SIGNAL_VERIFICATION_IMAGE_VER set to $(SIGNAL_VERIFICATION_IMAGE_VER)"
 # @if [ "$(USE_DEV_BUILD)" == "false" ]; then \
 # 	echo "and image set to $(SV_CAR_REGISTRY)"; \
-# 	cat charts/ska-mid-cbf-system-tests/resources/visibilities_pod_$(TARGET_SITE).yaml | sed -e "s|${SV_REGISTRY_REPO}/ska-mid-cbf-signal-verification-visibility-capture|${SV_CAR_REGISTRY}|" -e "s|SIGNAL_VERIFICATION_IMAGE_VER|${SIGNAL_VERIFICATION_IMAGE_VER}|" > visibilities_pod_temp.yaml; \
+# 	cat charts/ska-mid-cbf-fhs-system-tests/resources/visibilities_pod_$(TARGET_SITE).yaml | sed -e "s|${SV_REGISTRY_REPO}/ska-mid-cbf-signal-verification-visibility-capture|${SV_CAR_REGISTRY}|" -e "s|SIGNAL_VERIFICATION_IMAGE_VER|${SIGNAL_VERIFICATION_IMAGE_VER}|" > visibilities_pod_temp.yaml; \
 # else \
-# 	cat charts/ska-mid-cbf-system-tests/resources/visibilities_pod_$(TARGET_SITE).yaml | sed -e "s|SIGNAL_VERIFICATION_IMAGE_VER|${SIGNAL_VERIFICATION_IMAGE_VER}|" > visibilities_pod_temp.yaml; \
+# 	cat charts/ska-mid-cbf-fhs-system-tests/resources/visibilities_pod_$(TARGET_SITE).yaml | sed -e "s|SIGNAL_VERIFICATION_IMAGE_VER|${SIGNAL_VERIFICATION_IMAGE_VER}|" > visibilities_pod_temp.yaml; \
 # fi
 # cat visibilities_pod_temp.yaml
 	make update-internal-schema

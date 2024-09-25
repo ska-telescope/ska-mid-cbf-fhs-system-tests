@@ -30,8 +30,8 @@ PrivateRules.mak
 # self generated SSL certificates for Ingress
 charts/ska-tango-examples/secrets/tls.*
 
-charts/ska-mid-cbf-system-tests/charts/*
-charts/ska-mid-cbf-system-tests/Chart.lock
+charts/ska-mid-cbf-fhs-system-tests/charts/*
+charts/ska-mid-cbf-fhs-system-tests/Chart.lock
 telepresence.log
 charts/ska-tango-examples/Chart.lock
 charts/ska-tango-examples/charts/*

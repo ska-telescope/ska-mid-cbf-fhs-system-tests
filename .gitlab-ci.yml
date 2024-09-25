@@ -166,9 +166,9 @@ log-collector:
 #     - export CI_PYTHON_TEST_ID=$(cat "build/reports/python_test_id.txt")
 #     - export CI_LOG_COLLECTOR_ID=$(cat "logs/log_collector_id.txt")
 #     - export PYTEST_MARKER=$(cat "build/reports/pytest_marker.txt")
-#     - export REPORT_SUMMARY_URL="https://ska-telescope.gitlab.io/-/ska-mid-cbf-system-tests/-/jobs/$CI_PYTHON_TEST_ID/artifacts/results/reports/report_summary.html"
-#     - export REPORTS_FOLDER_URL="https://gitlab.com/ska-telescope/ska-mid-cbf-system-tests/-/jobs/$CI_PYTHON_TEST_ID/artifacts/browse/results/reports/"
-#     - export LOG_LEVEL_SUMMARY_URL="https://ska-telescope.gitlab.io/-/ska-mid-cbf-system-tests/-/jobs/$CI_LOG_COLLECTOR_ID/artifacts/logs/log_level_summary.txt"
+#     - export REPORT_SUMMARY_URL="https://ska-telescope.gitlab.io/-/ska-mid-cbf-fhs-system-tests/-/jobs/$CI_PYTHON_TEST_ID/artifacts/results/reports/report_summary.html"
+#     - export REPORTS_FOLDER_URL="https://gitlab.com/ska-telescope/ska-mid-cbf-fhs-system-tests/-/jobs/$CI_PYTHON_TEST_ID/artifacts/browse/results/reports/"
+#     - export LOG_LEVEL_SUMMARY_URL="https://ska-telescope.gitlab.io/-/ska-mid-cbf-fhs-system-tests/-/jobs/$CI_LOG_COLLECTOR_ID/artifacts/logs/log_level_summary.txt"
 #     - export TARGET_SITE=$TARGET_SITE
 #     - export HW_CONFIG_USED=$HW_CONFIG_FILE
 #     - export SLIM_FS_USED=$SLIM_FS_CONFIG_FILE
