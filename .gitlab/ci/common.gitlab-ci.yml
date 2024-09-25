@@ -2,9 +2,6 @@
   variables:
     CONFIG: mid
     HELM_RELEASE: "test-$CI_PIPELINE_ID"
-#    KUBE_NAMESPACE: "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN"
-  before_script:
-    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
 
 .deploy:
   variables:
@@ -15,6 +12,7 @@
     CHART_FILE: "charts/ska-mid-cbf-fhs-system-tests/Chart.yaml"
   script:
     - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
+    - export KUBE_AUTH_NAMESPACES=$KUBE_NAMESPACE
     - echo $CI_JOB_NAME - $CI_JOB_STAGE
     - echo "Make config dump"
     - make vars
