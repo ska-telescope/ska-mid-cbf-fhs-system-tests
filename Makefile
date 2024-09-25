@@ -318,7 +318,7 @@ k8s-namespace: ## create the kubernetes namespace
 		echo "createNamespace: Creating labeled namespace ..."; \
 		export CICD_DOMAIN="cicd.skao.int"; \
 		export MERGE_REQUEST_ASSIGNEES=""; \
-		SCRIPT_DIR=$(pwd); \
+		SCRIPT_DIR="."; \
 		echo "Script dir: ${SCRIPT_DIR}"; \
 		if [ ! -z "$(CI_MERGE_REQUEST_ID)" ]; then \
 			export MERGE_REQUEST_ASSIGNEES="$(echo ${CI_MERGE_REQUEST_ASSIGNEES} | sed -E 's/,? and /,/g; s/ //g')"; \
