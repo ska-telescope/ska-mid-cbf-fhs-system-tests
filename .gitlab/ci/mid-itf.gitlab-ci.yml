@@ -24,7 +24,7 @@ mid-itf-on-demand-deploy:
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
   before_script:
-    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
+    - export KUBE_NAMESPACE="ci-ska-mid-cbf-fhs-system-tests-1469526049-jwambackmda"
     - make k8s-delete-namespace
     - |
       if [[ $(kubectl get namespaces | grep ci-$CI_PROJECT_NAME) ]]; then
