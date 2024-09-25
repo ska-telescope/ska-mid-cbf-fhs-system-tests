@@ -1,0 +1,66 @@
+include:
+  - local: "/.gitlab/ci/common.gitlab-ci.yml"
+
+.mid_itf_on_demand:
+  tags:
+    - ska-k8srunner-za-itf
+  stage: on_demand_itf
+  extends:
+    - .mid
+  variables:
+    VALUES: "values.yml"
+    INGRESS_HOST: "INGRESS.IP.ADDRESS"
+    SERVICE_ACCOUNT: "ci-svc-fhs-sys-tests-$CI_PIPELINE_ID"
+
+mid-itf-on-demand-deploy:
+  extends:
+    - .deploy
+    - .mid_itf_on_demand
+  rules:
+    - if: $TARGET_SITE == "psi"
+      when: never  
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      when: manual
+  before_script:
+    - |
+      if [[ $(kubectl get namespaces | grep ci-$CI_PROJECT_NAME) ]]; then
+        echo "There is already a ci-$CI_PROJECT_NAME namespace deployed, please delete it before deploying a new one!"
+        exit 1
+      else
+        echo "There is no ci-$CI_PROJECT_NAME namespace deployed, let's do it!"
+      fi
+  allow_failure: true
+  environment:
+    name: mid-itf/ska-$CI_COMMIT_REF_NAME
+
+mid-itf-on-demand-info:
+  extends:
+    - .info
+    - .mid_itf_on_demand
+  rules:
+    - if: $TARGET_SITE == "psi"
+      when: never
+    - when: manual
+  allow_failure: true
+
+mid-itf-on-demand-destroy:
+  stage: cleanup
+  extends:
+    - .cleanup
+    - .mid_itf_on_demand
+  needs:
+    - log-collector
+  rules:
+    - if: $TARGET_SITE == "psi"
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: delayed
+      start_in: 1 hour
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      when: delayed
+      start_in: 1 hour
+  environment:
+    name: mid-itf/ska-$CI_COMMIT_REF_NAME
+    action: stop

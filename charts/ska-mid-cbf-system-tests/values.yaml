@@ -1,0 +1,92 @@
+display: ":0"
+xauthority: "~/.Xauthority"
+
+global:
+  minikube: false
+  operator: true
+  exposeAllDS: true
+  annotations:
+    app.gitlab.com/app: ska-mid-cbf-fhs-system-tests
+    app.gitlab.com/env: ska
+  taranta_auth_enabled: false
+  taranta_dashboard_enabled: true
+  sub-system:
+    tango-base:
+      enabled: false
+    ska-tango-base:
+      enabled: false
+    ska-taranta:
+      enabled: false
+  retry:
+    - "--sleep=3"
+    - "--tries=100"
+  tango_host: databaseds-tango-base:10000
+  device_server_port: 45450
+  cluster_domain: cluster.local
+
+ska-tango-base:
+  enabled: true
+  vnc:
+    replicas: 1
+    enabled: true
+  tangorest:
+    enabled: true
+    replicas: 1
+  tangodb:
+    use_pv: true
+
+ska-tango-tangogql:
+  enabled: true
+  ska-tango-base:
+    enabled: false
+
+ska-taranta:
+  legacy_compatibility: true
+  enabled: true
+
+ska-tango-util:
+  enabled: true
+
+#telescope control
+## mid-cbf
+# Note: Versions and repository links defined here do not necessarily reflect what will be
+# deployed to the namespace. These values can be overwritten by Makefile processing at runtime
+# based on USE_DEV_BUILD and <repo>_HASH_VERSION variables.
+ska-mid-cbf-fhs-vcc:
+  enabled: true
+  midcbf:
+    image:
+      registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-fhs-vcc
+      image: ska-mid-cbf-fhs-vcc
+      tag: 0.0.1-dev.c1d8f5c2c
+      pullPolicy: IfNotPresent
+
+ska-mid-cbf-emulators:
+  enabled: true
+  emulator:
+    image:
+      registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators
+      image: ska-mid-cbf-emulators-emulator
+      tag: 0.5.2
+      pullPolicy: IfNotPresent
+  injector:
+    image:
+      registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators
+      image: ska-mid-cbf-emulators-injector
+      tag: 0.5.2
+      pullPolicy: IfNotPresent
+
+# EDA
+# ska-tango-archiver:
+#   legacy_compatibility: true
+#   enabled: false
+#   telescope: SKA-mid
+#   telescope_environment: MID_PSI
+#   hostname: timescaledb.ska-eda-mid-db.svc.cluster.local
+#   dbname: default_timescaledb
+#   dbuser: admin
+#   dbpassword: admin
+#   port: 5432
+#   configuration_manager: mid-eda/cm/01
+#   event_subscriber: mid-eda/es/01
+#   archwizard_config: MyHDB=tango://databaseds-tango-base.{{.Release.Name}}.svc.cluster.local:10000/mid-eda/cm/01
