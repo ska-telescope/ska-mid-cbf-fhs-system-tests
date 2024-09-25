@@ -300,7 +300,7 @@ k8s-namespace: ## create the kubernetes namespace
 		echo "k8s-namespace: Namespace checks are skipped!"; \
 	else \
 		. $(K8S_SUPPORT); \
-		KUBE_NAMESPACE=$(KUBE_NAMESPACE) \
+		KUBE_NAMESPACE=$(KUBE_NAMESPACE); \
 		if [ "$(CI)" != "true" ]; then \
 			kubectl get namespace ${KUBE_NAMESPACE} > /dev/null 2>&1; \
 			if [ $? -eq 0 ]; then \
