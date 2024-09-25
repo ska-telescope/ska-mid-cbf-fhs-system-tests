@@ -2,8 +2,6 @@ include:
   - local: "/.gitlab/ci/common.gitlab-ci.yml"
 
 .mid_itf_on_demand:
-  tags:
-    - ska-k8srunner-za-itf
   stage: on_demand_itf
   extends:
     - .mid
@@ -24,8 +22,8 @@ mid-itf-on-demand-deploy:
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
   before_script:
-    - export KUBE_NAMESPACE="ci-ska-mid-cbf-fhs-system-tests-1469550350-jwambackmda"
-    - make k8s-delete-namespace
+#    - export KUBE_NAMESPACE="ci-ska-mid-cbf-fhs-system-tests-1469550350-jwambackmda"
+#    - make k8s-delete-namespace
     - |
       if [[ $(kubectl get namespaces | grep ci-$CI_PROJECT_NAME) ]]; then
         echo "There is already a ci-$CI_PROJECT_NAME namespace deployed, please delete it before deploying a new one!"

@@ -4,7 +4,6 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
   MINIKUBE: "false"
   TARGET_SITE: itf
-  RUNNER_TAG: ska-k8srunner-za-itf #Choose between k8srunner-psi-mid and ska-k8srunner-za-itf
   TANGO_HOST: databaseds-tango-base:10000
   CLUSTER_DOMAIN: "cluster.local" #Choose between cluster.local and miditf.internal.skao.int
   K8S_TIMEOUT: 800s
@@ -106,8 +105,6 @@ python-test:
     - when: never #Ensure the tests will only run if the target_site is set and the corresponding deployment job is executed
   variables:
     PYTEST_MARKER: nightly
-  tags:
-    - $RUNNER_TAG
   before_script:
     - apt update
     - apt install -y iputils-ping
@@ -133,8 +130,6 @@ log-collector:
   stage: log-collector
   extends:
     - .mid
-  tags:
-    - $RUNNER_TAG
   before_script:
     - apt update
     - apt install -y bsdmainutils
@@ -157,8 +152,6 @@ log-collector:
 # xray-publish:
 #   extends:
 #     - .mid
-#   tags:
-#     - $RUNNER_TAG
 #   before_script:
 #     - export MCS_IMAGE_VER=$(kubectl describe pod/ds-cbfcontroller-controller-0 -n $KUBE_NAMESPACE | grep ska-mid-cbf-mcs | grep 'Image:' | sed 's/.*\://')
 #     - export EC_IMAGE_VER=$(kubectl describe pod/ds-deployer-deployer-0 -n $KUBE_NAMESPACE | grep 'Image:' | sed 's/.*\://')
