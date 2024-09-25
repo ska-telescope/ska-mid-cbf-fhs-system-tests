@@ -318,12 +318,10 @@ k8s-namespace: ## create the kubernetes namespace
 		echo "createNamespace: Creating labeled namespace ..."; \
 		export CICD_DOMAIN="cicd.skao.int"; \
 		export MERGE_REQUEST_ASSIGNEES=""; \
-		SCRIPT_DIR=$(cd -- "$(dirname -- "$$BASH_SOURCE[0]")" &> /dev/null && pwd); \
-		echo "Script dir: $$SCRIPT_DIR"; \
 		if [ ! -z "$(CI_MERGE_REQUEST_ID)" ]; then \
 			export MERGE_REQUEST_ASSIGNEES="$(echo $$CI_MERGE_REQUEST_ASSIGNEES | sed -E 's/,? and /,/g; s/ //g')"; \
 			echo "Merge request assignees: $$MERGE_REQUEST_ASSIGNEES"; \
 		fi; \
-		cat $$SCRIPT_DIR/resources/namespace.yml | envsubst | kubectl apply 2>/dev/null -f -; \
+		cat ./resources/namespace.yml | envsubst | kubectl apply 2>/dev/null -f -; \
 		echo "Done!"; \
 	fi;
