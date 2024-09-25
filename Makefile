@@ -310,7 +310,7 @@ k8s-namespace: ## create the kubernetes namespace
 				kubectl describe namespace $$KUBE_NAMESPACE; \
 				echo "Described"; \
 				return; \
-			fi;
+			fi; \
 			kubectl create namespace $$KUBE_NAMESPACE; \
 			echo "Created"; \
 			return; \
@@ -327,4 +327,3 @@ k8s-namespace: ## create the kubernetes namespace
 		cat ${SCRIPT_DIR}/resources/namespace.yml | envsubst | kubectl apply 2>/dev/null -f -; \
 		echo "Done!"; \
 	fi;
-
