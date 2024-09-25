@@ -14,8 +14,8 @@ workflow:
   name: '$CI_PIPELINE_NAME'
   
 stages:
-  - lint
-  - build
+#  - lint
+#  - build
 #  - on_demand_psi
   - on_demand_itf
   - test

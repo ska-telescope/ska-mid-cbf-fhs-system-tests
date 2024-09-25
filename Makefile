@@ -301,7 +301,7 @@ k8s-namespace: ## create the kubernetes namespace
 	else \
 		. $(K8S_SUPPORT); \
 		KUBE_NAMESPACE=$(KUBE_NAMESPACE) \
-		if [ "$CI" != "true" ]; then \
+		if [ "$(CI)" != "true" ]; then \
 			kubectl get namespace ${KUBE_NAMESPACE} > /dev/null 2>&1; \
 			if [ $? -eq 0 ]; then \
 				kubectl describe namespace ${KUBE_NAMESPACE}; \
@@ -314,8 +314,11 @@ k8s-namespace: ## create the kubernetes namespace
 		export CICD_DOMAIN="cicd.skao.int"; \
 		export MERGE_REQUEST_ASSIGNEES=""; \
 		SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd); \
-		if [ ! -z "$CI_MERGE_REQUEST_ID" ]; then \
+		echo "Script dir: ${SCRIPT_DIR}"; \
+		if [ ! -z "$(CI_MERGE_REQUEST_ID)" ]; then \
 			export MERGE_REQUEST_ASSIGNEES="$(echo ${CI_MERGE_REQUEST_ASSIGNEES} | sed -E 's/,? and /,/g; s/ //g')"; \
+			echo "Merge request assignees: ${MERGE_REQUEST_ASSIGNEES}"; \
 		fi; \
 		cat ${SCRIPT_DIR}/resources/namespace.yml | envsubst | kubectl apply 2>/dev/null -f -; \
+		echo "Done!"; \
 	fi;
