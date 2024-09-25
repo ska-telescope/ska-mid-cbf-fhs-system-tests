@@ -89,16 +89,16 @@ python-test:
   extends:
     - .mid
   rules:
-    - if: $TARGET_SITE == "psi" && $CI_PIPELINE_SOURCE == "schedule"
-      needs:
-        - job: psi-mid-on-demand-deploy
+    # - if: $TARGET_SITE == "psi" && $CI_PIPELINE_SOURCE == "schedule"
+    #   needs:
+    #     - job: psi-mid-on-demand-deploy
     - if: $TARGET_SITE == "itf" && $CI_PIPELINE_SOURCE == "schedule"
       needs:
         - job: mid-itf-on-demand-deploy
-    - if: $TARGET_SITE == "psi" && $CI_PIPELINE_SOURCE != "schedule"
-      when: manual
-      needs:
-        - job: psi-mid-on-demand-deploy
+    # - if: $TARGET_SITE == "psi" && $CI_PIPELINE_SOURCE != "schedule"
+    #   when: manual
+    #   needs:
+    #     - job: psi-mid-on-demand-deploy
     - if: $TARGET_SITE == "itf" && $CI_PIPELINE_SOURCE != "schedule"
       when: manual
       needs:
