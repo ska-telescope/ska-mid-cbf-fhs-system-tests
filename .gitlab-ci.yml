@@ -14,11 +14,11 @@ workflow:
   name: '$CI_PIPELINE_NAME'
   
 stages:
-#  - lint
-#  - build
 #  - on_demand_psi
   - on_demand_itf
   - test
+  - lint
+  - build
   - log-collector
   - join-reports
   - pages
