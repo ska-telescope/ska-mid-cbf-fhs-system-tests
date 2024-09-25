@@ -295,51 +295,51 @@ lint-python-local:
 	if [ $$ISORT_ERROR -eq 0 ] && [ $$BLACK_ERROR -eq 0 ] && [ $$FLAKE_ERROR -eq 0 ] && [ $$PYLINT_ERROR -eq 0 ]; then echo "Lint was successful. Check build/lint-output for any additional details."; fi;
 
 
-k8s-namespace: ## create the kubernetes namespace
-	@if [ "true" == "$(K8S_SKIP_NAMESPACE)" ]; then \
-		echo "k8s-namespace: Namespace checks are skipped!"; \
-	else \
-		. $(K8S_SUPPORT); \
-		KUBE_NAMESPACE=$(KUBE_NAMESPACE); \
-		echo "KUBE_NAMESPACE: $$KUBE_NAMESPACE"; \
-		if [ "$$CI" != "true" ]; then \
-			echo "CI is true"; \
-			kubectl get namespace $$KUBE_NAMESPACE > /dev/null 2>&1; \
-			if [ $$? -eq 0 ]; then \
-				echo "Kubectl get succeeded"; \
-				kubectl describe namespace $$KUBE_NAMESPACE; \
-				echo "Described"; \
-				return; \
-			fi; \
-			kubectl create namespace $$KUBE_NAMESPACE; \
-			echo "Created"; \
-			return; \
-		fi; \
-		echo "createNamespace: Creating labeled namespace ..."; \
-		export CICD_DOMAIN="cicd.skao.int"; \
-		export MERGE_REQUEST_ASSIGNEES=""; \
-		if [ ! -z "$(CI_MERGE_REQUEST_ID)" ]; then \
-			export MERGE_REQUEST_ASSIGNEES="$(echo $$CI_MERGE_REQUEST_ASSIGNEES | sed -E 's/,? and /,/g; s/ //g')"; \
-			echo "Merge request assignees: $$MERGE_REQUEST_ASSIGNEES"; \
-		fi; \
-		echo "PWD is: $$PWD"; \
-		echo "$(cat ./resources/namespace.yml | envsubst)"; \
-		export MY_VAR="$(echo "\${PWD}" | envsubst)"; \
-		echo "My_VAR is: $$MY_VAR"; \
-		echo "asdfghjkl"; \
-		echo "${PWD}" | envsubst; \
-		if [ $$? -eq 0 ]; then echo "envsubst successful"; else echo "envsubst failed"; fi; \
-		echo "one"; \
-		cat ./resources/namespace.yml; \
-		echo "two"; \
-		cat $$PWD/resources/namespace.yml; \
-		echo "three"; \
-		cat ./resources/namespace.yml | envsubst; \
-		echo "four"; \
-		cat $$PWD/resources/namespace.yml | envsubst; \
-		echo "five"; \
-		cat ./resources/namespace.yml | envsubst | kubectl apply -f -; \
-		echo "Done!"; \
-	fi;
+# k8s-namespace: ## create the kubernetes namespace
+# 	@if [ "true" == "$(K8S_SKIP_NAMESPACE)" ]; then \
+# 		echo "k8s-namespace: Namespace checks are skipped!"; \
+# 	else \
+# 		. $(K8S_SUPPORT); \
+# 		KUBE_NAMESPACE=$(KUBE_NAMESPACE); \
+# 		echo "KUBE_NAMESPACE: $$KUBE_NAMESPACE"; \
+# 		if [ "$$CI" != "true" ]; then \
+# 			echo "CI is true"; \
+# 			kubectl get namespace $$KUBE_NAMESPACE > /dev/null 2>&1; \
+# 			if [ $$? -eq 0 ]; then \
+# 				echo "Kubectl get succeeded"; \
+# 				kubectl describe namespace $$KUBE_NAMESPACE; \
+# 				echo "Described"; \
+# 				return; \
+# 			fi; \
+# 			kubectl create namespace $$KUBE_NAMESPACE; \
+# 			echo "Created"; \
+# 			return; \
+# 		fi; \
+# 		echo "createNamespace: Creating labeled namespace ..."; \
+# 		export CICD_DOMAIN="cicd.skao.int"; \
+# 		export MERGE_REQUEST_ASSIGNEES=""; \
+# 		if [ ! -z "$(CI_MERGE_REQUEST_ID)" ]; then \
+# 			export MERGE_REQUEST_ASSIGNEES="$(echo $$CI_MERGE_REQUEST_ASSIGNEES | sed -E 's/,? and /,/g; s/ //g')"; \
+# 			echo "Merge request assignees: $$MERGE_REQUEST_ASSIGNEES"; \
+# 		fi; \
+# 		echo "PWD is: $$PWD"; \
+# 		echo "$(cat ./resources/namespace.yml | envsubst)"; \
+# 		export MY_VAR="$(echo "\${PWD}" | envsubst)"; \
+# 		echo "My_VAR is: $$MY_VAR"; \
+# 		echo "asdfghjkl"; \
+# 		echo "${PWD}" | envsubst; \
+# 		if [ $$? -eq 0 ]; then echo "envsubst successful"; else echo "envsubst failed"; fi; \
+# 		echo "one"; \
+# 		cat ./resources/namespace.yml; \
+# 		echo "two"; \
+# 		cat $$PWD/resources/namespace.yml; \
+# 		echo "three"; \
+# 		cat ./resources/namespace.yml | envsubst; \
+# 		echo "four"; \
+# 		cat $$PWD/resources/namespace.yml | envsubst; \
+# 		echo "five"; \
+# 		cat ./resources/namespace.yml | envsubst | kubectl apply -f -; \
+# 		echo "Done!"; \
+# 	fi;
 
-	@cat ./resources/namespace.yml | envsubst
+# 	@cat ./resources/namespace.yml | envsubst
