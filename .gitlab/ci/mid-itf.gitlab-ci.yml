@@ -3,6 +3,7 @@ include:
 
 .mid_itf_on_demand:
   tags:
+    - k8srunner
     - ska-k8s
   stage: on_demand_itf
   extends:
