@@ -322,7 +322,10 @@ k8s-namespace: ## create the kubernetes namespace
 			export MERGE_REQUEST_ASSIGNEES="$(echo $$CI_MERGE_REQUEST_ASSIGNEES | sed -E 's/,? and /,/g; s/ //g')"; \
 			echo "Merge request assignees: $$MERGE_REQUEST_ASSIGNEES"; \
 		fi; \
+		echo "$$PWD"; \
 		echo "$(cat ./resources/namespace.yml | envsubst)"; \
+		echo "$(echo "\${PWD}" | envsubst)"; \
+		echo "asdfghjkl"; \
 		cat ./resources/namespace.yml | envsubst | kubectl apply 2>/dev/null -f -; \
 		echo "Done!"; \
 	fi;
