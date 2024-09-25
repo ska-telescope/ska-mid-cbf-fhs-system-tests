@@ -293,3 +293,29 @@ lint-python-local:
 	if [ $$FLAKE_ERROR -ne 0 ]; then echo "Flake8 lint errors were found. Check build/lint-output/3-flake8-output.txt for details."; fi; \
 	if [ $$PYLINT_ERROR -ne 0 ]; then echo "Pylint lint errors were found. Check build/lint-output/4-pylint-output.txt for details."; fi; \
 	if [ $$ISORT_ERROR -eq 0 ] && [ $$BLACK_ERROR -eq 0 ] && [ $$FLAKE_ERROR -eq 0 ] && [ $$PYLINT_ERROR -eq 0 ]; then echo "Lint was successful. Check build/lint-output for any additional details."; fi;
+
+
+k8s-namespace: ## create the kubernetes namespace
+	@if [ "true" == "$(K8S_SKIP_NAMESPACE)" ]; then \
+		echo "k8s-namespace: Namespace checks are skipped!"; \
+	else \
+		. $(K8S_SUPPORT); \
+		KUBE_NAMESPACE=$(KUBE_NAMESPACE) \
+		if [ "$CI" != "true" ]; then \
+			kubectl get namespace ${KUBE_NAMESPACE} > /dev/null 2>&1; \
+			if [ $? -eq 0 ]; then \
+				kubectl describe namespace ${KUBE_NAMESPACE}; \
+				return; \
+			fi;
+			kubectl create namespace ${KUBE_NAMESPACE}; \
+			return; \
+		fi; \
+		echo "createNamespace: Creating labeled namespace ..."; \
+		export CICD_DOMAIN="cicd.skao.int"; \
+		export MERGE_REQUEST_ASSIGNEES=""; \
+		SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd); \
+		if [ ! -z "$CI_MERGE_REQUEST_ID" ]; then \
+			export MERGE_REQUEST_ASSIGNEES="$(echo ${CI_MERGE_REQUEST_ASSIGNEES} | sed -E 's/,? and /,/g; s/ //g')"; \
+		fi; \
+		cat ${SCRIPT_DIR}/resources/namespace.yml | envsubst | kubectl apply 2>/dev/null -f -; \
+	fi;
