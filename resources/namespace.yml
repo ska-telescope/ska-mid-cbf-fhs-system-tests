@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "${KUBE_NAMESPACE}"
+  annotations:
+    ${CICD_DOMAIN}/authorEmail: "${GITLAB_USER_EMAIL}"
+    ${CICD_DOMAIN}/environment: "${CI_ENVIRONMENT_SLUG}"
+    ${CICD_DOMAIN}/jobUrl: "${CI_JOB_URL}"
+    ${CICD_DOMAIN}/mrAssignees: "${MERGE_REQUEST_ASSIGNEES}"
+    ${CICD_DOMAIN}/pipelineUrl: "${CI_PIPELINE_URL}"
+    ${CICD_DOMAIN}/timestamp: "${CI_JOB_STARTED_AT}"
+  labels:
+    ${CICD_DOMAIN}/author: "${GITLAB_USER_LOGIN}"
+    ${CICD_DOMAIN}/authorId: "${GITLAB_USER_ID}"
+    ${CICD_DOMAIN}/branch: "${CI_COMMIT_REF_SLUG}"
+    ${CICD_DOMAIN}/commit: "${CI_COMMIT_SHA}"
+    ${CICD_DOMAIN}/job: "${CI_JOB_NAME_SLUG}"
+    ${CICD_DOMAIN}/pipelineSource: "${CI_PIPELINE_SOURCE}"
+    ${CICD_DOMAIN}/jobId: "${CI_JOB_ID}"
+    ${CICD_DOMAIN}/pipelineId: "${CI_PIPELINE_ID}"
+    ${CICD_DOMAIN}/environmentTier: "${CI_ENVIRONMENT_TIER}"
+    ${CICD_DOMAIN}/projectId: "${CI_PROJECT_ID}"
+    ${CICD_DOMAIN}/project: "${CI_PROJECT_NAME}"
+    ${CICD_DOMAIN}/projectPath: "${CI_PROJECT_PATH_SLUG}"
+    ${CICD_DOMAIN}/mrId: "${CI_MERGE_REQUEST_ID}"

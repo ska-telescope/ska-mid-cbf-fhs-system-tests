@@ -295,35 +295,35 @@ lint-python-local:
 	if [ $$ISORT_ERROR -eq 0 ] && [ $$BLACK_ERROR -eq 0 ] && [ $$FLAKE_ERROR -eq 0 ] && [ $$PYLINT_ERROR -eq 0 ]; then echo "Lint was successful. Check build/lint-output for any additional details."; fi;
 
 
-# k8s-namespace: ## create the kubernetes namespace
-# 	@if [ "true" == "$(K8S_SKIP_NAMESPACE)" ]; then \
-# 		echo "k8s-namespace: Namespace checks are skipped!"; \
-# 	else \
-# 		. $(K8S_SUPPORT); \
-# 		KUBE_NAMESPACE=$(KUBE_NAMESPACE); \
-# 		echo "KUBE_NAMESPACE: $$KUBE_NAMESPACE"; \
-# 		if [ "$$CI" != "true" ]; then \
-# 			echo "CI is true"; \
-# 			kubectl get namespace $$KUBE_NAMESPACE > /dev/null 2>&1; \
-# 			if [ $$? -eq 0 ]; then \
-# 				echo "Kubectl get succeeded"; \
-# 				kubectl describe namespace $$KUBE_NAMESPACE; \
-# 				echo "Described"; \
-# 				return; \
-# 			fi; \
-# 			kubectl create namespace $$KUBE_NAMESPACE; \
-# 			echo "Created"; \
-# 			return; \
-# 		fi; \
-# 		echo "createNamespace: Creating labeled namespace ..."; \
-# 		export CICD_DOMAIN="cicd.skao.int"; \
-# 		export MERGE_REQUEST_ASSIGNEES=""; \
-# 		SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd); \
-# 		echo "Script dir: ${SCRIPT_DIR}"; \
-# 		if [ ! -z "$(CI_MERGE_REQUEST_ID)" ]; then \
-# 			export MERGE_REQUEST_ASSIGNEES="$(echo ${CI_MERGE_REQUEST_ASSIGNEES} | sed -E 's/,? and /,/g; s/ //g')"; \
-# 			echo "Merge request assignees: ${MERGE_REQUEST_ASSIGNEES}"; \
-# 		fi; \
-# 		cat ${SCRIPT_DIR}/resources/namespace.yml | envsubst | kubectl apply 2>/dev/null -f -; \
-# 		echo "Done!"; \
-# 	fi;
+k8s-namespace: ## create the kubernetes namespace
+	@if [ "true" == "$(K8S_SKIP_NAMESPACE)" ]; then \
+		echo "k8s-namespace: Namespace checks are skipped!"; \
+	else \
+		. $(K8S_SUPPORT); \
+		KUBE_NAMESPACE=$(KUBE_NAMESPACE); \
+		echo "KUBE_NAMESPACE: $$KUBE_NAMESPACE"; \
+		if [ "$$CI" != "true" ]; then \
+			echo "CI is true"; \
+			kubectl get namespace $$KUBE_NAMESPACE > /dev/null 2>&1; \
+			if [ $$? -eq 0 ]; then \
+				echo "Kubectl get succeeded"; \
+				kubectl describe namespace $$KUBE_NAMESPACE; \
+				echo "Described"; \
+				return; \
+			fi; \
+			kubectl create namespace $$KUBE_NAMESPACE; \
+			echo "Created"; \
+			return; \
+		fi; \
+		echo "createNamespace: Creating labeled namespace ..."; \
+		export CICD_DOMAIN="cicd.skao.int"; \
+		export MERGE_REQUEST_ASSIGNEES=""; \
+		SCRIPT_DIR=$(pwd); \
+		echo "Script dir: ${SCRIPT_DIR}"; \
+		if [ ! -z "$(CI_MERGE_REQUEST_ID)" ]; then \
+			export MERGE_REQUEST_ASSIGNEES="$(echo ${CI_MERGE_REQUEST_ASSIGNEES} | sed -E 's/,? and /,/g; s/ //g')"; \
+			echo "Merge request assignees: ${MERGE_REQUEST_ASSIGNEES}"; \
+		fi; \
+		cat ${SCRIPT_DIR}/resources/namespace.yml | envsubst | kubectl apply 2>/dev/null -f -; \
+		echo "Done!"; \
+	fi;
