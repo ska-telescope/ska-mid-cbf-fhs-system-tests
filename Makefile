@@ -21,7 +21,7 @@ TARANTA ?= true # Enable Taranta
 TARANTA_AUTH ?= false # Enable Taranta
 MINIKUBE ?= false ## Minikube or not
 
-#LOADBALANCER_IP ?= 142.73.34.170# psi mid head node
+LOADBALANCER_IP ?= 192.168.99.16
 INGRESS_PROTOCOL ?= https
 ifeq ($(strip $(MINIKUBE)),true)
 LOADBALANCER_IP ?= $(shell minikube ip)
