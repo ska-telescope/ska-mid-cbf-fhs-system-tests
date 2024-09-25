@@ -4,7 +4,7 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
   MINIKUBE: "false"
   TARGET_SITE: itf
-  RUNNER_TAG: ska-k8s-runner
+  RUNNER_TAG: ska-k8s
   TANGO_HOST: databaseds-tango-base:10000
   CLUSTER_DOMAIN: "cluster.local"
   K8S_TIMEOUT: 800s
