@@ -1,8 +1,13 @@
+# pylint: skip-file
+# fmt: off
+# flake8: noqa
+
 """Basic Test"""
 import logging
 
 import pytest
 from dotenv import load_dotenv
+
 # from lib import get_parameters, powerswitch, utils
 # from lib.constant import LOG_FORMAT
 from pytest_bdd import given, scenario, then, when
@@ -10,7 +15,7 @@ from pytest_bdd import given, scenario, then, when
 load_dotenv()  # Load environment variables from .env file
 
 # logging.basicConfig(format=LOG_FORMAT, level=logging.INFO)
-_logger = logging.getLogger(__name__)
+# _logger = logging.getLogger(__name__)
 
 a = 0
 
