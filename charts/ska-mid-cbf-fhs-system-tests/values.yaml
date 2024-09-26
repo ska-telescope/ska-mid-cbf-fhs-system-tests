@@ -75,6 +75,19 @@ ska-mid-cbf-emulators:
       image: ska-mid-cbf-emulators-injector
       tag: 0.5.2
       pullPolicy: IfNotPresent
+  
+  emulators:
+    - bitstream_emulator_id: vcc-emulators
+      bitstream_emulator_ver: 0.0.1
+      deployment_id: fhs-vcc-emulator-1
+      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-vcc-emulators-0.0.1.tar.gz"
+    - bitstream_emulator_id: vcc-emulators
+      bitstream_emulator_ver: 0.0.1
+      deployment_id: fhs-vcc-emulator-2
+      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-vcc-emulators-0.0.1.tar.gz"
+
+  rabbitmq:
+    host: rabbitmq-service.ska-mid-cbf-fhs-system-tests.svc.cluster.local
 
 # EDA
 # ska-tango-archiver:
