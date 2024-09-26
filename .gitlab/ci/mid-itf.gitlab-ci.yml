@@ -42,7 +42,6 @@ deploy-failure-cleanup:
   stage: post-deploy
   rules:
     - when: on_failure
-    - when: manual
   script:
     - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
     - make k8s-uninstall-chart
