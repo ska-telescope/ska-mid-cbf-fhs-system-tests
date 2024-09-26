@@ -37,7 +37,7 @@ SKA_TANGO_ARCHIVER ?= false ## Set to true to deploy EDA
 K8S_CHART ?= $(HELM_CHART)
 K8S_CHARTS ?= $(K8S_CHART)
 
-TARGET_SITE ?= itf
+TARGET_SITE ?= k8s
 
 # include OCI Images support
 include .make/oci.mk
@@ -131,6 +131,7 @@ K8S_CHART_PARAMS = --set global.minikube=$(MINIKUBE) \
 	--set global.operator=$(SKA_TANGO_OPERATOR) \
 	--set ska-mid-cbf-fhs-vcc.hostInfo.clusterDomain=$(CLUSTER_DOMAIN) \
 	--set global.labels.app=$(KUBE_APP) \
+	--set ska-mid-cbf-emulators.rabbitmq.host="rabbitmq-service.$(KUBE_NAMESPACE).svc.cluster.local" \
 	$(TARANTA_PARAMS)
 
 # ifeq ($(SKA_TANGO_ARCHIVER),true)
