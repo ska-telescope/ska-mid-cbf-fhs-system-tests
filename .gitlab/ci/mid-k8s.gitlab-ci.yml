@@ -80,5 +80,5 @@ mid-k8s-destroy:
   environment:
     name: mid-k8s/ska-$CI_COMMIT_REF_NAME
     action: stop
-  before-script:
+  before_script:
     - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
