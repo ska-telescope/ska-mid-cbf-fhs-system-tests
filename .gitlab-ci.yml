@@ -117,6 +117,7 @@ python-test:
     - mkdir -p build/reports
     - echo "$CI_JOB_ID">>build/reports/python_test_id.txt
     - echo "$PYTEST_MARKER">>build/reports/pytest_marker.txt
+    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
   script:
     - make python-test KUBE_NAMESPACE=$KUBE_NAMESPACE PYTEST_MARKER=$PYTEST_MARKER TANGO_HOST=$TANGO_HOST CLUSTER_DOMAIN=$CLUSTER_DOMAIN TARGET_SITE=$TARGET_SITE
   artifacts:
