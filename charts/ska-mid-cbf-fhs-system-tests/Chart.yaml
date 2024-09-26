@@ -14,22 +14,20 @@ dependencies:
   - name: ska-tango-util
     version: 0.4.11
     repository: https://artefact.skao.int/repository/helm-internal
-
   # CBF
   # Note: Versions and repository links defined here do not necessarily reflect what will be
   # deployed to the namespace. These values can be overwritten by Makefile processing at runtime
   # based on USE_DEV_BUILD and <repo>_HASH_VERSION variables.
   - name: ska-mid-cbf-fhs-vcc
-    version: v0.0.1-dev.c1d8f5c2c
+    version: 0.0.1-dev.c98bd6c20
     repository: https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
     # To use a tagged version, update the version above and use the CAR repository below instead
     # repository: https://artefact.skao.int/repository/helm-internal
     condition: ska-mid-cbf-fhs-vcc.enabled
   - name: ska-mid-cbf-emulators
-    version: v0.5.2-dev.c36470273
+    version: 0.5.2-dev.c36470273
     repository: https://gitlab.com/api/v4/projects/55081836/packages/helm/dev
     condition: ska-mid-cbf.emulators.enabled
-
   # Taranta Suite
   - name: ska-tango-taranta
     version: 2.10.2
@@ -43,15 +41,14 @@ dependencies:
     version: 0.2.2
     repository: https://artefact.skao.int/repository/helm-internal
     condition: global.taranta_auth_enabled
-
-  # EDA
-  # - name: ska-tango-archiver
-  #   version: 2.7.0
-  #   repository: https://artefact.skao.int/repository/helm-internal
-  #   condition: ska-tango-archiver.enabled
-
   # Alarm Handler
   - name: ska-tango-alarmhandler
+    # EDA
+    # - name: ska-tango-archiver
+    #   version: 2.7.0
+    #   repository: https://artefact.skao.int/repository/helm-internal
+    #   condition: ska-tango-archiver.enabled
+
     version: 0.4.0
     repository: https://artefact.skao.int/repository/helm-internal
     condition: ska-tango-alarmhandler.enabled

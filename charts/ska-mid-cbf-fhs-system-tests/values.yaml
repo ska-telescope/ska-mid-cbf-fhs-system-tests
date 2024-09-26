@@ -59,7 +59,7 @@ ska-mid-cbf-fhs-vcc:
       registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-fhs-vcc
       image: ska-mid-cbf-fhs-vcc
       tag: 0.0.1-dev.c1d8f5c2c
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
 
 ska-mid-cbf-emulators:
   enabled: true
@@ -68,13 +68,13 @@ ska-mid-cbf-emulators:
       registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators
       image: ska-mid-cbf-emulators-emulator
       tag: 0.5.2
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
   injector:
     image:
       registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators
       image: ska-mid-cbf-emulators-injector
       tag: 0.5.2
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
   
   emulators:
     - bitstream_emulator_id: vcc-emulators
