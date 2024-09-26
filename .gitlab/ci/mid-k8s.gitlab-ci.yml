@@ -25,7 +25,7 @@ mid-k8s-on-demand-deploy:
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
   before_script:
-    - export KUBE_NAMESPACE="ci-ska-mid-cbf-fhs-system-tests-1470809514-jwambackmda"
+    - export KUBE_NAMESPACE="ci-ska-mid-cbf-fhs-system-tests-1470830171-jwambackmda"
     - make k8s-delete-namespace
     - |
       if [[ $(kubectl get namespaces | grep ci-$CI_PROJECT_NAME) ]]; then
@@ -34,7 +34,7 @@ mid-k8s-on-demand-deploy:
       else
         echo "There is no ci-$CI_PROJECT_NAME namespace deployed, let's do it!"
       fi
-  allow_failure: false
+  allow_failure: true
   environment:
     name: mid-k8s/ska-$CI_COMMIT_REF_NAME
 
