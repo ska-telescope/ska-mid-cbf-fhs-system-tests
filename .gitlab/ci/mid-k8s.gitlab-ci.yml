@@ -1,11 +1,11 @@
 include:
   - local: "/.gitlab/ci/common.gitlab-ci.yml"
 
-.mid_itf_on_demand:
+.mid_k8s_on_demand:
   tags:
     - k8srunner
     - ska-k8s
-  stage: on_demand_itf
+  stage: on_demand_k8s
   extends:
     - .mid
   variables:
@@ -13,10 +13,10 @@ include:
     INGRESS_HOST: "INGRESS.IP.ADDRESS"
     SERVICE_ACCOUNT: "ci-svc-fhs-sys-tests-$CI_PIPELINE_ID"
 
-mid-itf-on-demand-deploy:
+mid-k8s-on-demand-deploy:
   extends:
     - .deploy
-    - .mid_itf_on_demand
+    - .mid_k8s_on_demand
   rules:
     - if: $TARGET_SITE == "psi"
       when: never  
@@ -36,33 +36,38 @@ mid-itf-on-demand-deploy:
       fi
   allow_failure: false
   environment:
-    name: mid-itf/ska-$CI_COMMIT_REF_NAME
+    name: mid-k8s/ska-$CI_COMMIT_REF_NAME
 
-deploy-failure-cleanup:
-  stage: post-deploy
-  rules:
-    - when: on_failure
-  script:
-    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
-    - make k8s-uninstall-chart
-    - make k8s-delete-namespace
-
-
-mid-itf-on-demand-info:
+mid-k8s-on-demand-info:
   extends:
     - .info
-    - .mid_itf_on_demand
+    - .mid_k8s_on_demand
   rules:
     - if: $TARGET_SITE == "psi"
       when: never
     - when: manual
   allow_failure: true
 
-mid-itf-on-demand-destroy:
+mid-k8s-on-demand-destroy:
+  extends:
+    - .info
+    - .mid_k8s_on_demand
+  rules:
+    - if: $TARGET_SITE == "psi"
+      when: never
+    - when: manual
+  
+  script:
+    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
+    - make k8s-uninstall-chart
+    - make k8s-delete-namespace
+  allow_failure: true
+
+mid-k8s-destroy:
   stage: cleanup
   extends:
     - .cleanup
-    - .mid_itf_on_demand
+    - .mid_k8s_on_demand
   needs:
     - log-collector
   rules:
@@ -75,5 +80,5 @@ mid-itf-on-demand-destroy:
       when: delayed
       start_in: 1 hour
   environment:
-    name: mid-itf/ska-$CI_COMMIT_REF_NAME
+    name: mid-k8s/ska-$CI_COMMIT_REF_NAME
     action: stop

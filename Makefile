@@ -37,7 +37,7 @@ SKA_TANGO_ARCHIVER ?= false ## Set to true to deploy EDA
 K8S_CHART ?= $(HELM_CHART)
 K8S_CHARTS ?= $(K8S_CHART)
 
-TARGET_SITE ?= itf
+TARGET_SITE ?= k8s
 
 # include OCI Images support
 include .make/oci.mk
