@@ -25,6 +25,8 @@ mid-itf-on-demand-deploy:
     - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
   before_script:
+    - export KUBE_NAMESPACE="ci-ska-mid-cbf-fhs-system-tests-1470809514-jwambackmda"
+    - make k8s-delete-namespace
     - |
       if [[ $(kubectl get namespaces | grep ci-$CI_PROJECT_NAME) ]]; then
         echo "There is already a ci-$CI_PROJECT_NAME namespace deployed, please delete it before deploying a new one!"
@@ -32,13 +34,15 @@ mid-itf-on-demand-deploy:
       else
         echo "There is no ci-$CI_PROJECT_NAME namespace deployed, let's do it!"
       fi
-  allow_failure: true
+  allow_failure: false
   environment:
     name: mid-itf/ska-$CI_COMMIT_REF_NAME
 
 deploy-failure-cleanup:
   stage: post-deploy
-  when: on_failure
+  rules:
+    - when: on_failure
+    - when: manual
   script:
     - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
     - make k8s-uninstall-chart
