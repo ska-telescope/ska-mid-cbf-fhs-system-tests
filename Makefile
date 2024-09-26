@@ -132,6 +132,7 @@ K8S_CHART_PARAMS = --set global.minikube=$(MINIKUBE) \
 	--set ska-mid-cbf-fhs-vcc.hostInfo.clusterDomain=$(CLUSTER_DOMAIN) \
 	--set global.labels.app=$(KUBE_APP) \
 	--set ska-mid-cbf-emulators.rabbitmq.host="rabbitmq-service.$(KUBE_NAMESPACE).svc.cluster.local" \
+	--set ska-mid-cbf-fhs-vcc.lowLevel.emulatorBaseUrl=".emulators.$(KUBE_NAMESPACE).svc.cluster.local:5001" \
 	$(TARANTA_PARAMS)
 
 # ifeq ($(SKA_TANGO_ARCHIVER),true)

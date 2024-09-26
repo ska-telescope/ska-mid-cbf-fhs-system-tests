@@ -25,7 +25,7 @@ dependencies:
     # repository: https://artefact.skao.int/repository/helm-internal
     condition: ska-mid-cbf-fhs-vcc.enabled
   - name: ska-mid-cbf-emulators
-    version: 0.5.2-dev.c36470273
+    version: 0.5.3-dev.c8da4cf41
     repository: https://gitlab.com/api/v4/projects/55081836/packages/helm/dev
     condition: ska-mid-cbf.emulators.enabled
   # Taranta Suite
