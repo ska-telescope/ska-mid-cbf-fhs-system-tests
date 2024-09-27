@@ -47,8 +47,6 @@ ska-taranta:
 ska-tango-util:
   enabled: true
 
-#telescope control
-## mid-cbf
 # Note: Versions and repository links defined here do not necessarily reflect what will be
 # deployed to the namespace. These values can be overwritten by Makefile processing at runtime
 # based on USE_DEV_BUILD and <repo>_HASH_VERSION variables.
@@ -86,18 +84,3 @@ ska-mid-cbf-emulators:
 
   rabbitmq:
     host: rabbitmq-service.ska-mid-cbf-fhs-system-tests.svc.cluster.local
-
-# EDA
-# ska-tango-archiver:
-#   legacy_compatibility: true
-#   enabled: false
-#   telescope: SKA-mid
-#   telescope_environment: MID_PSI
-#   hostname: timescaledb.ska-eda-mid-db.svc.cluster.local
-#   dbname: default_timescaledb
-#   dbuser: admin
-#   dbpassword: admin
-#   port: 5432
-#   configuration_manager: mid-eda/cm/01
-#   event_subscriber: mid-eda/es/01
-#   archwizard_config: MyHDB=tango://databaseds-tango-base.{{.Release.Name}}.svc.cluster.local:10000/mid-eda/cm/01

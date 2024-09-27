@@ -31,7 +31,6 @@ endif
 
 EXPOSE_All_DS ?= true ## Expose All Tango Services to the external network (enable Loadbalancer service)
 SKA_TANGO_OPERATOR ?= true
-SKA_TANGO_ARCHIVER ?= false ## Set to true to deploy EDA
 
 # Chart for testing
 K8S_CHART ?= $(HELM_CHART)
@@ -62,9 +61,6 @@ include .make/base.mk
 
 # include your own private variables for custom deployment configuration
 -include PrivateRules.mak
-
-# ska-tango-archiver params for EDA deployment
-# include archiver/archiver.mk 
 
 TARANTA_PARAMS = --set ska-taranta.enabled=$(TARANTA) \
 				 --set global.taranta_auth_enabled=$(TARANTA_AUTH) \
@@ -134,10 +130,6 @@ K8S_CHART_PARAMS = --set global.minikube=$(MINIKUBE) \
 	--set ska-mid-cbf-emulators.rabbitmq.host="rabbitmq-service.$(KUBE_NAMESPACE).svc.cluster.local" \
 	--set ska-mid-cbf-fhs-vcc.lowLevel.emulatorBaseUrl=".emulators.$(KUBE_NAMESPACE).svc.cluster.local:5001" \
 	$(TARANTA_PARAMS)
-
-# ifeq ($(SKA_TANGO_ARCHIVER),true)
-# 	K8S_CHART_PARAMS += $(SKA_TANGO_ARCHIVER_PARAMS)
-# endif
 
 USE_DEV_BUILD ?= true # Update the Chart.yaml and values.yaml for the repositories. If set to true, to use the latest tag versions from main branch on Gitlab
 
@@ -254,10 +246,6 @@ python-pre-test:
 
 run-pylint:
 	pylint --output-format=parseable tests/ | tee build/code_analysis.stdout
-
-vars:
-	$(info ##### Mid deploy vars)
-	@echo "$(VARS)" | sed "s#VAR_#\n#g"
 
 links:
 	@echo ${CI_JOB_NAME}
