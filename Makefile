@@ -35,8 +35,6 @@ SKA_TANGO_OPERATOR ?= true
 K8S_CHART ?= $(HELM_CHART)
 K8S_CHARTS ?= $(K8S_CHART)
 
-TARGET_SITE ?= itf
-
 # include OCI Images support
 include .make/oci.mk
 
@@ -78,7 +76,7 @@ CLUSTER_DOMAIN ?= cluster.local## Domain used for naming Tango Device Servers
 #E203 is added for a whitespace error in tests/lib/utils/device_server_ping_test()
 PYTHON_SWITCHES_FOR_FLAKE8 = --ignore=E501,F407,W503,D100,D103,D400,DAR101,D104,D101,D107,D401,FS002,D200,DAR201,D202,D403,N802,DAR401,E203
 PYTHON_SWITCHES_FOR_PYLINT = --disable=W0613,C0116,C0114,R0801,W0621,W1203,C0301,F0010,R1721,R1732
-PYTHON_LINT_TARGET = tests/ test_parameters/
+PYTHON_LINT_TARGET = tests/
 
 CHART_FILE=charts/ska-mid-cbf-fhs-system-tests/Chart.yaml
 CAR_REGISTRY=artefact.skao.int
@@ -89,6 +87,9 @@ FHS_VCC_HELM_REPO=https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
 FHS_VCC_LATEST_TAG:=$(shell curl -s https://gitlab.com/api/v4/projects/58443798/repository/tags | jq -r '.[0] | .name')
 FHS_VCC_LATEST_COMMIT:=$(shell curl -s https://gitlab.com/api/v4/projects/58443798/repository/branches/main | jq -r .commit.short_id)
 FHS_VCC_HASH_VERSION?=$(FHS_VCC_LATEST_TAG)-dev.c$(FHS_VCC_LATEST_COMMIT)
+
+# TODO remove this
+EMULATORS_HASH_VERSION = "0.5.3-dev.cd74e33cb"
 
 EMULATORS_HELM_REPO=https://gitlab.com/api/v4/projects/55081836/packages/helm/dev
 EMULATORS_LATEST_TAG:=$(shell curl -s https://gitlab.com/api/v4/projects/55081836/repository/tags | jq -r '.[0] | .name')
