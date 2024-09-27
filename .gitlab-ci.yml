@@ -3,7 +3,6 @@ image: $SKA_K8S_TOOLS_BUILD_DEPLOY
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   MINIKUBE: "false"
-  TARGET_SITE: k8s
   RUNNER_TAG: ska-k8s
   TANGO_HOST: databaseds-tango-base:10000
   CLUSTER_DOMAIN: "cluster.local"
@@ -14,16 +13,10 @@ workflow:
   name: '$CI_PIPELINE_NAME'
   
 stages:
-#  - on_demand_psi
-  - on_demand_k8s
-  - test
   - lint
   - build
-  - log-collector
-  - join-reports
-  - pages
-  - publish
-  - scan
+  - on_demand_k8s
+  - test
   - cleanup
 
 include:
@@ -43,15 +36,6 @@ include:
   - project: 'ska-telescope/templates-repository'
     file: 'gitlab-ci/includes/changelog.gitlab-ci.yml'
 
-  # deploy steps to psi mid
-#  - local: "/.gitlab/ci/psi-mid.gitlab-ci.yml"
-
-    # deploy steps to mid k8s
-  - local: "/.gitlab/ci/mid-k8s.gitlab-ci.yml"
-    
-  # - project: 'ska-telescope/templates-repository'
-  #   file: 'gitlab-ci/includes/xray-publish.gitlab-ci.yml'
-
   # Docs pages
   - project: 'ska-telescope/templates-repository'
     file: 'gitlab-ci/includes/docs.gitlab-ci.yml'
@@ -60,23 +44,118 @@ include:
   - project: 'ska-telescope/templates-repository'
     file: 'gitlab-ci/includes/finaliser.gitlab-ci.yml'
 
-  # Jupyter notebook linting and testing
-#  - project: 'ska-telescope/templates-repository'
-#    file: 'gitlab-ci/includes/notebook.gitlab-ci.yml'
+.k8s_on_demand:
+  tags:
+    - k8srunner
+    - ska-k8s
+  stage: on_demand_k8s
+  variables:
+    CONFIG: k8s
+    HELM_RELEASE: "test-$CI_PIPELINE_ID"
+    VALUES: "values.yml"
+    INGRESS_HOST: "INGRESS.IP.ADDRESS"
+    SERVICE_ACCOUNT: "ci-svc-fhs-sys-tests-$CI_PIPELINE_ID"
 
-# notebook-test:
-#   rules:
-#     - when: never
-
-python-build-for-development:
+k8s-on-demand-deploy:
+  extends:
+    - .k8s_on_demand
+  variables:
+    K8S_AUTH_NAMESPACES: "$KUBE_NAMESPACE"
+    K8S_AUTH_SERVICE_ACCOUNT: "ci-svc-fhs-sys-tests-$CI_PIPELINE_ID"
+    SKA_TANGO_ARCHIVER: "false"
+    VALUES: values.yaml
+    CHART_FILE: "charts/ska-mid-cbf-fhs-system-tests/Chart.yaml"
   rules:
-    - when: never
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      when: manual
+  script:
+    - |
+      if [[ $(kubectl get namespaces | grep ci-$CI_PROJECT_NAME) ]]; then
+        echo "There is already a ci-$CI_PROJECT_NAME namespace deployed, please delete it before deploying a new one!"
+        exit 1
+      else
+        echo "There is no ci-$CI_PROJECT_NAME namespace deployed, let's do it!"
+      fi
+    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
+    - export K8S_AUTH_NAMESPACES=$KUBE_NAMESPACE
+    - echo $CI_JOB_NAME - $CI_JOB_STAGE
+    - echo "Make config dump"
+    - make vars
+    - echo $KUBE_NAMESPACE
+    - make k8s-namespace KUBE_NAMESPACE=$KUBE_NAMESPACE
+    - make k8s-namespace-credentials
+    - |
+      if [ "$K8S_INSTALL_FROM_CAR" != "true" ]; then
+       echo "Install charts with name $HELM_RELEASE and path K8S_UMBRELLA_CHART_PATH"
+       make k8s-install-chart
+      else
+        echo "Install charts from CAR"
+        make k8s-install-chart-car
+      fi
+    - echo "Get namespace resources"
+    - make k8s-get
+    - echo "Wait namespace resources"
+    - make k8s-wait
+  allow_failure: true
+  environment:
+    name: k8s/ska-$CI_COMMIT_REF_NAME
+
+k8s-on-demand-info:
+  extends:
+    - .k8s_on_demand
+  rules:
+    - when: manual
+  variables:
+    K8S_CHART: "ska-$CONFIG"
+  script:
+    - echo "Get namespace resources"
+    - make k8s-get
+    - make k8s-info
+  allow_failure: true
+
+k8s-on-demand-destroy:
+  extends:
+    - .k8s_on_demand
+  rules:
+    - when: manual
+  script:
+    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
+    - make k8s-uninstall-chart
+    - make k8s-delete-namespace
+  allow_failure: true
+
+k8s-destroy:
+  stage: cleanup
+  extends:
+    - .k8s_on_demand
+  needs:
+    - python-test
+  variables:
+    K8S_CHART: "ska-$CONFIG"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: delayed
+      start_in: 1 hour
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+      when: delayed
+      start_in: 10 minutes
+  environment:
+    name: k8s/ska-$CI_COMMIT_REF_NAME
+    action: stop
+  script:
+    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
+    - echo $CI_JOB_NAME - $CI_JOB_STAGE
+    - echo "Make config dump" ; make vars
+    - make k8s-uninstall-chart || true
+    - |
+      if [ "$KEEP_NAMESPACE" != "true" ]; then
+        make k8s-delete-namespace
+      fi
+
 
 python-publish-to-gitlab:
-  rules:
-    - when: never
-
-pages:
   rules:
     - when: never
 
@@ -86,32 +165,22 @@ python-gemnasium-scan:
 
 python-test:
   image: $SKA_K8S_TOOLS_BUILD_DEPLOY
-  extends:
-    - .mid
   rules:
-    # - if: $TARGET_SITE == "psi" && $CI_PIPELINE_SOURCE == "schedule"
-    #   needs:
-    #     - job: psi-mid-on-demand-deploy
-    - if: $TARGET_SITE == "k8s" && $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
       needs:
-        - job: mid-k8s-on-demand-deploy
-    # - if: $TARGET_SITE == "psi" && $CI_PIPELINE_SOURCE != "schedule"
-    #   when: manual
-    #   needs:
-    #     - job: psi-mid-on-demand-deploy
-    - if: $TARGET_SITE == "k8s" && $CI_PIPELINE_SOURCE != "schedule"
+        - job: k8s-on-demand-deploy
+    - if: $CI_PIPELINE_SOURCE != "schedule"
       when: manual
       needs:
-        - job: mid-k8s-on-demand-deploy
-    - when: never #Ensure the tests will only run if the target_site is set and the corresponding deployment job is executed
+        - job: k8s-on-demand-deploy
+    - when: never
   variables:
+    CONFIG: k8s
+    HELM_RELEASE: "test-$CI_PIPELINE_ID"
     PYTEST_MARKER: nightly
   tags:
     - $RUNNER_TAG
   before_script:
-    - apt update
-    - apt install -y iputils-ping
-    - sleep 10
     - poetry config virtualenvs.create false
     - poetry install
     - mkdir -p build/reports
@@ -119,77 +188,12 @@ python-test:
     - echo "$PYTEST_MARKER">>build/reports/pytest_marker.txt
     - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
   script:
-    - make python-test KUBE_NAMESPACE=$KUBE_NAMESPACE PYTEST_MARKER=$PYTEST_MARKER TANGO_HOST=$TANGO_HOST CLUSTER_DOMAIN=$CLUSTER_DOMAIN TARGET_SITE=$TARGET_SITE
+    - make python-test KUBE_NAMESPACE=$KUBE_NAMESPACE PYTEST_MARKER=$PYTEST_MARKER TANGO_HOST=$TANGO_HOST CLUSTER_DOMAIN=$CLUSTER_DOMAIN
   artifacts:
     paths:
-      - build/reports/cucumber.json
       - build/reports/report.json
       - build/reports/python_test_id.txt
       - build/reports/pytest_marker.txt
       - build/reports/internal_schemas_version.txt
       - results/*
   allow_failure: true
-
-log-collector:
-  stage: log-collector
-  extends:
-    - .mid
-  tags:
-    - $RUNNER_TAG
-  before_script:
-    - apt update
-    - apt install -y bsdmainutils
-    - apt install -y util-linux
-  script:
-    - mkdir -p logs
-    - echo "$CI_JOB_ID">>logs/log_collector_id.txt
-    - POD_LIST=$(kubectl get pods -n $KUBE_NAMESPACE --no-headers -o custom-columns=":metadata.name")
-    - for pod in ${POD_LIST[@]}; do echo "kubectl logs $pod -n $KUBE_NAMESPACE --since=3h &> logs/${pod}.log" ; kubectl logs $pod -n $KUBE_NAMESPACE --since=3h &> logs/${pod}.log ; done
-    - ./log_utils/log_level_summary.sh
-  needs:
-    - job: python-test
-  artifacts:
-    paths:
-    - logs/*.log
-    - logs/log_level_summary.txt
-    - logs/log_collector_id.txt
-  allow_failure: true
-
-# xray-publish:
-#   extends:
-#     - .mid
-#   tags:
-#     - $RUNNER_TAG
-#   before_script:
-#     - export MCS_IMAGE_VER=$(kubectl describe pod/ds-cbfcontroller-controller-0 -n $KUBE_NAMESPACE | grep ska-mid-cbf-mcs | grep 'Image:' | sed 's/.*\://')
-#     - export EC_IMAGE_VER=$(kubectl describe pod/ds-deployer-deployer-0 -n $KUBE_NAMESPACE | grep 'Image:' | sed 's/.*\://')
-#     - export SV_IMAGE_VER=$(kubectl describe pod/sv -n $KUBE_NAMESPACE | grep signal-verification | grep 'Image:' | sed 's/.*\://')
-#     - export CI_PYTHON_TEST_ID=$(cat "build/reports/python_test_id.txt")
-#     - export CI_LOG_COLLECTOR_ID=$(cat "logs/log_collector_id.txt")
-#     - export PYTEST_MARKER=$(cat "build/reports/pytest_marker.txt")
-#     - export REPORT_SUMMARY_URL="https://ska-telescope.gitlab.io/-/ska-mid-cbf-fhs-system-tests/-/jobs/$CI_PYTHON_TEST_ID/artifacts/results/reports/report_summary.html"
-#     - export REPORTS_FOLDER_URL="https://gitlab.com/ska-telescope/ska-mid-cbf-fhs-system-tests/-/jobs/$CI_PYTHON_TEST_ID/artifacts/browse/results/reports/"
-#     - export LOG_LEVEL_SUMMARY_URL="https://ska-telescope.gitlab.io/-/ska-mid-cbf-fhs-system-tests/-/jobs/$CI_LOG_COLLECTOR_ID/artifacts/logs/log_level_summary.txt"
-#     - export TARGET_SITE=$TARGET_SITE
-#     - export HW_CONFIG_USED=$HW_CONFIG_FILE
-#     - export SLIM_FS_USED=$SLIM_FS_CONFIG_FILE
-#     - export SLIM_VIS_CONFIG_USED=$SLIM_VIS_CONFIG_FILE
-#     - export INTERNAL_SCHEMAS_VER=$(cat "build/reports/internal_schemas_version.txt" | awk '/version/ { print $3 }')
-#     - export FPGA_BITSTREAMS_VER=$(kubectl exec -i -n $KUBE_NAMESPACE ds-deployer-deployer-0 -- bash -c "cat src/ska_mid_cbf_engineering_console/deployer/talondx_config/talondx_boardmap.json | python -c \"import sys, json; print(json.load(sys.stdin)['fpga_bitstreams'][0]['version'])\"")
-#   script:
-#     - make xray-publish TALON_LIST=$TALON_LIST KUBE_NAMESPACE=$KUBE_NAMESPACE PYTEST_MARKER=$PYTEST_MARKER
-#   dependencies:
-#     - python-test
-#     - log-collector
-#   needs:
-#     - job: python-test
-#     - job: log-collector
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE != 'schedule'
-#       when: manual
-#     - exists:
-#        - build/reports/cucumber.json
-#        - build/reports/report.json
-#        - build/reports/internal_schemas_version.txt
-#        - tests/xray-config.json
-#       when: on_success
