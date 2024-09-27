@@ -1,6 +1,6 @@
 apiVersion: v2
 name: ska-mid-cbf-fhs-system-tests
-description: A Helm chart for Kubernetes MVP Mid
+description: A Helm chart for Kubernetes Mid.CBF FHS H-level tests.
 type: application
 version: 0.13.0
 appVersion: 0.13.0
@@ -25,7 +25,7 @@ dependencies:
     # repository: https://artefact.skao.int/repository/helm-internal
     condition: ska-mid-cbf-fhs-vcc.enabled
   - name: ska-mid-cbf-emulators
-    version: 0.5.2-dev.c36470273
+    version: 0.5.3-dev.c8da4cf41
     repository: https://gitlab.com/api/v4/projects/55081836/packages/helm/dev
     condition: ska-mid-cbf.emulators.enabled
   # Taranta Suite
@@ -41,14 +41,3 @@ dependencies:
     version: 0.2.2
     repository: https://artefact.skao.int/repository/helm-internal
     condition: global.taranta_auth_enabled
-  # Alarm Handler
-  - name: ska-tango-alarmhandler
-    # EDA
-    # - name: ska-tango-archiver
-    #   version: 2.7.0
-    #   repository: https://artefact.skao.int/repository/helm-internal
-    #   condition: ska-tango-archiver.enabled
-
-    version: 0.4.0
-    repository: https://artefact.skao.int/repository/helm-internal
-    condition: ska-tango-alarmhandler.enabled

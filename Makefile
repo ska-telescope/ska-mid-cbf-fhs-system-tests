@@ -30,7 +30,6 @@ MINIKUBE ?= false ## Minikube or not
 
 EXPOSE_All_DS ?= true ## Expose All Tango Services to the external network (enable Loadbalancer service)
 SKA_TANGO_OPERATOR ?= true
-SKA_TANGO_ARCHIVER ?= false ## Set to true to deploy EDA
 
 # Chart for testing
 K8S_CHART ?= $(HELM_CHART)
