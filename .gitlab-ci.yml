@@ -35,14 +35,22 @@ include:
   - project: 'ska-telescope/templates-repository'
     file: 'gitlab-ci/includes/finaliser.gitlab-ci.yml'
 
-.k8s_on_demand:
+.k8s_base:
+  image: $SKA_K8S_TOOLS_BUILD_DEPLOY
   tags:
     - k8srunner
     - ska-k8s
-  stage: on_demand_k8s
   variables:
     CONFIG: k8s
     HELM_RELEASE: "test-$CI_PIPELINE_ID"
+  before_script:
+    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
+
+.k8s_on_demand:
+  extends:
+    - .k8s-base
+  stage: on_demand_k8s
+  variables:
     VALUES: "values.yml"
     INGRESS_HOST: "INGRESS.IP.ADDRESS"
     SERVICE_ACCOUNT: "ci-svc-fhs-sys-tests-$CI_PIPELINE_ID"
@@ -68,7 +76,6 @@ k8s-on-demand-deploy:
       else
         echo "There is no ci-$CI_PROJECT_NAME namespace deployed, let's do it!"
       fi
-    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
     - export K8S_AUTH_NAMESPACES=$KUBE_NAMESPACE
     - echo $CI_JOB_NAME - $CI_JOB_STAGE
     - echo $KUBE_NAMESPACE
@@ -109,7 +116,6 @@ k8s-on-demand-destroy:
   rules:
     - when: manual
   script:
-    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
     - make k8s-uninstall-chart
     - make k8s-delete-namespace
   allow_failure: true
@@ -133,7 +139,6 @@ k8s-scheduled-destroy:
     name: k8s/ska-$CI_COMMIT_REF_NAME
     action: stop
   script:
-    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
     - echo $CI_JOB_NAME - $CI_JOB_STAGE
     - make k8s-uninstall-chart || true
     - |
@@ -142,7 +147,7 @@ k8s-scheduled-destroy:
       fi
 
 python-test:
-  image: $SKA_K8S_TOOLS_BUILD_DEPLOY
+  extends: .k8s-base
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       needs:
@@ -153,20 +158,13 @@ python-test:
         - job: k8s-on-demand-deploy
     - when: never
   variables:
-    CONFIG: k8s
-    HELM_RELEASE: "test-$CI_PIPELINE_ID"
     PYTEST_MARKER: nightly
-  tags:
-    - k8srunner
-    - ska-k8s
-  before_script:
+  script:
     - poetry config virtualenvs.create false
     - poetry install
     - mkdir -p build/reports
     - echo "$CI_JOB_ID">>build/reports/python_test_id.txt
     - echo "$PYTEST_MARKER">>build/reports/pytest_marker.txt
-    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
-  script:
     - make python-test KUBE_NAMESPACE=$KUBE_NAMESPACE PYTEST_MARKER=$PYTEST_MARKER TANGO_HOST=$TANGO_HOST CLUSTER_DOMAIN=$CLUSTER_DOMAIN
   artifacts:
     paths:
