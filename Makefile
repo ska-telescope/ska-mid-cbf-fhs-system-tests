@@ -105,6 +105,8 @@ K8S_CHART_PARAMS = --set global.minikube=$(MINIKUBE) \
 	--set global.operator=$(SKA_TANGO_OPERATOR) \
 	--set ska-mid-cbf-fhs-vcc.hostInfo.clusterDomain=$(CLUSTER_DOMAIN) \
 	--set global.labels.app=$(KUBE_APP) \
+	--set ska-mid-cbf-emulators.emulator.labels.app=$(KUBE_APP) \
+	--set ska-mid-cbf-emulators.injector.labels.app=$(KUBE_APP) \
 	--set ska-mid-cbf-emulators.rabbitmq.host="rabbitmq-service.$(KUBE_NAMESPACE).svc.$(CLUSTER_DOMAIN)" \
 	$(TARANTA_PARAMS)
 
