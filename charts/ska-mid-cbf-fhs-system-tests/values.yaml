@@ -1,6 +1,9 @@
 display: ":0"
 xauthority: "~/.Xauthority"
 
+volumePermissions:
+  enabled: true 
+
 global:
   minikube: false
   operator: true
