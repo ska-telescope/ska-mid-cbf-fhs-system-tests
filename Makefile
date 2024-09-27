@@ -110,7 +110,7 @@ K8S_CHART_PARAMS = --set global.minikube=$(MINIKUBE) \
 	--set global.operator=$(SKA_TANGO_OPERATOR) \
 	--set ska-mid-cbf-fhs-vcc.hostInfo.clusterDomain=$(CLUSTER_DOMAIN) \
 	--set global.labels.app=$(KUBE_APP) \
-	--set ska-mid-cbf-emulators.rabbitmq.host="rabbitmq-service.$(KUBE_NAMESPACE).svc.cluster.local" \
+	--set ska-mid-cbf-emulators.rabbitmq.host="rabbitmq-service.$(KUBE_NAMESPACE).svc.$(CLUSTER_DOMAIN)" \
 	$(TARANTA_PARAMS)
 
 USE_DEV_BUILD ?= true # Update the Chart.yaml and values.yaml for the repositories. If set to true, to use the latest tag versions from main branch on Gitlab
