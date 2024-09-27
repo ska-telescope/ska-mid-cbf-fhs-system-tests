@@ -28,7 +28,9 @@ include:
 
   # Helm Charts
   - project: 'ska-telescope/templates-repository'
-    file: 'gitlab-ci/includes/helm-chart.gitlab-ci.yml'
+    file: 'gitlab-ci/includes/helm-chart-lint.gitlab-ci.yml'
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/helm-chart-build.gitlab-ci.yml'
 
   # changelog release page
   - project: 'ska-telescope/templates-repository'
