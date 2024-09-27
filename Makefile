@@ -89,7 +89,7 @@ FHS_VCC_LATEST_COMMIT:=$(shell curl -s https://gitlab.com/api/v4/projects/584437
 FHS_VCC_HASH_VERSION?=$(FHS_VCC_LATEST_TAG)-dev.c$(FHS_VCC_LATEST_COMMIT)
 
 # TODO remove this
-EMULATORS_HASH_VERSION = "0.5.3-dev.cd74e33cb"
+EMULATORS_HASH_VERSION = "0.5.3-dev.c50ce10c3"
 
 EMULATORS_HELM_REPO=https://gitlab.com/api/v4/projects/55081836/packages/helm/dev
 EMULATORS_LATEST_TAG:=$(shell curl -s https://gitlab.com/api/v4/projects/55081836/repository/tags | jq -r '.[0] | .name')
