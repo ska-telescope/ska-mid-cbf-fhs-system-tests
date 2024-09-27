@@ -5,12 +5,10 @@
 import logging
 import os
 import os.path
-
 from typing import List
 
 import pytest
 from dotenv import load_dotenv
-
 from pytest_bdd import given
 from ska_tango_testing.integration import TangoEventTracer
 
