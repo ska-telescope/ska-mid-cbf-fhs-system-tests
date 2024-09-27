@@ -48,7 +48,7 @@ include:
 
 .k8s_on_demand:
   extends:
-    - .k8s-base
+    - .k8s_base
   stage: on_demand_k8s
   variables:
     VALUES: "values.yml"
@@ -147,7 +147,7 @@ k8s-scheduled-destroy:
       fi
 
 python-test:
-  extends: .k8s-base
+  extends: .k8s_base
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       needs:
