@@ -1,9 +1,6 @@
 display: ":0"
 xauthority: "~/.Xauthority"
 
-volumePermissions:
-  enabled: true 
-
 global:
   minikube: false
   operator: true
@@ -65,11 +62,13 @@ ska-mid-cbf-fhs-vcc:
 ska-mid-cbf-emulators:
   enabled: true
   emulator:
+    app_label: ska-mid-cbf-fhs-system-tests
     image:
       repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-emulator
       tag: 0.5.3
       pullPolicy: Always
   injector:
+    app_label: ska-mid-cbf-fhs-system-tests
     image:
       repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-injector
       tag: 0.5.3
