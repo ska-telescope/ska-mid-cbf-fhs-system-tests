@@ -160,6 +160,7 @@ python-test:
   variables:
     PYTEST_MARKER: nightly
   script:
+    - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
     - poetry config virtualenvs.create false
     - poetry install
     - mkdir -p build/reports

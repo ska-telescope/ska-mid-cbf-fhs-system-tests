@@ -16,18 +16,22 @@ RELEASE_NAME = $(HELM_CHART)
 
 KUBE_APP ?= ska-mid-cbf-fhs-system-tests
 
+# TODO determine if taranta actually needed/useful since we probably can't use GUI...
+# ... replace with Boogie?
 TARANTA ?= true # Enable Taranta
 TARANTA_AUTH ?= false # Enable Taranta
-MINIKUBE ?= false ## Minikube or not
+TARANTA_PARAMS = --set ska-taranta.enabled=$(TARANTA) \
+				 --set global.taranta_auth_enabled=$(TARANTA_AUTH) \
+				 --set global.taranta_dashboard_enabled=$(TARANTA)
+ifneq ($(MINIKUBE),)
+ifneq ($(MINIKUBE),true)
+TARANTA_PARAMS = --set ska-taranta.enabled=$(TARANTA) \
+				 --set global.taranta_auth_enabled=$(TARANTA_AUTH) \
+				 --set global.taranta_dashboard_enabled=$(TARANTA)
+endif
+endif
 
-# LOADBALANCER_IP ?= 192.168.99.16
-# INGRESS_PROTOCOL ?= https
-# ifeq ($(strip $(MINIKUBE)),true)
-# LOADBALANCER_IP ?= $(shell minikube ip)
-# INGRESS_HOST ?= $(LOADBALANCER_IP)
-# INGRESS_PROTOCOL ?= http
-# endif
-# a
+MINIKUBE ?= false ## Minikube or not
 
 EXPOSE_All_DS ?= true ## Expose All Tango Services to the external network (enable Loadbalancer service)
 SKA_TANGO_OPERATOR ?= true
@@ -57,26 +61,16 @@ include .make/base.mk
 # include your own private variables for custom deployment configuration
 -include PrivateRules.mak
 
+CI_JOB_ID ?= local  # pipeline job id
+TANGO_HOST ?= databaseds-tango-base:10000  # TANGO_HOST connection to the Tango DS
+CLUSTER_DOMAIN ?= cluster.local  # Domain used for naming Tango Device Servers, Emulator APIs, rabbitmq host, etc.
 
-TARANTA_PARAMS = --set ska-taranta.enabled=$(TARANTA) \
-				 --set global.taranta_auth_enabled=$(TARANTA_AUTH) \
-				 --set global.taranta_dashboard_enabled=$(TARANTA)
+# W503: "Line break before binary operator." Disabled to work around a bug in flake8 where currently both "before" and "after" are disallowed.
+PYTHON_SWITCHES_FOR_FLAKE8 = --ignore=DAR201,W503,E731
 
-ifneq ($(MINIKUBE),)
-ifneq ($(MINIKUBE),true)
-TARANTA_PARAMS = --set ska-taranta.enabled=$(TARANTA) \
-				 --set global.taranta_auth_enabled=$(TARANTA_AUTH) \
-				 --set global.taranta_dashboard_enabled=$(TARANTA)
-endif
-endif
+# F0002, F0010: Astroid errors. Not our problem.
+PYTHON_SWITCHES_FOR_PYLINT = --disable=F0002,F0010
 
-CI_JOB_ID ?= local##pipeline job id
-TANGO_HOST ?= databaseds-tango-base:10000## TANGO_HOST connection to the Tango DS
-CLUSTER_DOMAIN ?= cluster.local## Domain used for naming Tango Device Servers
-
-#E203 is added for a whitespace error in tests/lib/utils/device_server_ping_test()
-PYTHON_SWITCHES_FOR_FLAKE8 = --ignore=E501,F407,W503,D100,D103,D400,DAR101,D104,D101,D107,D401,FS002,D200,DAR201,D202,D403,N802,DAR401,E203
-PYTHON_SWITCHES_FOR_PYLINT = --disable=W0613,C0116,C0114,R0801,W0621,W1203,C0301,F0010,R1721,R1732
 PYTHON_LINT_TARGET = tests/
 
 CHART_FILE=charts/ska-mid-cbf-fhs-system-tests/Chart.yaml
@@ -97,6 +91,7 @@ EMULATORS_LATEST_TAG:=$(shell curl -s https://gitlab.com/api/v4/projects/5508183
 EMULATORS_LATEST_COMMIT:=$(shell curl -s https://gitlab.com/api/v4/projects/55081836/repository/branches/main | jq -r .commit.short_id)
 EMULATORS_HASH_VERSION?=$(EMULATORS_LATEST_TAG)-dev.c$(EMULATORS_LATEST_COMMIT)
 
+# TODO determine if we will use internal schemas at all
 INTERNAL_SCHEMA_LATEST_TAG:=$(shell curl -s https://gitlab.com/api/v4/projects/47018613/repository/tags | jq -r '.[0] | .name')
 INTERNAL_SCHEMA_LATEST_COMMIT:=$(shell curl -s https://gitlab.com/api/v4/projects/47018613/repository/branches/main | jq -r .commit.short_id)
 INTERNAL_SCHEMA_HASH_VERSION?=$(INTERNAL_SCHEMA_LATEST_TAG)+dev.c$(INTERNAL_SCHEMA_LATEST_COMMIT)
@@ -136,20 +131,11 @@ ifneq (,$(wildcard $(VALUES)))
 	K8S_CHART_PARAMS += $(foreach f,$(wildcard $(VALUES)),--values $(f))
 endif
 
+# TODO determine if configurable test ID needed (probably depends on whether we can run all tests in one pipeline)
 TEST_ID = Test_1
-
 PYTEST_MARKER = nightly
 
 PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rpfs 
-
-echo-charts:
-	@echo $(K8S_CHART_PARAMS)
-
-echo-internal-schema:
-	@echo "INTERNAL_SCHEMA_LATEST_TAG = $(INTERNAL_SCHEMA_LATEST_TAG)"
-	@echo "INTERNAL_SCHEMA_LATEST_COMMIT = $(INTERNAL_SCHEMA_LATEST_COMMIT)"
-	@echo "INTERNAL_SCHEMA_HASH_VERSION = $(INTERNAL_SCHEMA_HASH_VERSION)"
-	@echo "CURR_INTERNAL_SCHEMA_VERSION = $(CURR_INTERNAL_SCHEMA_VERSION)"
 
 update-internal-schema:
 	@if [ "$(USE_DEV_BUILD)" == "false" ]; then \
@@ -193,9 +179,6 @@ python-pre-test:
 	make update-internal-schema
 	poetry show ska-mid-cbf-internal-schemas > build/reports/internal_schemas_version.txt
 	cat build/reports/internal_schemas_version.txt | grep version
-
-run-pylint:
-	pylint --output-format=parseable tests/ | tee build/code_analysis.stdout
 
 format-python:
 	$(POETRY_PYTHON_RUNNER) isort --profile black --line-length $(PYTHON_LINE_LENGTH) $(PYTHON_SWITCHES_FOR_ISORT) $(PYTHON_LINT_TARGET)
