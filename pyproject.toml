@@ -13,22 +13,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-requests = { version = "2.28.0", python = ">=3.7,<4" }
-ska-ser-skallop = { version = "^2.22.0", python = ">=3.9,<4.0", source = "nexus-internal" }
-ska-ser-xray = { version = "^0.2.4", python = ">=3.9,<4.0", source = "nexus-internal" }
-ska-tango-base = "1.0.0"
-ska-mid-cbf-internal-schemas = { version = "0.4.3+dev.c1d73d0dc", python = ">=3.8,<4.0", source = "gitlab-internal-schemas" }
-pytango = "9.5.0"
-ska-tango-testing = "0.7.1"
 jsonref = "^1.1.0"
-wheel = "^0.41.2"
-nbqa = "^1.7.0"
-nbmake = "^1.4.3"
-jupyterhub = "^4.0.2"
-jupyterlab = "^4.0.6"
-notebook = "^7.0.4"
-pysnmp = "4.4.12"
-pyasn1 = "0.4.8"
+pytango = "9.5.0"
+requests = { version = "2.28.0", python = ">=3.7,<4" }
+ska-mid-cbf-internal-schemas = { version = "0.4.3+dev.c1d73d0dc", python = ">=3.8,<4.0", source = "gitlab-internal-schemas" }
+ska-tango-base = "1.0.0"
+ska-tango-testing = "0.7.1"
+typing-extensions = "^4.12.2"
 
 [[tool.poetry.source]]
 name = "nexus-internal"
@@ -43,34 +34,31 @@ name = "gitlab-internal-schemas"
 url = "https://gitlab.com/api/v4/projects/47018613/packages/pypi/simple"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^2.20.0"
-pylint = "^2.15.5"
+black = "^24.2.0"
+flake8 = "^7.0.0"
+isort = "^5.13.2"
+pylint = "^3.2.3"
 pylint-junit = "^0.3.2"
-pytest = "^6.2.5"
-pytest-bdd = ">=5.0.0,<6.0.0"
-pytest-cov = "^4.0.0"
+pytest = "^7.2.0"
+pytest-cov = "^4.1.0"
+pytest-forked = "^1.6.0"
 pytest-json-report = "^1.5.0"
-pytest-mock = "^3.10.0"
+pytest-mock = "^3.11.1"
+pytest-ordering = "^0.6"
+pytest-pycodestyle = "2.2.0"
+pytest-pydocstyle = "2.2.0"
+pytest-pylint = "^0.21.0"
+pytest-rabbitmq = "^3.1.0"
 pytest-repeat = "^0.9.1"
 pytest-timeout = "^2.1.0"
-pytest-xdist = "^2.5.0"
-pytest-ordering = "^0.6"
-coverage = "^6.5.0"
-docformatter = "^1.5.0"
-darglint = "^1.8.1"
-mypy = "^0.982"
-pep8-naming = "^0.13.2"
-types-requests = "^2.28.11.2"
-types-pyyaml = "^6.0.12"
-isort = "^5.10.1"
+pytest-xdist = "^3.3.1"
 python-dotenv = "^0.21.0"
-paramiko = "^3.3.1"
 pyyaml = "^6.0.1"
-astropy = "^5.0.4"
+types-requests = "^2.28.11.2"
 
 [tool.poetry.group.docs.dependencies]
-black = "^23.9.1"
-flake8 = "^6.1.0"
+black = "^24.2.0"
+flake8 = "^7.0.0"
 
 [tool.pytest.ini_options]
 filterwarnings = [
@@ -81,14 +69,3 @@ addopts = "--show-capture=no"
 [build-system]
 requires = ["poetry>=1.8", "poetry-core>=1.9.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.pylint.'MESSAGES CONTROL']
-disable = [
-  "fixme",
-  "too-many-locals",
-  "too-many-lines",
-  "too-many-statements",
-  "too-many-arguments",
-  "unspecified-encoding"
-]
-good-names=["e","f","i","k","v"]

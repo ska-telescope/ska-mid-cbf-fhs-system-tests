@@ -135,7 +135,7 @@ endif
 TEST_ID = Test_1
 PYTEST_MARKER = nightly
 
-PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rpfs 
+PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rA 
 
 update-internal-schema:
 	@if [ "$(USE_DEV_BUILD)" == "false" ]; then \

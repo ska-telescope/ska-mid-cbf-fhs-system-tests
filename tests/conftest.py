@@ -9,7 +9,6 @@ from typing import List
 
 import pytest
 from dotenv import load_dotenv
-from pytest_bdd import given
 from ska_tango_testing.integration import TangoEventTracer
 
 load_dotenv()  # Load environment variables from .env file
@@ -98,18 +97,6 @@ def pytest_sessionstart(session):
     # fqdn_cbfcontroller = "mid_csp_cbf/sub_elt/controller"
     # tracer.subscribe_event(fqdn_cbfcontroller, "longRunningCommandResult")
     # tracer.subscribe_event(fqdn_cbfcontroller, "state")
-
-
-def pytest_bdd_after_scenario(request, feature, scenario):
-    pass
-    # namespace = request.config.getoption("--namespace")
-    # event_tracer = request.getfixturevalue("event_tracer")
-    # tango_host = request.config.getoption("--tango_host")
-    # cluster_domain = request.config.getoption("--cluster_domain")
-    # _logger.info(
-    #     f"pytest_bdd_after_scenario hook: cleaning up the {feature.name} BDD test"
-    # )
-    # _logger.info("pytest_bdd_after_scenario hook: clean-up complete.")
 
 
 # note that if sessionstart fails this step will not be executed
