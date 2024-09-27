@@ -27,6 +27,7 @@ MINIKUBE ?= false ## Minikube or not
 # INGRESS_HOST ?= $(LOADBALANCER_IP)
 # INGRESS_PROTOCOL ?= http
 # endif
+# a
 
 EXPOSE_All_DS ?= true ## Expose All Tango Services to the external network (enable Loadbalancer service)
 SKA_TANGO_OPERATOR ?= true
@@ -193,7 +194,7 @@ python-pre-test:
 	cat build/reports/internal_schemas_version.txt | grep version
 
 run-pylint:
-	pylint --output-format=parseable tests/ test_parameters/ | tee build/code_analysis.stdout
+	pylint --output-format=parseable tests/ | tee build/code_analysis.stdout
 
 format-python:
 	$(POETRY_PYTHON_RUNNER) isort --profile black --line-length $(PYTHON_LINE_LENGTH) $(PYTHON_SWITCHES_FOR_ISORT) $(PYTHON_LINT_TARGET)
