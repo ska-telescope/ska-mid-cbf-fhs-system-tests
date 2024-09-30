@@ -1,6 +1,7 @@
 
 PROJECT = ska-mid-cbf-fhs-system-tests
 
+PYTHON_RUNNER = poetry run python -m
 POETRY_PYTHON_RUNNER = poetry run python -m
 
 # KUBE_NAMESPACE defines the Kubernetes Namespace that will be deployed to
