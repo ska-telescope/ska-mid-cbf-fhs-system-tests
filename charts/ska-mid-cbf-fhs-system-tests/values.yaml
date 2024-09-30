@@ -43,11 +43,11 @@ ska-mid-cbf-fhs-vcc:
       pullPolicy: Always
 
 ska-mid-cbf-fhs-vcc-boogie:
-  enabled: true
+  enabled: false  # TODO figure out boogie deployment/registry
   boogie:
     tango_host: databaseds-tango-base:10000
   image:
-    repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-fhs-vcc
+    registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-fhs-vcc
     image: ska-mid-cbf-fhs-vcc-boogie
     tag: 0.0.1-dev.c1d8f5c2c
     pullPolicy: Always
