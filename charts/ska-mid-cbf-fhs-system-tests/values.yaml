@@ -21,11 +21,9 @@ global:
 ska-tango-base:
   enabled: true
   vnc:
-    enabled: true
-    replicas: 1
+    enabled: false
   tangorest:
-    enabled: true
-    replicas: 1
+    enabled: false
   tangodb:
     use_pv: true
 

@@ -8,11 +8,11 @@ icon: https://www.skatelescope.org/wp-content/uploads/2016/07/09545_NEW_LOGO_201
 dependencies:
   # Tango
   - name: ska-tango-base
-    version: 0.4.12
+    version: 0.4.10
     repository: https://artefact.skao.int/repository/helm-internal
     condition: ska-tango-base.enabled
   - name: ska-tango-util
-    version: 0.4.12
+    version: 0.4.11
     repository: https://artefact.skao.int/repository/helm-internal
   # Note: Versions and repository links defined here do not necessarily reflect what will be
   # deployed to the namespace. These values can be overwritten by Makefile processing at runtime
