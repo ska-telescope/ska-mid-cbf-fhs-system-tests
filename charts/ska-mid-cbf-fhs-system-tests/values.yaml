@@ -8,6 +8,9 @@ global:
   annotations:
     app.gitlab.com/app: ska-mid-cbf-fhs-system-tests
     app.gitlab.com/env: ska
+  sub-system:
+    ska-tango-base:
+      enabled: false  # disabled to prevent deployment conflicts
   retry:
     - "--sleep=3"
     - "--tries=100"
