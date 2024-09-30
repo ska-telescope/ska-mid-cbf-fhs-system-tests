@@ -20,3 +20,4 @@ class TestBasic:
         x = eth_proxy.read_attribute("adminMode")
         print(x)
         assert x is not None
+

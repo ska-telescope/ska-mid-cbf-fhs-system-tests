@@ -18,6 +18,7 @@ RELEASE_NAME = $(HELM_CHART)
 KUBE_APP ?= ska-mid-cbf-fhs-system-tests
 
 TARANTA ?= false
+BOOGIE ?= false
 MINIKUBE ?= false
 
 # Expose All Tango Services to the external network (enable Loadbalancer service)
@@ -98,6 +99,7 @@ K8S_CHART_PARAMS = --set global.minikube=$(MINIKUBE) \
 	--set global.cluster_domain=$(CLUSTER_DOMAIN) \
 	--set global.operator=$(SKA_TANGO_OPERATOR) \
 	--set ska-mid-cbf-fhs-vcc.hostInfo.clusterDomain=$(CLUSTER_DOMAIN) \
+	--set ska-mid-cbf-fhs-vcc-boogie.enabled=$(BOOGIE) \
 	--set global.labels.app=$(KUBE_APP) \
 	--set ska-mid-cbf-emulators.emulator.labels.app=$(KUBE_APP) \
 	--set ska-mid-cbf-emulators.injector.labels.app=$(KUBE_APP) \
@@ -107,7 +109,6 @@ K8S_CHART_PARAMS = --set global.minikube=$(MINIKUBE) \
 USE_DEV_BUILD ?= true
 
 DEV_BUILD_PARAMS =  --set ska-mid-cbf-fhs-vcc.midcbf.image.tag=$(FHS_VCC_HASH_VERSION) \
-					--set ska-mid-cbf-fhs-vcc-boogie.image.tag=$(FHS_VCC_HASH_VERSION) \
 					--set ska-mid-cbf-emulators.emulator.image.tag=$(EMULATORS_HASH_VERSION) \
 					--set ska-mid-cbf-emulators.injector.image.tag=$(EMULATORS_HASH_VERSION) \
 					
@@ -167,8 +168,6 @@ update-chart:
 		echo "Updating Chart.yaml to change ska-mid-cbf-fhs-vcc version to $(FHS_VCC_HASH_VERSION) and repository to $(FHS_VCC_HELM_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").version) = "$(FHS_VCC_HASH_VERSION)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").repository) = "$(FHS_VCC_HELM_REPO)"' $(CHART_FILE); \
-		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").version) = "$(FHS_VCC_HASH_VERSION)"' $(CHART_FILE); \
-		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").repository) = "$(FHS_VCC_HELM_REPO)"' $(CHART_FILE); \
 		echo "Updating Chart.yaml to change ska-mid-cbf-emulators version to $(EMULATORS_HASH_VERSION) and repository to $(EMULATORS_HELM_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").version) = "$(EMULATORS_HASH_VERSION)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").repository) = "$(EMULATORS_HELM_REPO)"' $(CHART_FILE); \

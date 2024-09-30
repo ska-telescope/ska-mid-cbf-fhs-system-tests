@@ -11,6 +11,8 @@ global:
   sub-system:
     ska-tango-base:
       enabled: false  # disabled to prevent deployment conflicts
+    boogie:
+      enabled: false
   retry:
     - "--sleep=3"
     - "--tries=100"
@@ -47,10 +49,10 @@ ska-mid-cbf-fhs-vcc-boogie:
   boogie:
     tango_host: databaseds-tango-base:10000
   image:
-    registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-fhs-vcc
+    repository: docker.io/library
     image: ska-mid-cbf-fhs-vcc-boogie
-    tag: 0.0.1-dev.c1d8f5c2c
-    pullPolicy: Always
+    tag: 0.0.1
+    pullPolicy: IfNotPresent
 
 ska-mid-cbf-emulators:
   enabled: true

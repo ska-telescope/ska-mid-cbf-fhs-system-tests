@@ -22,7 +22,7 @@ dependencies:
     repository: https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
     condition: ska-mid-cbf-fhs-vcc.enabled
   - name: ska-mid-cbf-fhs-vcc-boogie
-    version: 0.0.1-dev.ccfcbc438
+    version: 0.0.1-dev.c92d36d87
     repository: https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
     condition: ska-mid-cbf-fhs-vcc-boogie.enabled
   - name: ska-mid-cbf-emulators
