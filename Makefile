@@ -29,6 +29,7 @@ SKA_TANGO_OPERATOR ?= true
 # Chart for testing
 K8S_CHART ?= $(HELM_CHART)
 K8S_CHARTS ?= $(K8S_CHART)
+K8S_TIMEOUT ?= 600s
 
 # include OCI Images support
 include .make/oci.mk
