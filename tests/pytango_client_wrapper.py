@@ -1,3 +1,5 @@
+"""Wrapper class for utilizing Tango.DeviceProxy"""
+
 import sys
 from typing import Any
 

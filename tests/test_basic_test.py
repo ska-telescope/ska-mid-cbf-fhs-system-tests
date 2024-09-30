@@ -1,21 +1,13 @@
-# pylint: skip-file
-# fmt: off
-# flake8: noqa
-
 """Basic Test"""
 
 import pytest
-from dotenv import load_dotenv
 from pytango_client_wrapper import PyTangoClientWrapper
 
-load_dotenv()  # Load environment variables from .env file
-
-# logging.basicConfig(format=LOG_FORMAT, level=logging.INFO)
-# _logger = logging.getLogger(__name__)
 
 @pytest.mark.nightly
 @pytest.mark.all
-class TestBasic():
+class TestBasic:
+    """Basic tests."""
 
     def test_basic_test(self):
         """Basic Test."""
