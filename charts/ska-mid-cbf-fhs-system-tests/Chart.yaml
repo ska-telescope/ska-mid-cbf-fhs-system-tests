@@ -1,0 +1,31 @@
+apiVersion: v2
+name: ska-mid-cbf-fhs-system-tests
+description: A Helm chart for Kubernetes Mid.CBF FHS H-level tests.
+type: application
+version: 0.0.1
+appVersion: 0.0.1
+icon: https://www.skatelescope.org/wp-content/uploads/2016/07/09545_NEW_LOGO_2014.png
+dependencies:
+  # Tango
+  - name: ska-tango-base
+    version: 0.4.12
+    repository: https://artefact.skao.int/repository/helm-internal
+    condition: ska-tango-base.enabled
+  - name: ska-tango-util
+    version: 0.4.12
+    repository: https://artefact.skao.int/repository/helm-internal
+  # Note: Versions and repository links defined here do not necessarily reflect what will be
+  # deployed to the namespace. These values can be overwritten by Makefile processing at runtime
+  # based on USE_DEV_BUILD and <repo>_HASH_VERSION variables.
+  - name: ska-mid-cbf-fhs-vcc
+    version: 0.0.1-dev.ccfcbc438
+    repository: https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
+    condition: ska-mid-cbf-fhs-vcc.enabled
+  - name: ska-mid-cbf-fhs-vcc-boogie
+    version: 0.0.1-dev.c92d36d87
+    repository: https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
+    condition: ska-mid-cbf-fhs-vcc-boogie.enabled
+  - name: ska-mid-cbf-emulators
+    version: 0.5.3-dev.c87eb95f0
+    repository: https://gitlab.com/api/v4/projects/55081836/packages/helm/dev
+    condition: ska-mid-cbf.emulators.enabled

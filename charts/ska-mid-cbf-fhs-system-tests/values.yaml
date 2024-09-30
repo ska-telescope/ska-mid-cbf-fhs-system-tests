@@ -1,0 +1,83 @@
+display: ":0"
+xauthority: "~/.Xauthority"
+
+global:
+  minikube: false
+  operator: true
+  exposeAllDS: true  # Expose All Tango Services to the external network (enable Loadbalancer service)
+  annotations:
+    app.gitlab.com/app: ska-mid-cbf-fhs-system-tests
+    app.gitlab.com/env: ska
+  sub-system:
+    ska-tango-base:
+      enabled: false  # disabled to prevent deployment conflicts
+    boogie:
+      enabled: false
+  retry:
+    - "--sleep=3"
+    - "--tries=100"
+  tango_host: databaseds-tango-base:10000
+  device_server_port: 45450
+  cluster_domain: cluster.local
+
+ska-tango-base:
+  enabled: true
+  vnc:
+    enabled: false
+  tangorest:
+    enabled: false
+  tangodb:
+    use_pv: true
+
+ska-tango-util:
+  enabled: true
+
+# Note: Versions and repository links defined here do not necessarily reflect what will be
+# deployed to the namespace. These values can be overwritten by Makefile processing at runtime
+# based on USE_DEV_BUILD and <repo>_HASH_VERSION variables.
+ska-mid-cbf-fhs-vcc:
+  enabled: true
+  midcbf:
+    image:
+      registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-fhs-vcc
+      image: ska-mid-cbf-fhs-vcc
+      tag: 0.0.1-dev.c1d8f5c2c
+      pullPolicy: Always
+
+ska-mid-cbf-fhs-vcc-boogie:
+  enabled: false  # TODO figure out boogie deployment/registry
+  boogie:
+    tango_host: databaseds-tango-base:10000
+  image:
+    repository: docker.io/library
+    image: ska-mid-cbf-fhs-vcc-boogie
+    tag: 0.0.1
+    pullPolicy: IfNotPresent
+
+ska-mid-cbf-emulators:
+  enabled: true
+  emulator:
+    app_label: ska-mid-cbf-fhs-system-tests
+    image:
+      repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-emulator
+      tag: 0.5.3
+      pullPolicy: Always
+  injector:
+    app_label: ska-mid-cbf-fhs-system-tests
+    image:
+      repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-injector
+      tag: 0.5.3
+      pullPolicy: Always
+  
+  emulators:
+    - bitstream_emulator_id: agilex-vcc
+      bitstream_emulator_ver: 0.0.6
+      deployment_id: fhs-vcc-emulator-1
+      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-agilex-vcc-0.0.6.tar.gz"
+    - bitstream_emulator_id: agilex-vcc
+      bitstream_emulator_ver: 0.0.6
+      deployment_id: fhs-vcc-emulator-2
+      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-agilex-vcc-0.0.6.tar.gz"
+
+  rabbitmq:
+    host: rabbitmq-service.ska-mid-cbf-fhs-system-tests.svc.cluster.local
