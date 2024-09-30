@@ -17,9 +17,11 @@ RELEASE_NAME = $(HELM_CHART)
 KUBE_APP ?= ska-mid-cbf-fhs-system-tests
 
 TARANTA ?= false
-MINIKUBE ?= false ## Minikube or not
+MINIKUBE ?= false
 
-EXPOSE_All_DS ?= true ## Expose All Tango Services to the external network (enable Loadbalancer service)
+# Expose All Tango Services to the external network (enable Loadbalancer service)
+EXPOSE_All_DS ?= true
+
 SKA_TANGO_OPERATOR ?= true
 
 # Chart for testing
@@ -47,9 +49,14 @@ include .make/base.mk
 # include your own private variables for custom deployment configuration
 -include PrivateRules.mak
 
-CI_JOB_ID ?= local  # pipeline job id
-TANGO_HOST ?= databaseds-tango-base:10000  # TANGO_HOST connection to the Tango DS
-CLUSTER_DOMAIN ?= cluster.local  # Domain used for naming Tango Device Servers, Emulator APIs, rabbitmq host, etc.
+# pipeline job id
+CI_JOB_ID ?= local
+
+# TANGO_HOST connection to the Tango DS
+TANGO_HOST ?= databaseds-tango-base:10000
+
+# Domain used for naming Tango Device Servers, Emulator APIs, rabbitmq host, etc.
+CLUSTER_DOMAIN ?= cluster.local
 
 # W503: "Line break before binary operator." Disabled to work around a bug in flake8 where currently both "before" and "after" are disallowed.
 PYTHON_SWITCHES_FOR_FLAKE8 = --ignore=DAR201,W503,E731
@@ -93,10 +100,10 @@ K8S_CHART_PARAMS = --set global.minikube=$(MINIKUBE) \
 	--set global.labels.app=$(KUBE_APP) \
 	--set ska-mid-cbf-emulators.emulator.labels.app=$(KUBE_APP) \
 	--set ska-mid-cbf-emulators.injector.labels.app=$(KUBE_APP) \
-	--set ska-mid-cbf-emulators.rabbitmq.host="rabbitmq-service.$(KUBE_NAMESPACE).svc.$(CLUSTER_DOMAIN)" \
-	$(TARANTA_PARAMS)
+	--set ska-mid-cbf-emulators.rabbitmq.host="rabbitmq-service.$(KUBE_NAMESPACE).svc.$(CLUSTER_DOMAIN)"
 
-USE_DEV_BUILD ?= true # Update the Chart.yaml and values.yaml for the repositories. If set to true, to use the latest tag versions from main branch on Gitlab
+# Update the Chart.yaml and values.yaml for the repositories. If set to true, to use the latest tag versions from main branch on Gitlab
+USE_DEV_BUILD ?= true
 
 DEV_BUILD_PARAMS =  --set ska-mid-cbf-fhs-vcc.midcbf.image.tag=$(FHS_VCC_HASH_VERSION) \
 					--set ska-mid-cbf-fhs-vcc-boogie.image.tag=$(FHS_VCC_HASH_VERSION) \
