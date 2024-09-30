@@ -8,11 +8,6 @@ global:
   annotations:
     app.gitlab.com/app: ska-mid-cbf-fhs-system-tests
     app.gitlab.com/env: ska
-  sub-system:
-    tango-base:
-      enabled: false
-    ska-tango-base:
-      enabled: false
   retry:
     - "--sleep=3"
     - "--tries=100"
@@ -23,9 +18,11 @@ global:
 ska-tango-base:
   enabled: true
   vnc:
-    enabled: false
+    enabled: true
+    replicas: 1
   tangorest:
-    enabled: false
+    enabled: true
+    replicas: 1
   tangodb:
     use_pv: true
 
