@@ -9,6 +9,8 @@ global:
     app.gitlab.com/app: ska-mid-cbf-fhs-system-tests
     app.gitlab.com/env: ska
   sub-system:
+    tango-base:
+      enabled: false
     ska-tango-base:
       enabled: false
   retry:
