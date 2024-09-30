@@ -16,21 +16,7 @@ RELEASE_NAME = $(HELM_CHART)
 
 KUBE_APP ?= ska-mid-cbf-fhs-system-tests
 
-# TODO determine if taranta actually needed/useful since we probably can't use GUI...
-# ... replace with Boogie?
-TARANTA ?= true # Enable Taranta
-TARANTA_AUTH ?= false # Enable Taranta
-TARANTA_PARAMS = --set ska-taranta.enabled=$(TARANTA) \
-				 --set global.taranta_auth_enabled=$(TARANTA_AUTH) \
-				 --set global.taranta_dashboard_enabled=$(TARANTA)
-ifneq ($(MINIKUBE),)
-ifneq ($(MINIKUBE),true)
-TARANTA_PARAMS = --set ska-taranta.enabled=$(TARANTA) \
-				 --set global.taranta_auth_enabled=$(TARANTA_AUTH) \
-				 --set global.taranta_dashboard_enabled=$(TARANTA)
-endif
-endif
-
+TARANTA ?= false
 MINIKUBE ?= false ## Minikube or not
 
 EXPOSE_All_DS ?= true ## Expose All Tango Services to the external network (enable Loadbalancer service)
@@ -113,11 +99,14 @@ K8S_CHART_PARAMS = --set global.minikube=$(MINIKUBE) \
 USE_DEV_BUILD ?= true # Update the Chart.yaml and values.yaml for the repositories. If set to true, to use the latest tag versions from main branch on Gitlab
 
 DEV_BUILD_PARAMS =  --set ska-mid-cbf-fhs-vcc.midcbf.image.tag=$(FHS_VCC_HASH_VERSION) \
+					--set ska-mid-cbf-fhs-vcc-boogie.image.tag=$(FHS_VCC_HASH_VERSION) \
 					--set ska-mid-cbf-emulators.emulator.image.tag=$(EMULATORS_HASH_VERSION) \
 					--set ska-mid-cbf-emulators.injector.image.tag=$(EMULATORS_HASH_VERSION) \
 					
 TAG_BUILD_PARAMS =  --set ska-mid-cbf-fhs-vcc.midcbf.image.tag=$(FHS_VCC_LATEST_TAG) \
 					--set ska-mid-cbf-fhs-vcc.midcbf.image.registry=$(CAR_REGISTRY) \
+					--set ska-mid-cbf-fhs-vcc-boogie.image.tag=$(FHS_VCC_LATEST_TAG) \
+					--set ska-mid-cbf-fhs-vcc-boogie.image.registry=$(CAR_REGISTRY) \
 					--set ska-mid-cbf-emulators.emulator.image.tag=$(EMULATORS_LATEST_TAG) \
 					--set ska-mid-cbf-emulators.emulator.image.registry=$(CAR_REGISTRY) \
 					--set ska-mid-cbf-emulators.injector.image.tag=$(EMULATORS_LATEST_TAG) \
@@ -161,6 +150,8 @@ update-chart:
 		echo "Updating Chart.yaml to change ska-mid-cbf-fhs-vcc version to $(FHS_VCC_LATEST_TAG) and repository to $(HELM_INTERNAL_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").version) = "$(FHS_VCC_LATEST_TAG)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").repository) = "$(HELM_INTERNAL_REPO)"' $(CHART_FILE); \
+		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").version) = "$(FHS_VCC_LATEST_TAG)"' $(CHART_FILE); \
+		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").repository) = "$(HELM_INTERNAL_REPO)"' $(CHART_FILE); \
 		echo "Updating Chart.yaml to change ska-mid-cbf-emulators version to $(EMULATORS_LATEST_TAG) and repository to $(HELM_INTERNAL_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").version) = "$(EMULATORS_LATEST_TAG)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").repository) = "$(HELM_INTERNAL_REPO)"' $(CHART_FILE); \
@@ -168,6 +159,8 @@ update-chart:
 		echo "Updating Chart.yaml to change ska-mid-cbf-fhs-vcc version to $(FHS_VCC_HASH_VERSION) and repository to $(FHS_VCC_HELM_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").version) = "$(FHS_VCC_HASH_VERSION)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").repository) = "$(FHS_VCC_HELM_REPO)"' $(CHART_FILE); \
+		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").version) = "$(FHS_VCC_HASH_VERSION)"' $(CHART_FILE); \
+		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").repository) = "$(FHS_VCC_HELM_REPO)"' $(CHART_FILE); \
 		echo "Updating Chart.yaml to change ska-mid-cbf-emulators version to $(EMULATORS_HASH_VERSION) and repository to $(EMULATORS_HELM_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").version) = "$(EMULATORS_HASH_VERSION)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").repository) = "$(EMULATORS_HELM_REPO)"' $(CHART_FILE); \

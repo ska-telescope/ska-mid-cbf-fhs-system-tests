@@ -4,18 +4,12 @@ xauthority: "~/.Xauthority"
 global:
   minikube: false
   operator: true
-  exposeAllDS: true
+  exposeAllDS: true  # Expose All Tango Services to the external network (enable Loadbalancer service)
   annotations:
     app.gitlab.com/app: ska-mid-cbf-fhs-system-tests
     app.gitlab.com/env: ska
-  taranta_auth_enabled: false
-  taranta_dashboard_enabled: true
   sub-system:
-    tango-base:
-      enabled: false
     ska-tango-base:
-      enabled: false
-    ska-taranta:
       enabled: false
   retry:
     - "--sleep=3"
@@ -27,22 +21,11 @@ global:
 ska-tango-base:
   enabled: true
   vnc:
-    replicas: 1
-    enabled: true
+    enabled: false
   tangorest:
-    enabled: true
-    replicas: 1
+    enabled: false
   tangodb:
     use_pv: true
-
-ska-tango-tangogql:
-  enabled: true
-  ska-tango-base:
-    enabled: false
-
-ska-taranta:
-  legacy_compatibility: true
-  enabled: true
 
 ska-tango-util:
   enabled: true
@@ -58,6 +41,16 @@ ska-mid-cbf-fhs-vcc:
       image: ska-mid-cbf-fhs-vcc
       tag: 0.0.1-dev.c1d8f5c2c
       pullPolicy: Always
+
+ska-mid-cbf-fhs-vcc-boogie:
+  enabled: true
+  boogie:
+    tango_host: databaseds-tango-base:10000
+  image:
+    registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-fhs-vcc
+    image: ska-mid-cbf-fhs-vcc-boogie
+    tag: 0.0.1-dev.c1d8f5c2c
+    pullPolicy: Always
 
 ska-mid-cbf-emulators:
   enabled: true
