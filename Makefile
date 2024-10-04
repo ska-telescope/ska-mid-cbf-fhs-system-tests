@@ -73,14 +73,16 @@ CHART_FILE=charts/ska-mid-cbf-fhs-system-tests/Chart.yaml
 CAR_REGISTRY=artefact.skao.int
 HELM_INTERNAL_REPO=https://${CAR_REGISTRY}/repository/helm-internal
 
+
+# uncomment to force a specific hash & override the automatic hash lookup (e.g. for testing a commit to a non-main branch)
+FHS_VCC_HASH_VERSION = "0.0.1-dev.c06ae4f97"
+EMULATORS_HASH_VERSION = "0.5.3-dev.c15f99f96"
+
 # Use Gitlab API to extract latest tags and builds from the main branch for the various repositories, to extract the hash versions
 FHS_VCC_HELM_REPO=https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
 FHS_VCC_LATEST_TAG:=$(shell curl -s https://gitlab.com/api/v4/projects/58443798/repository/tags | jq -r '.[0] | .name')
 FHS_VCC_LATEST_COMMIT:=$(shell curl -s https://gitlab.com/api/v4/projects/58443798/repository/branches/main | jq -r .commit.short_id)
 FHS_VCC_HASH_VERSION?=$(FHS_VCC_LATEST_TAG)-dev.c$(FHS_VCC_LATEST_COMMIT)
-
-# TODO remove this
-EMULATORS_HASH_VERSION = "0.5.3-dev.c87eb95f0"
 
 EMULATORS_HELM_REPO=https://gitlab.com/api/v4/projects/55081836/packages/helm/dev
 EMULATORS_LATEST_TAG:=$(shell curl -s https://gitlab.com/api/v4/projects/55081836/repository/tags | jq -r '.[0] | .name')
@@ -136,7 +138,7 @@ endif
 TEST_ID = Test_1
 PYTEST_MARKER = nightly
 
-PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rA 
+PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rA --no-cov
 
 update-internal-schema:
 	@if [ "$(USE_DEV_BUILD)" == "false" ]; then \

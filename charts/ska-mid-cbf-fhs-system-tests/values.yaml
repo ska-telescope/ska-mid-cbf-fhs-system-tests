@@ -43,6 +43,91 @@ ska-mid-cbf-fhs-vcc:
       image: ska-mid-cbf-fhs-vcc
       tag: 0.0.1-dev.c1d8f5c2c
       pullPolicy: Always
+  simulationMode: 0
+  emulationMode: 1
+
+  emulatorIds: 
+    - "vcc-emulator-1"
+    - "vcc-emulator-2"
+    
+  emulatorIpBlockIds:
+    mac200: "ethernet_200g"
+    packetValidation: "packet_validation"
+    widebandInputBuffer: "wideband_input_buffer"
+    widebandFrequencyShifter: "wideband_frequency_shifter"
+    b123Vcc: "b123vcc"
+    frequencySliceSelection: "fs_selection_26_2_1"
+
+  instances:
+    - name: fhs-vcc-1
+      packetValidation:
+        deviceId: 1
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 0 }}"
+      mac200:
+        deviceId: 1
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 0 }}"
+      b123VccOsppfbChanneliser:
+        deviceId: 1
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 0 }}"
+      frequencySliceSelection:
+        deviceId: 1
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 0 }}"
+      widebandFrequencyShifter:
+        deviceId: 1
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 0 }}"
+      widebandInputBuffer:
+        deviceId: 1
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 0 }}"
+    - name: fhs-vcc-2
+      packetValidation:
+        deviceId: 2
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 1 }}"
+      mac200:
+        deviceId: 2
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 1 }}"
+      b123VccOsppfbChanneliser:
+        deviceId: 2
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 1 }}"
+      frequencySliceSelection:
+        deviceId: 2
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 1 }}"
+      widebandFrequencyShifter:
+        deviceId: 2
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 1 }}"
+      widebandInputBuffer:
+        deviceId: 2
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 1 }}"
+
+  lowLevel:
+    emulatorConfigPath: "/app/config/emulator"
+    emulatorBaseUrl: "ska-mid-cbf-fhs-system-tests.svc.cluster.local:5001"
+    firmwareRegistry: https://artefact.skao.int/repository/raw-internal
+    firmwareImage: ska-mid-cbf-agilex-vcc
+    firmwareVersion: 0.0.6
 
 ska-mid-cbf-fhs-vcc-boogie:
   enabled: false  # TODO figure out boogie deployment/registry
