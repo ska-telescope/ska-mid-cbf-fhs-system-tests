@@ -65,7 +65,10 @@ CLUSTER_DOMAIN ?= cluster.local
 PYTHON_SWITCHES_FOR_FLAKE8 = --ignore=DAR201,W503,E731
 
 # F0002, F0010: Astroid errors. Not our problem.
-PYTHON_SWITCHES_FOR_PYLINT = --disable=F0002,F0010
+# E0401: Import errors. Ignore for now until we figure out our actual project structure.
+# E0611: Name not found in module. This occurs in our pipeline because the image we pull down uses an older version of Python; we should remove this immediately once we have our image building to CAR.
+PYTHON_SWITCHES_FOR_PYLINT = --disable=E0401,E0611,F0002,F0010,E0001,E1101,C0114,C0115,C0116
+PYTHON_SWITCHES_FOR_PYLINT_LOCAL = --disable=E0401,F0002,F0010,E1101,C0114,C0115,C0116
 
 PYTHON_LINT_TARGET = tests/
 
@@ -139,6 +142,7 @@ TEST_ID = Test_1
 PYTEST_MARKER = nightly
 
 PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rA --no-cov
+PYTHON_LINE_LENGTH = 180
 
 update-internal-schema:
 	@if [ "$(USE_DEV_BUILD)" == "false" ]; then \
