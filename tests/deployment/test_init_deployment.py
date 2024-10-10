@@ -45,8 +45,8 @@ class TestInitDeployment:
         assert wib_000_state == DevState.ON
         assert pv_000_state == DevState.ON
 
-    def test_init_emulators(self: TestInitDeployment, namespace):
-        response: requests.Response = requests.get(f"http://fhs-vcc-emulator-1.{namespace}.svc.cluster.local:5001/state", timeout=60)
+    def test_init_emulators(self: TestInitDeployment, namespace, cluster_domain):
+        response: requests.Response = requests.get(f"http://fhs-vcc-emulator-1.{namespace}.svc.{cluster_domain}:5001/state", timeout=60)
         emulator1_json = response.json()
 
         assert emulator1_json["current_state"] == "RUNNING"
