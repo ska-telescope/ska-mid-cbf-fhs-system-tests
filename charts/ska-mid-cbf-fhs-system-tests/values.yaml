@@ -43,12 +43,13 @@ ska-mid-cbf-fhs-vcc:
       image: ska-mid-cbf-fhs-vcc
       tag: 0.0.1-dev.c1d8f5c2c
       pullPolicy: Always
+      
   simulationMode: 0
   emulationMode: 1
 
   emulatorIds: 
-    - "vcc-emulator-1"
-    - "vcc-emulator-2"
+    - "fhs-vcc-emulator-1"
+    - "fhs-vcc-emulator-2"
     
   emulatorIpBlockIds:
     mac200: "ethernet_200g"
@@ -123,11 +124,12 @@ ska-mid-cbf-fhs-vcc:
         emulatorId: "{{ index .Values.emulatorIds 1 }}"
 
   lowLevel:
-    emulatorConfigPath: "/app/config/emulator"
+    bitstreamEmulatorConfigPath: "emulators/config.json"
     emulatorBaseUrl: "ska-mid-cbf-fhs-system-tests.svc.cluster.local:5001"
     firmwareRegistry: https://artefact.skao.int/repository/raw-internal
     firmwareImage: ska-mid-cbf-agilex-vcc
     firmwareVersion: 0.0.6
+    bitstreamPath: "/app/mnt/bitstream"
 
 ska-mid-cbf-fhs-vcc-boogie:
   enabled: false  # TODO figure out boogie deployment/registry

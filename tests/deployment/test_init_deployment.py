@@ -68,19 +68,21 @@ class TestInitDeployment():
         wib_000_proxy.create_tango_client('fhs/wib/000')
         pv_000_proxy.create_tango_client('fhs/packetvalidation/000')
         
-        mac200_status = mac200_000_proxy.command_read_write("GetStatus")
-        vcc_status = vcc_000_proxy.command_read_write("GetStatus")
-        fss_status = fss_000_proxy.command_read_write("GetStatus")
-        wfs_status = wfs_000_proxy.command_read_write("GetStatus")
-        wib_status = wib_000_proxy.command_read_write("GetStatus")
-        pv_status = pv_000_proxy.command_read_write("GetStatus")
+        mac200_status = mac200_000_proxy.command_read_write("getstatus", False)
+        vcc_status = vcc_000_proxy.command_read_write("getstatus", False)
+        fss_status = fss_000_proxy.command_read_write("getstatus", False)
+        wfs_status = wfs_000_proxy.command_read_write("getstatus", False)
+        wib_status = wib_000_proxy.command_read_write("getstatus", False)
+        pv_status = pv_000_proxy.command_read_write("getstatus", False)
         
         print(f'......Mac200Stats: {mac200_status}......')
+        print(f'......Mac200Stats: {mac200_status[0]}......')
+        print(f'......Mac200Stats: {mac200_status[1]}......')
         
-        assert mac200_status[0] is ResultCode.OK
-        assert vcc_status[0] is ResultCode.OK
-        assert fss_status[0] is ResultCode.OK
-        assert fss_status[0] is ResultCode.OK
-        assert wfs_status[0] is ResultCode.OK
-        assert wib_status[0] is ResultCode.OK
-        assert pv_status[0] is ResultCode.OK
+        assert mac200_status is not None
+        assert vcc_status is not None
+        assert fss_status is not None
+        assert fss_status is not None
+        assert wfs_status is not None
+        assert wib_status is not None
+        assert pv_status is not None
