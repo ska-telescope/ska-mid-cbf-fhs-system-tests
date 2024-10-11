@@ -65,7 +65,10 @@ CLUSTER_DOMAIN ?= cluster.local
 PYTHON_SWITCHES_FOR_FLAKE8 = --ignore=DAR201,W503,E731
 
 # F0002, F0010: Astroid errors. Not our problem.
-PYTHON_SWITCHES_FOR_PYLINT = --disable=F0002,F0010
+# E0401: Import errors. Ignore for now until we figure out our actual project structure.
+# E0611: Name not found in module. This occurs in our pipeline because the image we pull down uses an older version of Python; we should remove this immediately once we have our image building to CAR.
+PYTHON_SWITCHES_FOR_PYLINT = --disable=E0401,E0611,F0002,F0010,E0001,E1101,C0114,C0115,C0116
+PYTHON_SWITCHES_FOR_PYLINT_LOCAL = --disable=E0401,F0002,F0010,E1101,C0114,C0115,C0116
 
 PYTHON_LINT_TARGET = tests/
 
@@ -73,14 +76,16 @@ CHART_FILE=charts/ska-mid-cbf-fhs-system-tests/Chart.yaml
 CAR_REGISTRY=artefact.skao.int
 HELM_INTERNAL_REPO=https://${CAR_REGISTRY}/repository/helm-internal
 
+
+# uncomment to force a specific hash & override the automatic hash lookup (e.g. for testing a commit to a non-main branch)
+FHS_VCC_HASH_VERSION = "0.0.1-dev.cf4a7c442"
+# EMULATORS_HASH_VERSION = "0.5.3-dev.c15f99f96"
+
 # Use Gitlab API to extract latest tags and builds from the main branch for the various repositories, to extract the hash versions
 FHS_VCC_HELM_REPO=https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
 FHS_VCC_LATEST_TAG:=$(shell curl -s https://gitlab.com/api/v4/projects/58443798/repository/tags | jq -r '.[0] | .name')
 FHS_VCC_LATEST_COMMIT:=$(shell curl -s https://gitlab.com/api/v4/projects/58443798/repository/branches/main | jq -r .commit.short_id)
 FHS_VCC_HASH_VERSION?=$(FHS_VCC_LATEST_TAG)-dev.c$(FHS_VCC_LATEST_COMMIT)
-
-# TODO remove this
-EMULATORS_HASH_VERSION = "0.5.3-dev.c87eb95f0"
 
 EMULATORS_HELM_REPO=https://gitlab.com/api/v4/projects/55081836/packages/helm/dev
 EMULATORS_LATEST_TAG:=$(shell curl -s https://gitlab.com/api/v4/projects/55081836/repository/tags | jq -r '.[0] | .name')
@@ -136,7 +141,8 @@ endif
 TEST_ID = Test_1
 PYTEST_MARKER = nightly
 
-PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rA 
+PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rA --no-cov
+PYTHON_LINE_LENGTH = 180
 
 update-internal-schema:
 	@if [ "$(USE_DEV_BUILD)" == "false" ]; then \

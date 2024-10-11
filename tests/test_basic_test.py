@@ -5,7 +5,6 @@ from pytango_client_wrapper import PyTangoClientWrapper
 
 
 @pytest.mark.nightly
-@pytest.mark.all
 class TestBasic:
     """Basic tests."""
 
