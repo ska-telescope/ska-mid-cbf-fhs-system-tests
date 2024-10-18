@@ -9,11 +9,8 @@ from typing import List
 
 import pytest
 from dotenv import load_dotenv
-from ska_tango_testing.integration import TangoEventTracer
 
 load_dotenv()  # Load environment variables from .env file
-
-_logger = logging.getLogger(__name__)
 
 
 def pytest_addoption(parser):
@@ -25,6 +22,11 @@ def pytest_addoption(parser):
         "--tango_host", action="store", default="databaseds-tango-base:10000"
     )
     parser.addoption("--test_id", action="store", default="Test_1")
+
+
+@pytest.fixture(scope="session")
+def logger():
+    return logging.getLogger(__name__)
 
 
 @pytest.fixture(scope="session")

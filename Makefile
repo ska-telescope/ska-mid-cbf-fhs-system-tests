@@ -78,7 +78,7 @@ HELM_INTERNAL_REPO=https://${CAR_REGISTRY}/repository/helm-internal
 
 
 # uncomment to force a specific hash & override the automatic hash lookup (e.g. for testing a commit to a non-main branch)
-FHS_VCC_HASH_VERSION = "0.0.1-dev.cf4a7c442"
+FHS_VCC_HASH_VERSION = "0.0.1-dev.c5971b129"
 # EMULATORS_HASH_VERSION = "0.5.3-dev.c15f99f96"
 
 # Use Gitlab API to extract latest tags and builds from the main branch for the various repositories, to extract the hash versions
@@ -141,7 +141,8 @@ endif
 TEST_ID = Test_1
 PYTEST_MARKER = nightly
 
-PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rA --no-cov
+PYTEST_LOG_LEVEL = 3
+PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rA --no-cov -o log_cli_level=$(PYTEST_LOG_LEVEL)
 PYTHON_LINE_LENGTH = 180
 
 update-internal-schema:
@@ -181,10 +182,26 @@ update-chart:
 	fi
 	cat $(CHART_FILE)
 
+check-minikube-eval:
+	@minikube status | grep -iE '^.*(docker-env: in-use).*$$'; \
+	if [ $$? -ne 0 ]; then \
+		echo "Minikube docker-env not active. Please run: 'eval \$$(minikube docker-env)'."; \
+		exit 1; \
+	else echo "Minikube docker-env is active."; \
+	fi
+
 k8s-pre-install-chart:
+	@if [ "$(MINIKUBE)" = "true" ]; then make check-minikube-eval; fi;
+	rm -f charts/ska-mid-cbf-fhs-system-tests/Chart.lock
 	make update-chart FHS_VCC_HASH_VERSION=$(FHS_VCC_HASH_VERSION) EMULATORS_HASH_VERSION=$(EMULATORS_HASH_VERSION)
 
+k8s-destroy:
+	make k8s-uninstall-chart
+	@echo "Waiting for all pods in namespace $(KUBE_NAMESPACE) to terminate..."
+	@time kubectl wait pod --all --for=delete --timeout=5m0s --namespace $(KUBE_NAMESPACE)
+
 python-pre-test:
+	mkdir -p build/reports
 	make update-internal-schema
 	poetry show ska-mid-cbf-internal-schemas > build/reports/internal_schemas_version.txt
 	cat build/reports/internal_schemas_version.txt | grep version

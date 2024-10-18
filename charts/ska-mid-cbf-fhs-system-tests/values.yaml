@@ -50,6 +50,10 @@ ska-mid-cbf-fhs-vcc:
   emulatorIds: 
     - "fhs-vcc-emulator-1"
     - "fhs-vcc-emulator-2"
+    - "fhs-vcc-emulator-3"
+    - "fhs-vcc-emulator-4"
+    - "fhs-vcc-emulator-5"
+    - "fhs-vcc-emulator-6"
     
   emulatorIpBlockIds:
     mac200: "ethernet_200g"
@@ -91,6 +95,10 @@ ska-mid-cbf-fhs-vcc:
         simulationMode: "{{ .Values.simulationMode }}"
         emulationMode: "{{ .Values.emulationMode }}"
         emulatorId: "{{ index .Values.emulatorIds 0 }}"
+      vccAllBands:
+        deviceId: 1
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
     - name: fhs-vcc-2
       packetValidation:
         deviceId: 2
@@ -122,13 +130,158 @@ ska-mid-cbf-fhs-vcc:
         simulationMode: "{{ .Values.simulationMode }}"
         emulationMode: "{{ .Values.emulationMode }}"
         emulatorId: "{{ index .Values.emulatorIds 1 }}"
+      vccAllBands:
+        deviceId: 2
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+    - name: fhs-vcc-3
+      packetValidation:
+        deviceId: 3
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 2 }}"
+      mac200:
+        deviceId: 3
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 2 }}"
+      b123VccOsppfbChanneliser:
+        deviceId: 3
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 2 }}"
+      frequencySliceSelection:
+        deviceId: 3
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 2 }}"
+      widebandFrequencyShifter:
+        deviceId: 3
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 2 }}"
+      widebandInputBuffer:
+        deviceId: 3
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 2 }}"
+      vccAllBands:
+        deviceId: 3
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+    - name: fhs-vcc-4
+      packetValidation:
+        deviceId: 4
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 3 }}"
+      mac200:
+        deviceId: 4
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 3 }}"
+      b123VccOsppfbChanneliser:
+        deviceId: 4
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 3 }}"
+      frequencySliceSelection:
+        deviceId: 4
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 3 }}"
+      widebandFrequencyShifter:
+        deviceId: 4
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 3 }}"
+      widebandInputBuffer:
+        deviceId: 4
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 3 }}"
+      vccAllBands:
+        deviceId: 4
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+    - name: fhs-vcc-5
+      packetValidation:
+        deviceId: 5
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 4 }}"
+      mac200:
+        deviceId: 5
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 4 }}"
+      b123VccOsppfbChanneliser:
+        deviceId: 5
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 4 }}"
+      frequencySliceSelection:
+        deviceId: 5
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 4 }}"
+      widebandFrequencyShifter:
+        deviceId: 5
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 4 }}"
+      widebandInputBuffer:
+        deviceId: 5
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 4 }}"
+      vccAllBands:
+        deviceId: 5
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+    - name: fhs-vcc-6
+      packetValidation:
+        deviceId: 6
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 5 }}"
+      mac200:
+        deviceId: 6
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 5 }}"
+      b123VccOsppfbChanneliser:
+        deviceId: 6
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 5 }}"
+      frequencySliceSelection:
+        deviceId: 6
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 5 }}"
+      widebandFrequencyShifter:
+        deviceId: 6
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 5 }}"
+      widebandInputBuffer:
+        deviceId: 6
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
+        emulatorId: "{{ index .Values.emulatorIds 5 }}"
+      vccAllBands:
+        deviceId: 6
+        simulationMode: "{{ .Values.simulationMode }}"
+        emulationMode: "{{ .Values.emulationMode }}"
 
   lowLevel:
     bitstreamEmulatorConfigPath: "emulators/config.json"
     emulatorBaseUrl: "ska-mid-cbf-fhs-system-tests.svc.cluster.local:5001"
     firmwareRegistry: https://artefact.skao.int/repository/raw-internal
     firmwareImage: ska-mid-cbf-agilex-vcc
-    firmwareVersion: 0.0.6
+    bitstreamId: agilex-vcc
+    firmwareVersion: 0.0.8
     bitstreamPath: "/app/mnt/bitstream"
 
 ska-mid-cbf-fhs-vcc-boogie:
@@ -149,6 +302,7 @@ ska-mid-cbf-emulators:
       repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-emulator
       tag: 0.5.3
       pullPolicy: Always
+    verbosity: 4
   injector:
     app_label: ska-mid-cbf-fhs-system-tests
     image:
@@ -158,13 +312,29 @@ ska-mid-cbf-emulators:
   
   emulators:
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.6
+      bitstream_emulator_ver: 0.0.8
       deployment_id: fhs-vcc-emulator-1
-      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-agilex-vcc-0.0.6.tar.gz"
+      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-agilex-vcc-0.0.8.tar.gz"
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.6
+      bitstream_emulator_ver: 0.0.8
       deployment_id: fhs-vcc-emulator-2
-      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-agilex-vcc-0.0.6.tar.gz"
+      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-agilex-vcc-0.0.8.tar.gz"
+    - bitstream_emulator_id: agilex-vcc
+      bitstream_emulator_ver: 0.0.8
+      deployment_id: fhs-vcc-emulator-3
+      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-agilex-vcc-0.0.8.tar.gz"
+    - bitstream_emulator_id: agilex-vcc
+      bitstream_emulator_ver: 0.0.8
+      deployment_id: fhs-vcc-emulator-4
+      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-agilex-vcc-0.0.8.tar.gz"
+    - bitstream_emulator_id: agilex-vcc
+      bitstream_emulator_ver: 0.0.8
+      deployment_id: fhs-vcc-emulator-5
+      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-agilex-vcc-0.0.8.tar.gz"
+    - bitstream_emulator_id: agilex-vcc
+      bitstream_emulator_ver: 0.0.8
+      deployment_id: fhs-vcc-emulator-6
+      bitstream_url: "https://artefact.skao.int/repository/raw-internal/ska-mid-cbf-agilex-vcc-0.0.8.tar.gz"
 
   rabbitmq:
     host: rabbitmq-service.ska-mid-cbf-fhs-system-tests.svc.cluster.local
