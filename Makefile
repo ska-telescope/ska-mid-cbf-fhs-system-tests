@@ -78,7 +78,7 @@ HELM_INTERNAL_REPO=https://${CAR_REGISTRY}/repository/helm-internal
 
 
 # uncomment to force a specific hash & override the automatic hash lookup (e.g. for testing a commit to a non-main branch)
-FHS_VCC_HASH_VERSION = "0.0.1-dev.c5971b129"
+FHS_VCC_HASH_VERSION = "0.0.1-dev.c55e4a242"
 # EMULATORS_HASH_VERSION = "0.5.3-dev.c15f99f96"
 
 # Use Gitlab API to extract latest tags and builds from the main branch for the various repositories, to extract the hash versions
@@ -141,8 +141,8 @@ endif
 TEST_ID = Test_1
 PYTEST_MARKER = nightly
 
-PYTEST_LOG_LEVEL = 3
-PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rA --no-cov -o log_cli_level=$(PYTEST_LOG_LEVEL)
+PYTEST_LOG_LEVEL = INFO
+PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rA --no-cov --log-cli-level=$(PYTEST_LOG_LEVEL)
 PYTHON_LINE_LENGTH = 180
 
 update-internal-schema:

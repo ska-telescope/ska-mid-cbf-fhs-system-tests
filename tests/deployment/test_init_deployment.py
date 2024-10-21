@@ -9,7 +9,7 @@ from tango import DevState
 @pytest.mark.nightly
 class TestInitDeployment:
 
-    def test_device_server_deployment(self: TestInitDeployment):
+    def test_device_server_deployment(self: TestInitDeployment, logger):
         mac200_000_proxy = PyTangoClientWrapper()
         vcc_000_proxy = PyTangoClientWrapper()
         fss_000_proxy = PyTangoClientWrapper()
@@ -31,12 +31,12 @@ class TestInitDeployment:
         wib_000_state = wib_000_proxy.read_attribute("State")
         pv_000_state = pv_000_proxy.read_attribute("State")
 
-        print(f"mac200 state {mac200_000_state}")
-        print(f"vcc state {vcc_000_state}")
-        print(f"fss state {fss_000_state}")
-        print(f"wfs state {wfs_000_state}")
-        print(f"wib state {wib_000_state}")
-        print(f"pv state {pv_000_state}")
+        logger.debug(f"mac200 state {mac200_000_state}")
+        logger.debug(f"vcc state {vcc_000_state}")
+        logger.debug(f"fss state {fss_000_state}")
+        logger.debug(f"wfs state {wfs_000_state}")
+        logger.debug(f"wib state {wib_000_state}")
+        logger.debug(f"pv state {pv_000_state}")
 
         assert mac200_000_state == DevState.ON
         assert vcc_000_state == DevState.ON
@@ -51,7 +51,7 @@ class TestInitDeployment:
 
         assert emulator1_json["current_state"] == "RUNNING"
 
-    def test_device_servers_to_emulator_connection(self: TestInitDeployment):
+    def test_device_servers_to_emulator_connection(self: TestInitDeployment, logger):
 
         mac200_000_proxy = PyTangoClientWrapper()
         vcc_000_proxy = PyTangoClientWrapper()
@@ -74,9 +74,9 @@ class TestInitDeployment:
         wib_status = wib_000_proxy.command_read_write("getstatus", False)
         pv_status = pv_000_proxy.command_read_write("getstatus", False)
 
-        print(f"......Mac200Stats: {mac200_status}......")
-        print(f"......Mac200Stats: {mac200_status[0]}......")
-        print(f"......Mac200Stats: {mac200_status[1]}......")
+        logger.debug(f"......Mac200Stats: {mac200_status}......")
+        logger.debug(f"......Mac200Stats: {mac200_status[0]}......")
+        logger.debug(f"......Mac200Stats: {mac200_status[1]}......")
 
         assert mac200_status is not None
         assert vcc_status is not None

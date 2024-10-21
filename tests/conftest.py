@@ -9,6 +9,7 @@ from typing import List
 
 import pytest
 from dotenv import load_dotenv
+from proxy_utils import create_proxy, get_fqdn
 
 load_dotenv()  # Load environment variables from .env file
 
@@ -80,6 +81,76 @@ def obs_state_str():
     return "ObsState"
 
 
+@pytest.fixture(scope="function")
+def all_bands_fqdn(device_idx):
+    return get_fqdn(device_idx, "all_bands")
+
+
+@pytest.fixture(scope="function")
+def eth_fqdn(device_idx):
+    return get_fqdn(device_idx, "ethernet")
+
+
+@pytest.fixture(scope="function")
+def pv_fqdn(device_idx):
+    return get_fqdn(device_idx, "pv")
+
+
+@pytest.fixture(scope="function")
+def wib_fqdn(device_idx):
+    return get_fqdn(device_idx, "wib")
+
+
+@pytest.fixture(scope="function")
+def wfs_fqdn(device_idx):
+    return get_fqdn(device_idx, "wfs")
+
+
+@pytest.fixture(scope="function")
+def vcc_123_fqdn(device_idx):
+    return get_fqdn(device_idx, "vcc_123")
+
+
+@pytest.fixture(scope="function")
+def fss_fqdn(device_idx):
+    return get_fqdn(device_idx, "fss")
+
+
+@pytest.fixture(scope="function")
+def all_bands_proxy(device_idx):
+    return create_proxy(device_idx, "all_bands")
+
+
+@pytest.fixture(scope="function")
+def eth_proxy(device_idx):
+    return create_proxy(device_idx, "ethernet")
+
+
+@pytest.fixture(scope="function")
+def pv_proxy(device_idx):
+    return create_proxy(device_idx, "pv")
+
+
+@pytest.fixture(scope="function")
+def wib_proxy(device_idx):
+    return create_proxy(device_idx, "wib")
+
+
+@pytest.fixture(scope="function")
+def wfs_proxy(device_idx):
+    return create_proxy(device_idx, "wfs")
+
+
+@pytest.fixture(scope="function")
+def vcc_123_proxy(device_idx):
+    return create_proxy(device_idx, "vcc_123")
+
+
+@pytest.fixture(scope="function")
+def fss_proxy(device_idx):
+    return create_proxy(device_idx, "fss")
+
+
 def pytest_sessionstart(session):
     namespace = session.config.getoption("--namespace")
     tango_host = session.config.getoption("--tango_host")
@@ -94,21 +165,8 @@ def pytest_sessionstart(session):
         "TANGO_HOST"
     ] = f"{tango_hostname}.{namespace}.svc.{cluster_domain}:{tango_port}"
 
-    # # Need to create a specific tracer for sending the ON command, as pytest_sessionstart can not access the event_tracer fixture
-    # tracer = TangoEventTracer()
-    # fqdn_cbfcontroller = "mid_csp_cbf/sub_elt/controller"
-    # tracer.subscribe_event(fqdn_cbfcontroller, "longRunningCommandResult")
-    # tracer.subscribe_event(fqdn_cbfcontroller, "state")
-
 
 # note that if sessionstart fails this step will not be executed
 def pytest_sessionfinish():
     pass
-    # fqdn_cbfcontroller = "mid_csp_cbf/sub_elt/controller"
-    # timeout_millis = 100000
-    # cbfcontroller = get_parameters.create_device_proxy(
-    #     fqdn_cbfcontroller, timeout_millis
-    # )
 
-    # # as part of the clean up at the end of the session we want to undo everything that was done during the ON command, including setting the AdminMode back to off
-    # cbfcontroller.write_attribute("adminMode", 1)
