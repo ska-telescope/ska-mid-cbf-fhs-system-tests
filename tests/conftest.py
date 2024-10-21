@@ -169,4 +169,3 @@ def pytest_sessionstart(session):
 # note that if sessionstart fails this step will not be executed
 def pytest_sessionfinish():
     pass
-
