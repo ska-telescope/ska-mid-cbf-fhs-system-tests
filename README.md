@@ -18,3 +18,5 @@ To test locally with a custom bitstream (i.e. a branch in ska-mid-cbf-bitstreams
 ```yaml
 gitlab_bitstream_url_override: "https://gitlab.com/ska-telescope/ska-mid-cbf-bitstreams/-/archive/cip-2957/ska-mid-cbf-bitstreams-cip-2957.tar.gz?path=raw/ska-mid-cbf-agilex-vcc"
 ```
+
+You can find this URL by navigating to the bitstream repo on GitLab (https://gitlab.com/ska-telescope/ska-mid-cbf-bitstreams), navigating into your branch, and then navigating into the raw/ska-mid-cbf-<bitstream_id> folder. Then click the "Code" dropdown, and copy the "tar.gz" link under "Download this directory". Alternatively, you can just copy the above and substitute in your branch name and bitstream ID.
