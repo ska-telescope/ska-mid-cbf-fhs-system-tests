@@ -281,9 +281,8 @@ ska-mid-cbf-fhs-vcc:
     firmwareRegistry: https://artefact.skao.int/repository/raw-internal
     firmwareImage: ska-mid-cbf-agilex-vcc
     bitstreamId: agilex-vcc
-    firmwareVersion: 0.0.8
+    firmwareVersion: 0.0.9
     bitstreamPath: "/app/mnt/bitstream"
-    gitlab_bitstream_url_override: "https://gitlab.com/ska-telescope/ska-mid-cbf-bitstreams/-/archive/cip-2957/ska-mid-cbf-bitstreams-cip-2957.tar.gz?path=raw/ska-mid-cbf-agilex-vcc"
 
 ska-mid-cbf-fhs-vcc-boogie:
   enabled: false  # TODO figure out boogie deployment/registry
@@ -313,22 +312,22 @@ ska-mid-cbf-emulators:
   
   emulators:
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.8
+      bitstream_emulator_ver: 0.0.9
       deployment_id: fhs-vcc-emulator-1
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.8
+      bitstream_emulator_ver: 0.0.9
       deployment_id: fhs-vcc-emulator-2
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.8
+      bitstream_emulator_ver: 0.0.9
       deployment_id: fhs-vcc-emulator-3
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.8
+      bitstream_emulator_ver: 0.0.9
       deployment_id: fhs-vcc-emulator-4
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.8
+      bitstream_emulator_ver: 0.0.9
       deployment_id: fhs-vcc-emulator-5
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.8
+      bitstream_emulator_ver: 0.0.9
       deployment_id: fhs-vcc-emulator-6
 
   rabbitmq:
