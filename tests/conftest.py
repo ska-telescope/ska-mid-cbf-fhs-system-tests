@@ -8,8 +8,8 @@ import os.path
 from typing import List
 
 import pytest
+from connection_utils import DeviceKey, create_proxy, get_fqdn
 from dotenv import load_dotenv
-from proxy_utils import create_proxy, get_fqdn
 
 load_dotenv()  # Load environment variables from .env file
 
@@ -26,7 +26,7 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture(scope="session")
-def logger():
+def logger() -> logging.Logger:
     return logging.getLogger(__name__)
 
 
@@ -36,7 +36,7 @@ def all_test_ids_for_scenario() -> List[str]:
 
 
 @pytest.fixture(scope="session")
-def namespace(request):
+def namespace(request) -> str:
     namespace_value = request.config.option.namespace
     if namespace_value is None:
         pytest.skip()
@@ -44,111 +44,106 @@ def namespace(request):
 
 
 @pytest.fixture(scope="session")
-def cluster_domain(request):
+def cluster_domain(request) -> str:
     return request.config.getoption("--cluster_domain")
 
 
 @pytest.fixture(scope="session")
-def tango_host(request):
+def emulator_base_url(namespace: str, cluster_domain: str) -> str:
+    return f"{namespace}.svc.{cluster_domain}:5001"
+
+
+@pytest.fixture(scope="function")
+def emulator_url(device_idx: int, emulator_base_url: str) -> str:
+    return f"fhs-vcc-emulator-{device_idx}.{emulator_base_url}"
+
+
+@pytest.fixture(scope="session")
+def tango_host(request) -> str:
     return request.config.getoption("--tango_host")
 
 
 @pytest.fixture(scope="session")
-def test_id(request):
+def test_id(request) -> str:
     return request.config.getoption("--test_id")
 
 
 @pytest.fixture(scope="session")
-def results_dir():
+def results_dir() -> str:
     current_dir = os.getcwd()
     results_dir = current_dir + "/results"
     os.makedirs(results_dir, exist_ok=True)
     return results_dir
 
 
-@pytest.fixture(scope="session")
-def state_str():
-    return "State"
-
-
-@pytest.fixture(scope="session")
-def off_state_str():
-    return "OFF"
-
-
-@pytest.fixture(scope="session")
-def obs_state_str():
-    return "ObsState"
+@pytest.fixture(scope="function")
+def all_bands_fqdn(device_idx: int) -> str:
+    return get_fqdn(device_idx, DeviceKey.ALL_BANDS)
 
 
 @pytest.fixture(scope="function")
-def all_bands_fqdn(device_idx):
-    return get_fqdn(device_idx, "all_bands")
+def eth_fqdn(device_idx: int) -> str:
+    return get_fqdn(device_idx, DeviceKey.ETHERNET)
 
 
 @pytest.fixture(scope="function")
-def eth_fqdn(device_idx):
-    return get_fqdn(device_idx, "ethernet")
+def pv_fqdn(device_idx: int) -> str:
+    return get_fqdn(device_idx, DeviceKey.PACKET_VALIDATION)
 
 
 @pytest.fixture(scope="function")
-def pv_fqdn(device_idx):
-    return get_fqdn(device_idx, "pv")
+def wib_fqdn(device_idx: int) -> str:
+    return get_fqdn(device_idx, DeviceKey.WIDEBAND_INPUT_BUFFER)
 
 
 @pytest.fixture(scope="function")
-def wib_fqdn(device_idx):
-    return get_fqdn(device_idx, "wib")
+def wfs_fqdn(device_idx: int) -> str:
+    return get_fqdn(device_idx, DeviceKey.WIDEBAND_FREQ_SHIFTER)
 
 
 @pytest.fixture(scope="function")
-def wfs_fqdn(device_idx):
-    return get_fqdn(device_idx, "wfs")
+def vcc_123_fqdn(device_idx: int) -> str:
+    return get_fqdn(device_idx, DeviceKey.VCC_123)
 
 
 @pytest.fixture(scope="function")
-def vcc_123_fqdn(device_idx):
-    return get_fqdn(device_idx, "vcc_123")
+def fss_fqdn(device_idx: int) -> str:
+    return get_fqdn(device_idx, DeviceKey.FREQ_SLICE_SELECTION)
 
 
 @pytest.fixture(scope="function")
-def fss_fqdn(device_idx):
-    return get_fqdn(device_idx, "fss")
+def all_bands_proxy(device_idx: int) -> str:
+    return create_proxy(device_idx, DeviceKey.ALL_BANDS)
 
 
 @pytest.fixture(scope="function")
-def all_bands_proxy(device_idx):
-    return create_proxy(device_idx, "all_bands")
+def eth_proxy(device_idx: int) -> str:
+    return create_proxy(device_idx, DeviceKey.ETHERNET)
 
 
 @pytest.fixture(scope="function")
-def eth_proxy(device_idx):
-    return create_proxy(device_idx, "ethernet")
+def pv_proxy(device_idx: int) -> str:
+    return create_proxy(device_idx, DeviceKey.PACKET_VALIDATION)
 
 
 @pytest.fixture(scope="function")
-def pv_proxy(device_idx):
-    return create_proxy(device_idx, "pv")
+def wib_proxy(device_idx: int) -> str:
+    return create_proxy(device_idx, DeviceKey.WIDEBAND_INPUT_BUFFER)
 
 
 @pytest.fixture(scope="function")
-def wib_proxy(device_idx):
-    return create_proxy(device_idx, "wib")
+def wfs_proxy(device_idx: int) -> str:
+    return create_proxy(device_idx, DeviceKey.WIDEBAND_FREQ_SHIFTER)
 
 
 @pytest.fixture(scope="function")
-def wfs_proxy(device_idx):
-    return create_proxy(device_idx, "wfs")
+def vcc_123_proxy(device_idx: int) -> str:
+    return create_proxy(device_idx, DeviceKey.VCC_123)
 
 
 @pytest.fixture(scope="function")
-def vcc_123_proxy(device_idx):
-    return create_proxy(device_idx, "vcc_123")
-
-
-@pytest.fixture(scope="function")
-def fss_proxy(device_idx):
-    return create_proxy(device_idx, "fss")
+def fss_proxy(device_idx: int) -> str:
+    return create_proxy(device_idx, DeviceKey.FREQ_SLICE_SELECTION)
 
 
 def pytest_sessionstart(session):
