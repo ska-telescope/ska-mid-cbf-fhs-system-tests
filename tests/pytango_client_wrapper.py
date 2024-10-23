@@ -1,5 +1,6 @@
 """Wrapper class for utilizing Tango.DeviceProxy"""
 
+import logging
 import sys
 from typing import Any
 
@@ -12,6 +13,7 @@ class PyTangoClientWrapper:
     def __init__(self):
         self.device_proxy = None
         self.timeout_ms = 3000  # Default Tango timeout
+        self.logger = logging.getLogger(__name__)
 
     def create_tango_client(self, dev_name: str):
         """
@@ -21,12 +23,12 @@ class PyTangoClientWrapper:
         """
         try:
             self.device_proxy = DeviceProxy(dev_name)
-            print(f"Device State : {self.device_proxy.state()}")
-            print(f"Device Status: {self.device_proxy.status()}")
-            print(f"dev_name = {dev_name}")
+            self.logger.debug(f"Device State : {self.device_proxy.state()}")
+            self.logger.debug(f"Device Status: {self.device_proxy.status()}")
+            self.logger.debug(f"dev_name = {dev_name}")
 
         except DevFailed as e:
-            print(f"Error on DeviceProxy: {e}")
+            self.logger.error(f"Error on DeviceProxy: {e}")
             self.clear_all()
             sys.exit(str(e))
 
@@ -48,7 +50,7 @@ class PyTangoClientWrapper:
             self.timeout_ms = timeout * 1000
             self.device_proxy.set_timeout_millis(self.timeout_ms)
         except DevFailed as e:
-            print(str(e))
+            self.logger.error(str(e))
 
     def write_attribute(self, attr_name: str, value: Any):
         """
@@ -60,7 +62,7 @@ class PyTangoClientWrapper:
         try:
             self.device_proxy.write_attribute(attr_name, value)
         except DevFailed as e:
-            print(str(e))
+            self.logger.error(str(e))
 
     def read_attribute(self, attr_name: str) -> Any:
         """
@@ -73,7 +75,7 @@ class PyTangoClientWrapper:
             attr_read = self.device_proxy.read_attribute(attr_name)
             return attr_read.value
         except DevFailed as e:
-            print(str(e))
+            self.logger.error(str(e))
             return None
 
     def command_read_write(self, command_name: str, *args) -> Any:
@@ -87,7 +89,7 @@ class PyTangoClientWrapper:
         try:
             return self.device_proxy.command_inout(command_name, *args)
         except DevFailed as e:
-            print(str(e))
+            self.logger.error(str(e))
             return None
 
     def get_property(self, property_name: str) -> Any:
@@ -100,5 +102,5 @@ class PyTangoClientWrapper:
         try:
             return self.device_proxy.get_property(property_name)
         except DevFailed as e:
-            print(str(e))
+            self.logger.error(str(e))
             return None
