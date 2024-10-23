@@ -43,7 +43,7 @@ class TestHappyPath:
         for ip_block in EmulatorIPBlockId:
             EmulatorAPIService.post(emulator_url, ip_block, route="recover")
 
-    @pytest.mark.parametrize("device_idx", [1])
+    @pytest.mark.parametrize("device_idx", [1, 2, 3, 4, 5, 6])
     def test_happy_path(
         self,
         logger: Logger,
