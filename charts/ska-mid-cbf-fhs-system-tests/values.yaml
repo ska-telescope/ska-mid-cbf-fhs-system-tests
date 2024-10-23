@@ -302,7 +302,7 @@ ska-mid-cbf-emulators:
       repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-emulator
       tag: 0.5.3
       pullPolicy: Always
-    verbosity: 4
+    verbosity: 3
   injector:
     app_label: ska-mid-cbf-fhs-system-tests
     image:
