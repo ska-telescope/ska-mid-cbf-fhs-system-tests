@@ -9,14 +9,17 @@ from tango import DevState
 
 
 @pytest.mark.nightly
-class TestInitDeployment:
+class TestDeployment:
 
     @pytest.fixture(scope="class")
-    def device_idx(self) -> int:
+    def fhs_vcc_idx(self) -> int:
+        """Mock FHS-VCC device/emulator index fixture [1-based] for this test class.
+        For now this set of tests only checks one stack.
+        """
         return 1
 
-    def test_device_server_deployment(
-        self: TestInitDeployment,
+    def test_device_servers_are_deployed_and_opstate_is_on(
+        self: TestDeployment,
         logger: Logger,
         eth_proxy: PyTangoClientWrapper,
         pv_proxy: PyTangoClientWrapper,
@@ -24,7 +27,7 @@ class TestInitDeployment:
         wib_proxy: PyTangoClientWrapper,
         vcc_123_proxy: PyTangoClientWrapper,
         fss_proxy: PyTangoClientWrapper,
-        device_idx: int,
+        fhs_vcc_idx: int,
     ):
         mac200_000_state = eth_proxy.read_attribute("State")
         vcc_000_state = vcc_123_proxy.read_attribute("State")
@@ -33,12 +36,12 @@ class TestInitDeployment:
         wib_000_state = wib_proxy.read_attribute("State")
         pv_000_state = pv_proxy.read_attribute("State")
 
-        logger.debug(f"mac200 state {mac200_000_state}")
-        logger.debug(f"vcc state {vcc_000_state}")
-        logger.debug(f"fss state {fss_000_state}")
-        logger.debug(f"wfs state {wfs_000_state}")
-        logger.debug(f"wib state {wib_000_state}")
-        logger.debug(f"pv state {pv_000_state}")
+        logger.info(f"200Gb Ethernet state is: {mac200_000_state}")
+        logger.info(f"B123-VCC state is: {vcc_000_state}")
+        logger.info(f"Frequency Slice Selection state is: {fss_000_state}")
+        logger.info(f"Wideband Frequency Shifter state is: {wfs_000_state}")
+        logger.info(f"Wideband Input Buffer state is: {wib_000_state}")
+        logger.info(f"Packet Validation state is: {pv_000_state}")
 
         assert mac200_000_state == DevState.ON
         assert vcc_000_state == DevState.ON
@@ -47,16 +50,18 @@ class TestInitDeployment:
         assert wib_000_state == DevState.ON
         assert pv_000_state == DevState.ON
 
-    def test_init_emulators(
-        self: TestInitDeployment,
+    def test_emulator_is_deployed_and_running(
+        self: TestDeployment,
+        logger: Logger,
         emulator_url: str,
-        device_idx: int,
+        fhs_vcc_idx: int,
     ):
         emulator1_json = EmulatorAPIService.get(emulator_url, route="state")
+        logger.info(f"Emulator state is: {emulator1_json.get('current_state', 'None')}")
         assert emulator1_json.get("current_state") == "RUNNING"
 
-    def test_device_servers_to_emulator_connection(
-        self: TestInitDeployment,
+    def test_device_servers_can_send_emulator_api_requests_and_get_responses(
+        self: TestDeployment,
         logger: Logger,
         eth_proxy: PyTangoClientWrapper,
         pv_proxy: PyTangoClientWrapper,
@@ -64,7 +69,7 @@ class TestInitDeployment:
         wib_proxy: PyTangoClientWrapper,
         vcc_123_proxy: PyTangoClientWrapper,
         fss_proxy: PyTangoClientWrapper,
-        device_idx: int,
+        fhs_vcc_idx: int,
     ):
         mac200_status = eth_proxy.command_read_write("getstatus", False)
         vcc_status = vcc_123_proxy.command_read_write("getstatus", False)

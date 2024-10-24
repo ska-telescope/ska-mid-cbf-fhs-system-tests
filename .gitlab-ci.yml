@@ -132,7 +132,7 @@ python-test:
     - poetry config virtualenvs.create false
     - poetry install
     - mkdir -p build/reports
-    - echo "$CI_JOB_ID">>build/reports/python_test_id.txt
+    - echo "$CI_JOB_ID">>build/reports/ci_job_id.txt
     - echo "$PYTEST_MARKER">>build/reports/pytest_marker.txt
     - make python-test KUBE_NAMESPACE=$KUBE_NAMESPACE PYTEST_MARKER=$PYTEST_MARKER TANGO_HOST=$TANGO_HOST CLUSTER_DOMAIN=$CLUSTER_DOMAIN
   artifacts:

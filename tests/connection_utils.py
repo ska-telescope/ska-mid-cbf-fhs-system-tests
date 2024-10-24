@@ -7,6 +7,8 @@ from pytango_client_wrapper import PyTangoClientWrapper
 
 
 class DeviceKey(Enum):
+    """Enum of device names for mapping to device FQDNs/etc."""
+
     ALL_BANDS = "all_bands"
     VCC_123 = "vcc_123"
     FREQ_SLICE_SELECTION = "frequency_slice_selection"
@@ -17,6 +19,8 @@ class DeviceKey(Enum):
 
 
 class EmulatorIPBlockId(Enum):
+    """Enum of IP block IDs."""
+
     ETHERNET_200G = "ethernet_200g"
     PACKET_VALIDATION = "packet_validation"
     WIDEBAND_INPUT_BUFFER = "wideband_input_buffer"
@@ -36,20 +40,27 @@ fqdn_map = {
 }
 
 
-def get_fqdn(device_idx: int, fqdn_key: DeviceKey) -> str:
-    mapped_idx = str(device_idx - 1).zfill(3)
+def get_fqdn(fhs_vcc_idx: int, fqdn_key: DeviceKey) -> str:
+    """Get the FQDN for a given device name/key and index."""
+    mapped_idx = str(fhs_vcc_idx - 1).zfill(3)
     return fqdn_map[fqdn_key] + mapped_idx
 
 
-def create_proxy(device_idx: int, fqdn_key: DeviceKey) -> PyTangoClientWrapper:
+def create_proxy(fhs_vcc_idx: int, fqdn_key: DeviceKey) -> PyTangoClientWrapper:
+    """Create and return a proxy wrapper for a given device name/key and index."""
     proxy = PyTangoClientWrapper()
-    proxy.create_tango_client(get_fqdn(device_idx, fqdn_key))
+    proxy.create_tango_client(get_fqdn(fhs_vcc_idx, fqdn_key))
     return proxy
 
 
 class EmulatorAPIService:
+    """Service containing methods for interacting with the emulator APIs."""
+
     @staticmethod
     def get(base_url: str, ip_block: EmulatorIPBlockId | None = None, route: str = "state", param_string: str = "") -> Any:
+        """Send a GET request to the specified emulator URL, IP block ID (if specified) and route,
+        and return the response contents.
+        """
         ip_string = f"/{ip_block.value}" if ip_block is not None else ""
         full_url = f"http://{base_url}{ip_string}/{route}/{param_string}"
         resp = requests.get(full_url)
@@ -58,7 +69,10 @@ class EmulatorAPIService:
         return resp.json()
 
     @staticmethod
-    def post(base_url: str, ip_block: EmulatorIPBlockId | None = None, route: str = "state", param_string: str = "", body: dict | str = {}) -> Any:
+    def post(base_url: str, ip_block: EmulatorIPBlockId | None = None, route: str = "start", param_string: str = "", body: dict | str = {}) -> Any:
+        """Send a POST request to the specified emulator URL, IP block ID (if specified),
+        route, and body, and return the response contents.
+        """
         ip_string = f"/{ip_block.value}" if ip_block is not None else ""
         full_url = f"http://{base_url}{ip_string}/{route}/{param_string}"
         resp = requests.post(full_url, json=body)
@@ -68,6 +82,11 @@ class EmulatorAPIService:
 
     @staticmethod
     def wait_for_state(base_url: str, ip_block: EmulatorIPBlockId | None, state: str, poll_interval_sec: int = 1, timeout_sec: int = 60) -> tuple[str, bool]:
+        """Poll the specified emulator/ip block state until it matches
+        the specified destination state. Returns a 2-tuple containing the last retrieved state
+        (will match the destination state unless timed out),
+        and whether the retrieval was successful or not.
+        """
         start_time = time.time()
         while True:
             got_state = EmulatorAPIService.get(base_url, ip_block, "state")
