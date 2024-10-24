@@ -141,7 +141,7 @@ endif
 PYTEST_MARKER = nightly
 
 PYTEST_LOG_LEVEL = INFO
-PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) -v -rA --no-cov --log-cli-level=$(PYTEST_LOG_LEVEL)
+PYTHON_VARS_AFTER_PYTEST = -m "$(PYTEST_MARKER)" -s --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) -v -rA --no-cov --log-cli-level=$(PYTEST_LOG_LEVEL)
 PYTHON_LINE_LENGTH = 180
 
 update-internal-schema:

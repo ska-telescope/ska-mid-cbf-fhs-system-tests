@@ -10,6 +10,7 @@ from ska_tango_testing.integration import TangoEventTracer
 from tango import DevState
 
 
+@pytest.mark.H1
 @pytest.mark.nightly
 class TestScanSequence:
 

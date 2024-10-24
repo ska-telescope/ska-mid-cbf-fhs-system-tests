@@ -8,6 +8,8 @@ from pytango_client_wrapper import PyTangoClientWrapper
 from tango import DevState
 
 
+@pytest.mark.H1
+@pytest.mark.deployment
 @pytest.mark.nightly
 class TestDeployment:
 
