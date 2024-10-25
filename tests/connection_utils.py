@@ -32,7 +32,7 @@ class EmulatorIPBlockId(Enum):
 fqdn_map = {
     DeviceKey.ALL_BANDS: "fhs/vcc-all-bands/",
     DeviceKey.VCC_123: "fhs/vcc/",
-    DeviceKey.FREQ_SLICE_SELECTION: "fhs/frequency-slice-selection/",
+    DeviceKey.FREQ_SLICE_SELECTION: "fhs/fss/",
     DeviceKey.ETHERNET: "fhs/mac200/",
     DeviceKey.PACKET_VALIDATION: "fhs/packetvalidation/",
     DeviceKey.WIDEBAND_FREQ_SHIFTER: "fhs/wfs/",
@@ -42,7 +42,7 @@ fqdn_map = {
 
 def get_fqdn(fhs_vcc_idx: int, fqdn_key: DeviceKey) -> str:
     """Get the FQDN for a given device name/key and index."""
-    mapped_idx = str(fhs_vcc_idx - 1).zfill(3)
+    mapped_idx = str(fhs_vcc_idx).zfill(3)
     return fqdn_map[fqdn_key] + mapped_idx
 
 

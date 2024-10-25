@@ -1,5 +1,6 @@
 {
   "config_id": "1",
+  "expected_dish_id": 1,
   "dish_sample_rate": 3960000000,
   "samples_per_frame": 18,
   "vcc_gain": [
