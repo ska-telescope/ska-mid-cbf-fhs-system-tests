@@ -138,10 +138,12 @@ python-test:
   artifacts:
     paths:
       - build/reports/report.json
-      - build/reports/python_test_id.txt
+      - build/reports/ci_job_id.txt
       - build/reports/pytest_marker.txt
       - build/reports/internal_schemas_version.txt
-      - results/*
+      - build/reports/test-results.html
+      - build/reports/test-results.xml
+      - build/reports/assets/*
   allow_failure: true
 
 k8s-scheduled-destroy:
