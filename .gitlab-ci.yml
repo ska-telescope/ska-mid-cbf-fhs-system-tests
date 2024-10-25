@@ -132,16 +132,18 @@ python-test:
     - poetry config virtualenvs.create false
     - poetry install
     - mkdir -p build/reports
-    - echo "$CI_JOB_ID">>build/reports/python_test_id.txt
+    - echo "$CI_JOB_ID">>build/reports/ci_job_id.txt
     - echo "$PYTEST_MARKER">>build/reports/pytest_marker.txt
     - make python-test KUBE_NAMESPACE=$KUBE_NAMESPACE PYTEST_MARKER=$PYTEST_MARKER TANGO_HOST=$TANGO_HOST CLUSTER_DOMAIN=$CLUSTER_DOMAIN
   artifacts:
     paths:
       - build/reports/report.json
-      - build/reports/python_test_id.txt
+      - build/reports/ci_job_id.txt
       - build/reports/pytest_marker.txt
       - build/reports/internal_schemas_version.txt
-      - results/*
+      - build/reports/test-results.html
+      - build/reports/test-results.xml
+      - build/reports/assets/*
   allow_failure: true
 
 k8s-scheduled-destroy:

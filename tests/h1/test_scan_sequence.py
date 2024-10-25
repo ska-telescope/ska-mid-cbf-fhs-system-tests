@@ -10,8 +10,9 @@ from ska_tango_testing.integration import TangoEventTracer
 from tango import DevState
 
 
+@pytest.mark.H1
 @pytest.mark.nightly
-class TestHappyPath:
+class TestScanSequence:
 
     @pytest.fixture(scope="function")
     def event_tracer(
@@ -20,7 +21,7 @@ class TestHappyPath:
         eth_fqdn: str,
         pv_fqdn: str,
         wib_fqdn: str,
-        device_idx: int,
+        fhs_vcc_idx: int,
     ) -> TangoEventTracer:
         tracer = TangoEventTracer()
 
@@ -36,15 +37,15 @@ class TestHappyPath:
         return tracer
 
     @pytest.fixture(autouse=True)
-    def reset_all_bands(self, all_bands_proxy: PyTangoClientWrapper, device_idx: int) -> None:
+    def reset_all_bands(self, all_bands_proxy: PyTangoClientWrapper, fhs_vcc_idx: int) -> None:
         all_bands_proxy.command_read_write("Init")
 
     def reset_emulators(self, emulator_url: str) -> None:
         for ip_block in EmulatorIPBlockId:
             EmulatorAPIService.post(emulator_url, ip_block, route="recover")
 
-    @pytest.mark.parametrize("device_idx", [1, 2, 3, 4, 5, 6])
-    def test_happy_path(
+    @pytest.mark.parametrize("fhs_vcc_idx", [1, 2, 3, 4, 5, 6], ids=lambda i: f"fhs_vcc_idx={i}")
+    def test_scan_sequence_valid_config_single_scan_success(
         self,
         logger: Logger,
         all_bands_fqdn: str,
@@ -60,7 +61,7 @@ class TestHappyPath:
         fss_proxy: PyTangoClientWrapper,
         event_tracer: TangoEventTracer,
         emulator_url: str,
-        device_idx: int,
+        fhs_vcc_idx: int,
     ) -> None:
         # 0. Initial setup
 
@@ -74,6 +75,8 @@ class TestHappyPath:
         assert eth_reset
         assert pv_reset
         assert wib_reset
+
+        logger.info("Emulators were reset successfully.")
 
         all_bands_state = all_bands_proxy.read_attribute("State")
         all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
@@ -91,6 +94,8 @@ class TestHappyPath:
         logger.debug(f"allbands OpState after setting to ONLINE: {all_bands_opState}")
         assert all_bands_adminMode == AdminMode.ONLINE
         assert all_bands_opState == DevState.ON
+
+        logger.info("AdminMode successfully set to ONLINE.")
 
         # 2. Run ConfigureScan()
 
@@ -183,6 +188,8 @@ class TestHappyPath:
         assert wfs_status.get("shift_frequency") == expected_shift_frequency
         assert fss_status.get("band_select") == expected_band_select
 
+        logger.info("ConfigureScan completed successfully.")
+
         # 3. Run Scan()
 
         eth_obsState = eth_proxy.read_attribute("obsState")
@@ -244,6 +251,8 @@ class TestHappyPath:
         assert pv_enabled
         assert wib_enabled
 
+        logger.info("Scan completed successfully.")
+
         # 4. Run EndScan()
 
         end_scan_result = all_bands_proxy.command_read_write("EndScan")
@@ -287,6 +296,8 @@ class TestHappyPath:
         assert pv_reset
         assert wib_ready
 
+        logger.info("EndScan completed successfully.")
+
         # 5. Run GoToIdle()
 
         go_to_idle_result = all_bands_proxy.command_read_write("GoToIdle")
@@ -312,11 +323,15 @@ class TestHappyPath:
         logger.debug(f"allbands opState after GoToIdle: {all_bands_opState}")
         logger.debug(f"allbands obsState after GoToIdle: {all_bands_obsState}")
 
+        logger.info("GoToIdle completed successfully.")
+
         # 6. Set AdminMode.OFFLINE
 
         all_bands_proxy.write_attribute("adminMode", AdminMode.OFFLINE)
         all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
 
         assert all_bands_adminMode == AdminMode.OFFLINE
+
+        logger.info("AdminMode successfully set to OFFLINE.")
 
         self.reset_emulators(emulator_url)

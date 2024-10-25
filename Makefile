@@ -138,12 +138,10 @@ ifneq (,$(wildcard $(VALUES)))
 	K8S_CHART_PARAMS += $(foreach f,$(wildcard $(VALUES)),--values $(f))
 endif
 
-# TODO determine if configurable test ID needed (probably depends on whether we can run all tests in one pipeline)
-TEST_ID = Test_1
 PYTEST_MARKER = nightly
 
 PYTEST_LOG_LEVEL = INFO
-PYTHON_VARS_AFTER_PYTEST = -m $(PYTEST_MARKER) -s --json-report --json-report-file=build/reports/report.json --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) --test_id $(TEST_ID) -v -rA --no-cov --log-cli-level=$(PYTEST_LOG_LEVEL)
+PYTHON_VARS_AFTER_PYTEST = -m "$(PYTEST_MARKER)" -s --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) -v -rA --no-cov --log-cli-level=$(PYTEST_LOG_LEVEL)
 PYTHON_LINE_LENGTH = 180
 
 update-internal-schema:
@@ -206,6 +204,10 @@ python-pre-test:
 	make update-internal-schema
 	poetry show ska-mid-cbf-internal-schemas > build/reports/internal_schemas_version.txt
 	cat build/reports/internal_schemas_version.txt | grep version
+
+python-do-test:
+	@$(PYTHON_RUNNER) pytest --version -c /dev/null
+	$(PYTHON_VARS_BEFORE_PYTEST) $(PYTHON_RUNNER) pytest $(PYTHON_VARS_AFTER_PYTEST) $(PYTHON_TEST_FILE)
 
 format-python:
 	$(POETRY_PYTHON_RUNNER) isort --profile black --line-length $(PYTHON_LINE_LENGTH) $(PYTHON_SWITCHES_FOR_ISORT) $(PYTHON_LINT_TARGET)
