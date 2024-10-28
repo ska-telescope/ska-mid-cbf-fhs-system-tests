@@ -5,7 +5,7 @@ import pytest
 from assertpy import assert_that
 from connection_utils import EmulatorAPIService, EmulatorIPBlockId
 from pytango_client_wrapper import PyTangoClientWrapper
-from ska_tango_base.control_model import AdminMode, ObsState
+from ska_tango_base.control_model import AdminMode, CommunicationStatus, ObsState
 from ska_tango_testing.integration import TangoEventTracer
 from tango import DevState
 
@@ -29,6 +29,7 @@ class TestScanSequence:
         tracer.subscribe_event(all_bands_fqdn, "adminMode")
         tracer.subscribe_event(all_bands_fqdn, "state")
         tracer.subscribe_event(all_bands_fqdn, "obsState")
+        tracer.subscribe_event(all_bands_fqdn, "communicationState")
 
         tracer.subscribe_event(eth_fqdn, "obsState")
         tracer.subscribe_event(pv_fqdn, "obsState")
@@ -96,6 +97,14 @@ class TestScanSequence:
         assert all_bands_opState == DevState.ON
 
         logger.info("AdminMode successfully set to ONLINE.")
+
+        logger.info("Waiting for CommunicationState to be ESTABLISHED.")
+        assert_that(event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="communicationState",
+            attribute_value=CommunicationStatus.ESTABLISHED,
+        )
+        logger.info("CommunicationState successfully set to ESTABLISHED.")
 
         # 2. Run ConfigureScan()
 
@@ -333,5 +342,13 @@ class TestScanSequence:
         assert all_bands_adminMode == AdminMode.OFFLINE
 
         logger.info("AdminMode successfully set to OFFLINE.")
+
+        logger.info("Waiting for CommunicationState to be DISABLED.")
+        assert_that(event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="communicationState",
+            attribute_value=CommunicationStatus.DISABLED,
+        )
+        logger.info("CommunicationState successfully set to DISABLED.")
 
         self.reset_emulators(emulator_url)
