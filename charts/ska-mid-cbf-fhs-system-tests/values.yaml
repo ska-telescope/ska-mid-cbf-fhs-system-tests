@@ -41,7 +41,7 @@ ska-mid-cbf-fhs-vcc:
     image:
       registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-fhs-vcc
       image: ska-mid-cbf-fhs-vcc
-      tag: 0.0.1-dev.c1d8f5c2c
+      tag: 0.0.2-dev.ce8dc774e
       pullPolicy: Always
       
   lowLevel:
@@ -56,7 +56,7 @@ ska-mid-cbf-fhs-vcc:
   properties:
     - name: deviceId
     - name: deviceVersionNum
-      default: "0.0.1"
+      default: "0.0.2"
     - name: deviceGitlabHash
       default: "0"
     - name: configLocation
@@ -97,7 +97,7 @@ ska-mid-cbf-fhs-vcc-boogie:
   image:
     repository: docker.io/library
     image: ska-mid-cbf-fhs-vcc-boogie
-    tag: 0.0.1
+    tag: 0.0.2
     pullPolicy: IfNotPresent
 
 ska-mid-cbf-emulators:
