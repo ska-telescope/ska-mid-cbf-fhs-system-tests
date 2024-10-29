@@ -6,8 +6,8 @@ import numpy as np
 import pytest
 from assertpy import assert_that
 from connection_utils import EmulatorAPIService, EmulatorIPBlockId
-from scan_utils import frequency_band_map
 from pytango_client_wrapper import PyTangoClientWrapper
+from scan_utils import frequency_band_map
 from ska_tango_base.control_model import AdminMode, CommunicationStatus, ObsState
 from ska_tango_testing.integration import TangoEventTracer
 from tango import DevState
@@ -84,9 +84,9 @@ class TestScanSequence:
         for ip_block in EmulatorIPBlockId:
             EmulatorAPIService.post(self.emulator_url, ip_block, route="recover")
 
-        eth_state, eth_reset = EmulatorAPIService.wait_for_state(self.emulator_url, EmulatorIPBlockId.ETHERNET_200G, "RESET")
-        pv_state, pv_reset = EmulatorAPIService.wait_for_state(self.emulator_url, EmulatorIPBlockId.PACKET_VALIDATION, "RESET")
-        wib_state, wib_reset = EmulatorAPIService.wait_for_state(self.emulator_url, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, "RESET")
+        _, eth_reset = EmulatorAPIService.wait_for_state(self.emulator_url, EmulatorIPBlockId.ETHERNET_200G, "RESET")
+        _, pv_reset = EmulatorAPIService.wait_for_state(self.emulator_url, EmulatorIPBlockId.PACKET_VALIDATION, "RESET")
+        _, wib_reset = EmulatorAPIService.wait_for_state(self.emulator_url, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, "RESET")
 
         assert eth_reset
         assert pv_reset
@@ -94,10 +94,7 @@ class TestScanSequence:
 
         self.logger.info("Emulators were reset successfully.")
 
-    def set_admin_mode_and_assert_change_events_occurred(
-        self,
-        admin_mode: AdminMode,
-    ) -> None:
+    def set_admin_mode_and_assert_change_events_occurred(self, admin_mode: AdminMode) -> None:
         self.all_bands_proxy.write_attribute("adminMode", admin_mode)
         all_bands_adminMode = self.all_bands_proxy.read_attribute("adminMode")
         all_bands_opState = self.all_bands_proxy.read_attribute("State")
@@ -433,7 +430,7 @@ class TestScanSequence:
         # 4. Run first EndScan()
 
         self.run_end_scan_and_assert_success()
-        
+
         # 5. Run second ConfigureScan()
 
         self.run_configure_scan_and_assert_success("test_parameters/configure_scan_valid_2.json")
