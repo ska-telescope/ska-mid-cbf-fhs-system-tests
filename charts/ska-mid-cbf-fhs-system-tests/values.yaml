@@ -50,7 +50,7 @@ ska-mid-cbf-fhs-vcc:
     firmwareRegistry: https://artefact.skao.int/repository/raw-internal
     firmwareImage: ska-mid-cbf-agilex-vcc
     bitstreamId: agilex-vcc
-    bitstreamVersion: 0.0.9
+    bitstreamVersion: 0.0.10
     bitstreamPath: /app/mnt/bitstream
   
   properties:
@@ -62,31 +62,31 @@ ska-mid-cbf-fhs-vcc:
     - name: configLocation
       default: "/app/mnt/lowLevelConfigMap"
     - name: simulationMode
-      default: 0
+      default: "0"
     - name: emulationMode
-      default: 1
+      default: "1"
     - name: emulatorIpBlockId
     - name: emulatorId
     - name: firmwareIpBlockId
 
   instances:
     - name: fhs-vcc-1
-      deviceId: 1
+      deviceId: "1"
       emulatorId: "fhs-vcc-emulator-1"
     - name: fhs-vcc-2
-      deviceId: 2
+      deviceId: "2"
       emulatorId: "fhs-vcc-emulator-2"
     - name: fhs-vcc-3
-      deviceId: 3
+      deviceId: "3"
       emulatorId: "fhs-vcc-emulator-3"
     - name: fhs-vcc-4
-      deviceId: 4
+      deviceId: "4"
       emulatorId: "fhs-vcc-emulator-4"
     - name: fhs-vcc-5
-      deviceId: 5
+      deviceId: "5"
       emulatorId: "fhs-vcc-emulator-5"
     - name: fhs-vcc-6
-      deviceId: 6
+      deviceId: "6"
       emulatorId: "fhs-vcc-emulator-6"
 
 
@@ -118,22 +118,22 @@ ska-mid-cbf-emulators:
   
   emulators:
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.9
+      bitstream_emulator_ver: 0.0.10
       deployment_id: fhs-vcc-emulator-1
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.9
+      bitstream_emulator_ver: 0.0.10
       deployment_id: fhs-vcc-emulator-2
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.9
+      bitstream_emulator_ver: 0.0.10
       deployment_id: fhs-vcc-emulator-3
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.9
+      bitstream_emulator_ver: 0.0.10
       deployment_id: fhs-vcc-emulator-4
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.9
+      bitstream_emulator_ver: 0.0.10
       deployment_id: fhs-vcc-emulator-5
     - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.9
+      bitstream_emulator_ver: 0.0.10
       deployment_id: fhs-vcc-emulator-6
 
   rabbitmq:
