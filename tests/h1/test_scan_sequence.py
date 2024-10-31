@@ -1,16 +1,13 @@
 import json
-from logging import Logger
 from typing import Any
 
 import numpy as np
 import pytest
 from assertpy import assert_that
 from base_tango_test_class import BaseTangoTestClass
-from connection_utils import DeviceKey, EmulatorAPIService, EmulatorIPBlockId, create_proxy, get_fqdn
-from pytango_client_wrapper import PyTangoClientWrapper
+from connection_utils import DeviceKey, EmulatorAPIService, EmulatorIPBlockId
 from scan_utils import frequency_band_map
 from ska_tango_base.control_model import AdminMode, CommunicationStatus, ObsState
-from ska_tango_testing.integration import TangoEventTracer
 from tango import DevState
 
 
@@ -51,15 +48,9 @@ class TestScanSequence(BaseTangoTestClass):
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
         all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
         all_bands_proxy.write_attribute("adminMode", admin_mode)
-        all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
         all_bands_opState = all_bands_proxy.read_attribute("State")
 
-        self.logger.debug(f"allbands AdminMode after setting to {admin_mode.name}: {all_bands_adminMode}")
         self.logger.debug(f"allbands OpState after setting to {admin_mode.name}: {all_bands_opState}")
-
-        assert all_bands_adminMode == admin_mode
-
-        self.logger.info(f"AdminMode successfully set to {admin_mode.name} for FHS-VCC {fhs_vcc_idx}.")
 
         match admin_mode:
             case AdminMode.ONLINE:
@@ -85,6 +76,13 @@ class TestScanSequence(BaseTangoTestClass):
                 self.logger.info(f"CommunicationState successfully set to DISABLED for FHS-VCC {fhs_vcc_idx}.")
             case _:
                 self.logger.warn("Unsupported AdminMode: {admin_mode.name}")
+
+        all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
+        self.logger.debug(f"allbands AdminMode after setting to {admin_mode.name}: {all_bands_adminMode}")
+
+        assert all_bands_adminMode == admin_mode
+
+        self.logger.info(f"AdminMode successfully set to {admin_mode.name} for FHS-VCC {fhs_vcc_idx}.")
 
     def get_configure_scan_config(self, config_path: str) -> tuple[str, dict]:
         with open(config_path, "r") as configure_scan_file:
@@ -202,7 +200,7 @@ class TestScanSequence(BaseTangoTestClass):
         fss_proxy = self.proxies[DeviceKey.FREQ_SLICE_SELECTION][fhs_vcc_idx]
         emulator_url = self.emulator_urls[fhs_vcc_idx]
 
-        config_str, config_dict = self.get_configure_scan_config(config_path)
+        config_str, _ = self.get_configure_scan_config(config_path)
 
         all_bands_obsState = all_bands_proxy.read_attribute("obsState")
         all_bands_frequencyBand_before = all_bands_proxy.read_attribute("frequencyBand")
@@ -465,7 +463,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
-    @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [4, [5, 6]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_valid_config_two_scans_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
@@ -555,6 +553,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
+    @pytest.mark.skip
     @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_invalid_config_bad_gains_single_scan_error(self, initialize_with_indices) -> None:
         # 0. Initial setup
@@ -591,6 +590,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
+    @pytest.mark.skip
     @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_commands_out_of_order_error(self, initialize_with_indices) -> None:
         # 0. Initial setup

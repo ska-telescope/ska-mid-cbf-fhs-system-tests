@@ -1,11 +1,8 @@
 from __future__ import annotations
 
-from logging import Logger
-
 import pytest
 from base_tango_test_class import BaseTangoTestClass
 from connection_utils import DeviceKey, EmulatorAPIService
-from pytango_client_wrapper import PyTangoClientWrapper
 from tango import DevState
 
 
