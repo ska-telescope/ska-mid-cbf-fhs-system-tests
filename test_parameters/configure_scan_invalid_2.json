@@ -1,0 +1,31 @@
+{
+    "config_id": "2",
+    "expected_dish_id": "MKT005",
+    "dish_sample_rate": 3960000000,
+    "samples_per_frame": 18,
+    "vcc_gain": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+    ],
+    "frequency_band": "2",
+    "noise_diode_transition_holdoff_seconds": 0,
+    "frequency_band_offset_stream_1": 55.0,
+    "frequency_band_offset_stream_2": 0.0
+}
