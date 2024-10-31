@@ -53,6 +53,11 @@ def create_proxy(fhs_vcc_idx: int, fqdn_key: DeviceKey) -> PyTangoClientWrapper:
     return proxy
 
 
+def get_emulator_url(fhs_vcc_idx: int, emulator_base_url: str) -> str:
+    """Get the emulator URL for a given device index and base URL."""
+    return f"fhs-vcc-emulator-{fhs_vcc_idx}.{emulator_base_url}"
+
+
 class EmulatorAPIService:
     """Service containing methods for interacting with the emulator APIs."""
 

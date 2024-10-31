@@ -3,7 +3,8 @@ from __future__ import annotations
 from logging import Logger
 
 import pytest
-from connection_utils import EmulatorAPIService
+from base_tango_test_class import BaseTangoTestClass
+from connection_utils import DeviceKey, EmulatorAPIService
 from pytango_client_wrapper import PyTangoClientWrapper
 from tango import DevState
 
@@ -11,39 +12,25 @@ from tango import DevState
 @pytest.mark.H1
 @pytest.mark.deployment
 @pytest.mark.nightly
-class TestDeployment:
+class TestDeployment(BaseTangoTestClass):
 
-    @pytest.fixture(scope="class")
-    def fhs_vcc_idx(self) -> int:
-        """Mock FHS-VCC device/emulator index fixture [1-based] for this test class.
-        For now this set of tests only checks one stack.
-        """
-        return 1
+    @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_device_servers_are_deployed_and_opstate_is_on(self: TestDeployment, initialize_with_indices):
+        fhs_vcc_idx = self.idxs[0]
 
-    def test_device_servers_are_deployed_and_opstate_is_on(
-        self: TestDeployment,
-        logger: Logger,
-        eth_proxy: PyTangoClientWrapper,
-        pv_proxy: PyTangoClientWrapper,
-        wfs_proxy: PyTangoClientWrapper,
-        wib_proxy: PyTangoClientWrapper,
-        vcc_123_proxy: PyTangoClientWrapper,
-        fss_proxy: PyTangoClientWrapper,
-        fhs_vcc_idx: int,
-    ):
-        mac200_000_state = eth_proxy.read_attribute("State")
-        vcc_000_state = vcc_123_proxy.read_attribute("State")
-        fss_000_state = fss_proxy.read_attribute("State")
-        wfs_000_state = wfs_proxy.read_attribute("State")
-        wib_000_state = wib_proxy.read_attribute("State")
-        pv_000_state = pv_proxy.read_attribute("State")
+        mac200_000_state = self.proxies[DeviceKey.ETHERNET][fhs_vcc_idx].read_attribute("State")
+        vcc_000_state = self.proxies[DeviceKey.VCC_123][fhs_vcc_idx].read_attribute("State")
+        fss_000_state = self.proxies[DeviceKey.FREQ_SLICE_SELECTION][fhs_vcc_idx].read_attribute("State")
+        wfs_000_state = self.proxies[DeviceKey.WIDEBAND_FREQ_SHIFTER][fhs_vcc_idx].read_attribute("State")
+        wib_000_state = self.proxies[DeviceKey.WIDEBAND_INPUT_BUFFER][fhs_vcc_idx].read_attribute("State")
+        pv_000_state = self.proxies[DeviceKey.PACKET_VALIDATION][fhs_vcc_idx].read_attribute("State")
 
-        logger.info(f"200Gb Ethernet state is: {mac200_000_state}")
-        logger.info(f"B123-VCC state is: {vcc_000_state}")
-        logger.info(f"Frequency Slice Selection state is: {fss_000_state}")
-        logger.info(f"Wideband Frequency Shifter state is: {wfs_000_state}")
-        logger.info(f"Wideband Input Buffer state is: {wib_000_state}")
-        logger.info(f"Packet Validation state is: {pv_000_state}")
+        self.logger.info(f"200Gb Ethernet state is: {mac200_000_state}")
+        self.logger.info(f"B123-VCC state is: {vcc_000_state}")
+        self.logger.info(f"Frequency Slice Selection state is: {fss_000_state}")
+        self.logger.info(f"Wideband Frequency Shifter state is: {wfs_000_state}")
+        self.logger.info(f"Wideband Input Buffer state is: {wib_000_state}")
+        self.logger.info(f"Packet Validation state is: {pv_000_state}")
 
         assert mac200_000_state == DevState.ON
         assert vcc_000_state == DevState.ON
@@ -52,37 +39,26 @@ class TestDeployment:
         assert wib_000_state == DevState.ON
         assert pv_000_state == DevState.ON
 
-    def test_emulator_is_deployed_and_running(
-        self: TestDeployment,
-        logger: Logger,
-        emulator_url: str,
-        fhs_vcc_idx: int,
-    ):
-        emulator1_json = EmulatorAPIService.get(emulator_url, route="state")
-        logger.info(f"Emulator state is: {emulator1_json.get('current_state', 'None')}")
+    @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_emulator_is_deployed_and_running(self: TestDeployment, initialize_with_indices):
+        emulator1_json = EmulatorAPIService.get(self.emulator_urls[self.idxs[0]], route="state")
+        self.logger.info(f"Emulator state is: {emulator1_json.get('current_state', 'None')}")
         assert emulator1_json.get("current_state") == "RUNNING"
 
-    def test_device_servers_can_send_emulator_api_requests_and_get_responses(
-        self: TestDeployment,
-        logger: Logger,
-        eth_proxy: PyTangoClientWrapper,
-        pv_proxy: PyTangoClientWrapper,
-        wfs_proxy: PyTangoClientWrapper,
-        wib_proxy: PyTangoClientWrapper,
-        vcc_123_proxy: PyTangoClientWrapper,
-        fss_proxy: PyTangoClientWrapper,
-        fhs_vcc_idx: int,
-    ):
-        mac200_status = eth_proxy.command_read_write("getstatus", False)
-        vcc_status = vcc_123_proxy.command_read_write("getstatus", False)
-        fss_status = fss_proxy.command_read_write("getstatus", False)
-        wfs_status = wfs_proxy.command_read_write("getstatus", False)
-        wib_status = wib_proxy.command_read_write("getstatus", False)
-        pv_status = pv_proxy.command_read_write("getstatus", False)
+    @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_device_servers_can_send_emulator_api_requests_and_get_responses(self: TestDeployment, initialize_with_indices):
+        fhs_vcc_idx = self.idxs[0]
 
-        logger.debug(f"......Mac200Stats: {mac200_status}......")
-        logger.debug(f"......Mac200Stats: {mac200_status[0]}......")
-        logger.debug(f"......Mac200Stats: {mac200_status[1]}......")
+        mac200_status = self.proxies[DeviceKey.ETHERNET][fhs_vcc_idx].command_read_write("getstatus", False)
+        vcc_status = self.proxies[DeviceKey.VCC_123][fhs_vcc_idx].command_read_write("getstatus", False)
+        fss_status = self.proxies[DeviceKey.FREQ_SLICE_SELECTION][fhs_vcc_idx].command_read_write("getstatus", False)
+        wfs_status = self.proxies[DeviceKey.WIDEBAND_FREQ_SHIFTER][fhs_vcc_idx].command_read_write("getstatus", False)
+        wib_status = self.proxies[DeviceKey.WIDEBAND_INPUT_BUFFER][fhs_vcc_idx].command_read_write("getstatus", False)
+        pv_status = self.proxies[DeviceKey.PACKET_VALIDATION][fhs_vcc_idx].command_read_write("getstatus", False)
+
+        self.logger.debug(f"......Mac200Stats: {mac200_status}......")
+        self.logger.debug(f"......Mac200Stats: {mac200_status[0]}......")
+        self.logger.debug(f"......Mac200Stats: {mac200_status[1]}......")
 
         assert mac200_status is not None
         assert vcc_status is not None
