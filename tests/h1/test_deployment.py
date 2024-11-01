@@ -11,9 +11,9 @@ from tango import DevState
 @pytest.mark.nightly
 class TestDeployment(BaseTangoTestClass):
 
-    @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [1, 2, 3, 4, 5, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_device_servers_are_deployed_and_opstate_is_on(self: TestDeployment, initialize_with_indices):
-        fhs_vcc_idx = self.idxs[0]
+        fhs_vcc_idx = self.loaded_idxs[0]
 
         mac200_000_state = self.proxies[DeviceKey.ETHERNET][fhs_vcc_idx].read_attribute("State")
         vcc_000_state = self.proxies[DeviceKey.VCC_123][fhs_vcc_idx].read_attribute("State")
@@ -36,15 +36,15 @@ class TestDeployment(BaseTangoTestClass):
         assert wib_000_state == DevState.ON
         assert pv_000_state == DevState.ON
 
-    @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [1, 2, 3, 4, 5, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_emulator_is_deployed_and_running(self: TestDeployment, initialize_with_indices):
-        emulator1_json = EmulatorAPIService.get(self.emulator_urls[self.idxs[0]], route="state")
+        emulator1_json = EmulatorAPIService.get(self.emulator_urls[self.loaded_idxs[0]], route="state")
         self.logger.info(f"Emulator state is: {emulator1_json.get('current_state', 'None')}")
         assert emulator1_json.get("current_state") == "RUNNING"
 
-    @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [1, 2, 3, 4, 5, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_device_servers_can_send_emulator_api_requests_and_get_responses(self: TestDeployment, initialize_with_indices):
-        fhs_vcc_idx = self.idxs[0]
+        fhs_vcc_idx = self.loaded_idxs[0]
 
         mac200_status = self.proxies[DeviceKey.ETHERNET][fhs_vcc_idx].command_read_write("getstatus", False)
         vcc_status = self.proxies[DeviceKey.VCC_123][fhs_vcc_idx].command_read_write("getstatus", False)

@@ -18,7 +18,7 @@ dependencies:
   # deployed to the namespace. These values can be overwritten by Makefile processing at runtime
   # based on USE_DEV_BUILD and <repo>_HASH_VERSION variables.
   - name: ska-mid-cbf-fhs-vcc
-    version: 0.0.2-dev.c20bf091a
+    version: 0.0.2-dev.c24c65102
     repository: https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
     condition: ska-mid-cbf-fhs-vcc.enabled
   - name: ska-mid-cbf-fhs-vcc-boogie

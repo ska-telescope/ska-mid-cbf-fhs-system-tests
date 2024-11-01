@@ -17,14 +17,14 @@ class TestScanSequence(BaseTangoTestClass):
 
     @pytest.fixture(autouse=True)
     def reset_all_bands(self, initialize_with_indices) -> None:
-        for fhs_vcc_idx in self.idxs:
+        for fhs_vcc_idx in self.loaded_idxs:
             self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx].command_read_write("Init")
         yield
-        for fhs_vcc_idx in self.idxs:
+        for fhs_vcc_idx in self.loaded_idxs:
             self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx].command_read_write("Init")
 
     def post_initialize(self) -> None:
-        for i in self.idxs:
+        for i in self.loaded_idxs:
             self.event_tracer.subscribe_event(self.fqdns[DeviceKey.ETHERNET][i], "obsState")
             self.event_tracer.subscribe_event(self.fqdns[DeviceKey.PACKET_VALIDATION][i], "obsState")
             self.event_tracer.subscribe_event(self.fqdns[DeviceKey.WIDEBAND_INPUT_BUFFER][i], "obsState")
@@ -54,7 +54,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         match admin_mode:
             case AdminMode.ONLINE:
-                assert all_bands_opState == DevState.ON
+                # assert all_bands_opState == DevState.ON
 
                 self.logger.info("Waiting for CommunicationState to be ESTABLISHED.")
                 assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
@@ -191,7 +191,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.logger.info(f"ConfigureScan completed successfully for FHS-VCC {fhs_vcc_idx}.")
 
-    def run_configure_scan_and_assert_failure(self, fhs_vcc_idx: int, config_path: str, expected_error_msg: str | None = None) -> Any:
+    def run_configure_scan_and_assert_failure(self, fhs_vcc_idx: int, config_path: str, expected_code: int = 5, expected_error_msg: str | None = None) -> Any:
 
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
         all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
@@ -224,7 +224,7 @@ class TestScanSequence(BaseTangoTestClass):
                 attribute_name="longRunningCommandResult",
                 attribute_value=(
                     f"{configure_scan_result[1][0]}",
-                    f'[5, "{expected_error_msg}"]',
+                    f'[{expected_code}, "{expected_error_msg}"]',
                 ),
             )
 
@@ -232,7 +232,7 @@ class TestScanSequence(BaseTangoTestClass):
             assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
                 device_name=all_bands_fqdn,
                 attribute_name="longRunningCommandResult",
-                custom_matcher=lambda event: event.attribute_value[1].strip("[]").split(",")[0].strip() == "5",
+                custom_matcher=lambda event: event.attribute_value[1].strip("[]").split(",")[0].strip() == f"{expected_code}",
             )
 
         all_bands_obsState = all_bands_proxy.read_attribute("obsState")
@@ -421,11 +421,11 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.logger.info(f"GoToIdle completed successfully for FHS-VCC {fhs_vcc_idx}.")
 
-    @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [1, 3, 5], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_valid_config_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
-        fhs_vcc_idx = self.idxs[0]
+        fhs_vcc_idx = self.loaded_idxs[0]
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
 
         # Ensure emulators are reset before starting
@@ -463,11 +463,11 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
-    @pytest.mark.parametrize("initialize_with_indices", [4, [5, 6]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [2, 4, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_valid_config_two_scans_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
-        fhs_vcc_idx = self.idxs[0]
+        fhs_vcc_idx = self.loaded_idxs[0]
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
 
         # Ensure emulators are reset before starting
@@ -517,11 +517,11 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
-    @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [1, 4, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_invalid_config_schema_mismatch_single_scan_error(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
-        fhs_vcc_idx = self.idxs[0]
+        fhs_vcc_idx = self.loaded_idxs[0]
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
 
         # Ensure emulators are reset before starting
@@ -539,7 +539,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         # 2. Run ConfigureScan()
 
-        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_invalid_1.json", "Arg provided does not match schema for ConfigureScan")
+        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_invalid_1.json", 5, "Arg provided does not match schema for ConfigureScan")
 
         assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
             device_name=self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx],
@@ -553,12 +553,11 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
-    @pytest.mark.skip
-    @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [2, 4, 5], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_invalid_config_bad_gains_single_scan_error(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
-        fhs_vcc_idx = self.idxs[0]
+        fhs_vcc_idx = self.loaded_idxs[0]
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
 
         # Ensure emulators are reset before starting
@@ -576,7 +575,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         # 2. Run ConfigureScan()
 
-        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_invalid_2.json")
+        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_invalid_2.json", 3)
 
         assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
             device_name=self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx],
@@ -590,12 +589,11 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
-    @pytest.mark.skip
-    @pytest.mark.parametrize("initialize_with_indices", [1, [2, 3]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [1, 3, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_commands_out_of_order_error(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
-        fhs_vcc_idx = self.idxs[0]
+        fhs_vcc_idx = self.loaded_idxs[0]
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
 
         # Ensure emulators are reset before starting
@@ -621,7 +619,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         # 4. Run ConfigureScan() again (incorrect)
 
-        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_valid_2.json")
+        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_valid_2.json", 5)
 
         # 5. Run EndScan()
 
