@@ -54,7 +54,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         match admin_mode:
             case AdminMode.ONLINE:
-                # assert all_bands_opState == DevState.ON
+                assert all_bands_opState == DevState.ON
 
                 self.logger.info("Waiting for CommunicationState to be ESTABLISHED.")
                 assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
