@@ -539,7 +539,9 @@ class TestScanSequence(BaseTangoTestClass):
 
         # 2. Run ConfigureScan()
 
-        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_invalid_1.json", 5, "Arg provided does not match schema for ConfigureScan")
+        self.run_configure_scan_and_assert_failure(
+            fhs_vcc_idx, "test_parameters/configure_scan_invalid_schema_mismatch.json", 5, "Arg provided does not match schema for ConfigureScan"
+        )
 
         assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
             device_name=self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx],
@@ -575,7 +577,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         # 2. Run ConfigureScan()
 
-        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_invalid_2.json", 3)
+        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_invalid_wrong_num_gains.json", 3)
 
         assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
             device_name=self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx],
