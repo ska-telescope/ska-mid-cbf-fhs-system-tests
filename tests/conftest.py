@@ -66,84 +66,9 @@ def emulator_base_url(namespace: str, cluster_domain: str) -> str:
     return f"{namespace}.svc.{cluster_domain}:5001"
 
 
-@pytest.fixture(scope="function")
-def emulator_url(fhs_vcc_idx: int, emulator_base_url: str) -> str:
-    return f"fhs-vcc-emulator-{fhs_vcc_idx}.{emulator_base_url}"
-
-
 @pytest.fixture(scope="session")
 def tango_host(request) -> str:
     return request.config.getoption("--tango_host")
-
-
-@pytest.fixture(scope="function")
-def all_bands_fqdn(fhs_vcc_idx: int) -> str:
-    return get_fqdn(fhs_vcc_idx, DeviceKey.ALL_BANDS)
-
-
-@pytest.fixture(scope="function")
-def eth_fqdn(fhs_vcc_idx: int) -> str:
-    return get_fqdn(fhs_vcc_idx, DeviceKey.ETHERNET)
-
-
-@pytest.fixture(scope="function")
-def pv_fqdn(fhs_vcc_idx: int) -> str:
-    return get_fqdn(fhs_vcc_idx, DeviceKey.PACKET_VALIDATION)
-
-
-@pytest.fixture(scope="function")
-def wib_fqdn(fhs_vcc_idx: int) -> str:
-    return get_fqdn(fhs_vcc_idx, DeviceKey.WIDEBAND_INPUT_BUFFER)
-
-
-@pytest.fixture(scope="function")
-def wfs_fqdn(fhs_vcc_idx: int) -> str:
-    return get_fqdn(fhs_vcc_idx, DeviceKey.WIDEBAND_FREQ_SHIFTER)
-
-
-@pytest.fixture(scope="function")
-def vcc_123_fqdn(fhs_vcc_idx: int) -> str:
-    return get_fqdn(fhs_vcc_idx, DeviceKey.VCC_123)
-
-
-@pytest.fixture(scope="function")
-def fss_fqdn(fhs_vcc_idx: int) -> str:
-    return get_fqdn(fhs_vcc_idx, DeviceKey.FREQ_SLICE_SELECTION)
-
-
-@pytest.fixture(scope="function")
-def all_bands_proxy(fhs_vcc_idx: int) -> str:
-    return create_proxy(fhs_vcc_idx, DeviceKey.ALL_BANDS)
-
-
-@pytest.fixture(scope="function")
-def eth_proxy(fhs_vcc_idx: int) -> str:
-    return create_proxy(fhs_vcc_idx, DeviceKey.ETHERNET)
-
-
-@pytest.fixture(scope="function")
-def pv_proxy(fhs_vcc_idx: int) -> str:
-    return create_proxy(fhs_vcc_idx, DeviceKey.PACKET_VALIDATION)
-
-
-@pytest.fixture(scope="function")
-def wib_proxy(fhs_vcc_idx: int) -> str:
-    return create_proxy(fhs_vcc_idx, DeviceKey.WIDEBAND_INPUT_BUFFER)
-
-
-@pytest.fixture(scope="function")
-def wfs_proxy(fhs_vcc_idx: int) -> str:
-    return create_proxy(fhs_vcc_idx, DeviceKey.WIDEBAND_FREQ_SHIFTER)
-
-
-@pytest.fixture(scope="function")
-def vcc_123_proxy(fhs_vcc_idx: int) -> str:
-    return create_proxy(fhs_vcc_idx, DeviceKey.VCC_123)
-
-
-@pytest.fixture(scope="function")
-def fss_proxy(fhs_vcc_idx: int) -> str:
-    return create_proxy(fhs_vcc_idx, DeviceKey.FREQ_SLICE_SELECTION)
 
 
 def pytest_sessionstart(session):
