@@ -1,4 +1,5 @@
 import json
+import random
 from typing import Any
 
 import numpy as np
@@ -516,6 +517,219 @@ class TestScanSequence(BaseTangoTestClass):
         self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+    @pytest.mark.parametrize("initialize_with_indices", [[1, 2, 3, 4, 5, 6]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_scan_sequence_split_config_6_stacks_random_order_single_scan_success(self, initialize_with_indices) -> None:
+        # 0. Initial setup
+
+        all_bands_proxies = self.proxies[DeviceKey.ALL_BANDS]
+        configure_scan_results = {}
+        config_dicts = {}
+        scan_results = {}
+
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
+            all_bands_proxy = all_bands_proxies[fhs_vcc_idx]
+
+            # Ensure emulators are reset before starting
+            self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+            all_bands_state = all_bands_proxy.read_attribute("State")
+            all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
+
+            self.logger.debug(f"allbands {fhs_vcc_idx} initial OpState: {all_bands_state}")
+            self.logger.debug(f"allbands {fhs_vcc_idx} initial AdminMode: {all_bands_adminMode}")
+
+            # 1. Set AdminMode.ONLINE
+
+            self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.ONLINE)
+
+            # 2. Run ConfigureScan()'s in parallel with unique configurations
+
+            all_bands_obsState = all_bands_proxy.read_attribute("obsState")
+            all_bands_frequencyBand = all_bands_proxy.read_attribute("frequencyBand")
+            all_bands_frequencyBandOffset = all_bands_proxy.read_attribute("frequencyBandOffset")
+            vcc_123_status = json.loads(self.proxies[DeviceKey.VCC_123][fhs_vcc_idx].command_read_write("GetStatus", False)[1][0])
+            wfs_status = json.loads(self.proxies[DeviceKey.WIDEBAND_FREQ_SHIFTER][fhs_vcc_idx].command_read_write("GetStatus", False)[1][0])
+            fss_status = json.loads(self.proxies[DeviceKey.FREQ_SLICE_SELECTION][fhs_vcc_idx].command_read_write("GetStatus", False)[1][0])
+
+            self.logger.debug(f"allbands {fhs_vcc_idx} ObsState before ConfigureScan: {all_bands_obsState}")
+            self.logger.debug(f"allbands {fhs_vcc_idx} frequencyBand before ConfigureScan: {all_bands_frequencyBand}")
+            self.logger.debug(f"allbands {fhs_vcc_idx} frequencyBandOffset before ConfigureScan: {all_bands_frequencyBandOffset}")
+            self.logger.debug(f"vcc {fhs_vcc_idx} status before ConfigureScan: {vcc_123_status}")
+            self.logger.debug(f"wfs {fhs_vcc_idx} status before ConfigureScan: {wfs_status}")
+            self.logger.debug(f"fss {fhs_vcc_idx} status before ConfigureScan: {fss_status}")
+
+            config_str, config_dicts[fhs_vcc_idx] = self.get_configure_scan_config(f"test_parameters/configure_scan_valid_{fhs_vcc_idx}.json")
+            configure_scan_results[fhs_vcc_idx] = self.run_configure_scan(fhs_vcc_idx, config_str)
+
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
+            all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+            emulator_url = self.emulator_urls[fhs_vcc_idx]
+
+            assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+                device_name=all_bands_fqdn,
+                attribute_name="obsState",
+                attribute_value=ObsState.CONFIGURING,
+            )
+
+            assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+                device_name=all_bands_fqdn,
+                attribute_name="longRunningCommandResult",
+                attribute_value=(
+                    f"{configure_scan_results[fhs_vcc_idx][1][0]}",
+                    '[0, "ConfigureScan completed OK"]',
+                ),
+            )
+
+            assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+                device_name=all_bands_fqdn,
+                attribute_name="obsState",
+                attribute_value=ObsState.READY,
+            )
+
+            vcc_123_state, vcc_123_active = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.VCC_123, "ACTIVE")
+            wfs_state, wfs_active = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.WIDEBAND_FREQ_SHIFTER, "ACTIVE")
+            fss_state, fss_active = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.FREQ_SLICE_SELECTION, "ACTIVE")
+
+            self.logger.debug(f"vcc {fhs_vcc_idx} state after ConfigureScan: {vcc_123_state}")
+            self.logger.debug(f"wfs {fhs_vcc_idx} state after ConfigureScan: {wfs_state}")
+            self.logger.debug(f"fss {fhs_vcc_idx} state after ConfigureScan: {fss_state}")
+
+            assert vcc_123_active
+            assert wfs_active
+            assert fss_active
+
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
+            config_dict = config_dicts[fhs_vcc_idx]
+            all_bands_proxy = all_bands_proxies[fhs_vcc_idx]
+
+            all_bands_obsState = all_bands_proxy.read_attribute("obsState")
+            all_bands_frequencyBand = all_bands_proxy.read_attribute("frequencyBand")
+            all_bands_frequencyBandOffset = all_bands_proxy.read_attribute("frequencyBandOffset")
+            vcc_123_status = json.loads(self.proxies[DeviceKey.VCC_123][fhs_vcc_idx].command_read_write("GetStatus", False)[1][0])
+            wfs_status = json.loads(self.proxies[DeviceKey.WIDEBAND_FREQ_SHIFTER][fhs_vcc_idx].command_read_write("GetStatus", False)[1][0])
+            fss_status = json.loads(self.proxies[DeviceKey.FREQ_SLICE_SELECTION][fhs_vcc_idx].command_read_write("GetStatus", False)[1][0])
+
+            self.logger.debug(f"allbands {fhs_vcc_idx} ObsState after ConfigureScan: {all_bands_obsState}")
+            self.logger.debug(f"allbands {fhs_vcc_idx} frequencyBand after ConfigureScan: {all_bands_frequencyBand}")
+            self.logger.debug(f"allbands {fhs_vcc_idx} frequencyBandOffset after ConfigureScan: {all_bands_frequencyBandOffset}")
+            self.logger.debug(f"vcc {fhs_vcc_idx} status after ConfigureScan: {vcc_123_status}")
+            self.logger.debug(f"wfs {fhs_vcc_idx} status after ConfigureScan: {wfs_status}")
+            self.logger.debug(f"fss {fhs_vcc_idx} status after ConfigureScan: {fss_status}")
+
+            expected_frequency_band = frequency_band_map.get(config_dict.get("frequency_band"))
+            expected_frequency_band_offset = [
+                config_dict.get("frequency_band_offset_stream_1"),
+                config_dict.get("frequency_band_offset_stream_2"),
+            ]
+
+            assert all_bands_frequencyBand == expected_frequency_band
+            assert len(all_bands_frequencyBandOffset) == 2
+            assert all_bands_frequencyBandOffset[0] == expected_frequency_band_offset[0]
+            assert all_bands_frequencyBandOffset[1] == expected_frequency_band_offset[1]
+
+            expected_gains = np.reshape(config_dict.get("vcc_gain"), (-1, 2)).transpose().flatten()
+            expected_shift_frequency = expected_frequency_band_offset[0]
+            expected_band_select = expected_frequency_band + 1
+
+            vcc_123_gains = vcc_123_status.get("gains")
+            assert all(expected_gains[i] == pytest.approx(vcc_123_gains[i].get("gain")) for i in range(len(expected_gains)))
+            assert wfs_status.get("shift_frequency") == expected_shift_frequency
+            assert fss_status.get("band_select") == expected_band_select
+
+            self.logger.info(f"ConfigureScan completed successfully for FHS-VCC {fhs_vcc_idx}.")
+
+            # 3. Run Scan()'s in parallel
+
+            all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+            eth_proxy = self.proxies[DeviceKey.ETHERNET][fhs_vcc_idx]
+            pv_proxy = self.proxies[DeviceKey.PACKET_VALIDATION][fhs_vcc_idx]
+            wib_proxy = self.proxies[DeviceKey.WIDEBAND_INPUT_BUFFER][fhs_vcc_idx]
+            emulator_url = self.emulator_urls[fhs_vcc_idx]
+
+            eth_obsState = eth_proxy.read_attribute("obsState")
+            pv_obsState = pv_proxy.read_attribute("obsState")
+            wib_obsState = wib_proxy.read_attribute("obsState")
+
+            self.logger.debug(f"Ethernet {fhs_vcc_idx} obsState before Scan: {eth_obsState}")
+            self.logger.debug(f"Packet Validation {fhs_vcc_idx} obsState before Scan: {pv_obsState}")
+            self.logger.debug(f"WIB {fhs_vcc_idx} obsState before Scan: {wib_obsState}")
+
+            eth_state = EmulatorAPIService.get(emulator_url, EmulatorIPBlockId.ETHERNET_200G, "state")
+            pv_state = EmulatorAPIService.get(emulator_url, EmulatorIPBlockId.PACKET_VALIDATION, "state")
+            wib_state = EmulatorAPIService.get(emulator_url, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, "state")
+
+            self.logger.debug(f"eth {fhs_vcc_idx} state before Scan: {eth_state}")
+            self.logger.debug(f"pv {fhs_vcc_idx} state before Scan: {pv_state}")
+            self.logger.debug(f"wib {fhs_vcc_idx} state before Scan: {wib_state}")
+
+            scan_results[fhs_vcc_idx] = all_bands_proxy.command_read_write("Scan", 0)
+
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
+            all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+            emulator_url = self.emulator_urls[fhs_vcc_idx]
+
+            assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+                device_name=self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx],
+                attribute_name="longRunningCommandResult",
+                attribute_value=(
+                    f"{scan_results[fhs_vcc_idx][1][0]}",
+                    '[0, "Scan completed OK"]',
+                ),
+            )
+
+            for device_key in [DeviceKey.ALL_BANDS, DeviceKey.ETHERNET, DeviceKey.PACKET_VALIDATION, DeviceKey.WIDEBAND_INPUT_BUFFER]:
+                assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+                    device_name=self.fqdns[device_key][fhs_vcc_idx],
+                    attribute_name="obsState",
+                    attribute_value=ObsState.SCANNING,
+                )
+
+            eth_state, eth_link = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.ETHERNET_200G, "LINK")
+            pv_state, pv_enabled = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.PACKET_VALIDATION, "ENABLED")
+            wib_state, wib_enabled = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, "ENABLED")
+
+            self.logger.debug(f"eth {fhs_vcc_idx} state after Scan: {eth_state}")
+            self.logger.debug(f"pv {fhs_vcc_idx} state after Scan: {pv_state}")
+            self.logger.debug(f"wib {fhs_vcc_idx} state after Scan: {wib_state}")
+
+            assert eth_link
+            assert pv_enabled
+            assert wib_enabled
+
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
+            all_bands_opState = all_bands_proxy.read_attribute("State")
+            assert all_bands_opState == DevState.ON
+
+            all_bands_obsState = all_bands_proxy.read_attribute("obsState")
+            eth_obsState = eth_proxy.read_attribute("obsState")
+            pv_obsState = pv_proxy.read_attribute("obsState")
+            wib_obsState = wib_proxy.read_attribute("obsState")
+
+            self.logger.debug(f"allbands {fhs_vcc_idx} obsState after Scan: {all_bands_obsState}")
+            self.logger.debug(f"Ethernet {fhs_vcc_idx} obsState after Scan: {eth_obsState}")
+            self.logger.debug(f"Packet Validation {fhs_vcc_idx} obsState after Scan: {pv_obsState}")
+            self.logger.debug(f"WIB {fhs_vcc_idx} obsState after Scan: {wib_obsState}")
+
+            self.logger.info(f"Scan completed successfully for FHS-VCC {fhs_vcc_idx}.")
+
+        # 4. Teardown (sequential)
+
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
+
+            # 5. Run EndScan()
+
+            self.run_end_scan_and_assert_success(fhs_vcc_idx)
+
+            # 6. Run GoToIdle()
+
+            self.run_go_to_idle_and_assert_success(fhs_vcc_idx)
+
+            # 7. Set AdminMode.OFFLINE
+
+            self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
+
+            self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
     @pytest.mark.parametrize("initialize_with_indices", [1, 4, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_invalid_config_schema_mismatch_single_scan_error(self, initialize_with_indices) -> None:

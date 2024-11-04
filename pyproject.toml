@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ska-mid-cbf-fhs-system-tests"
-version = "0.0.3"
+version = "0.0.4"
 description = "System tests for H1 and beyond."
 authors = [
     "Justin Wamback <justin.wamback@mda.space>",
