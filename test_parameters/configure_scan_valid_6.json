@@ -1,0 +1,54 @@
+{
+  "config_id": "6",
+  "expected_dish_id": "MKT001",
+  "dish_sample_rate": 3960000000,
+  "samples_per_frame": 18,
+  "vcc_gain": [
+    0.3,
+    0.3,
+    0.1,
+    0.1,
+    0.4,
+    0.4,
+    0.1,
+    0.1,
+    0.5,
+    0.5,
+    0.9,
+    0.9,
+    0.2,
+    0.2,
+    0.6,
+    0.6,
+    0.5,
+    0.5,
+    0.3,
+    0.3
+  ],
+  "frequency_band": "2",
+  "fsp": [
+    {
+      "fsp_id": 1,
+      "frequency_slice_id": 1,
+      "function_mode": "CORR"
+    },
+    {
+      "fsp_id": 4,
+      "frequency_slice_id": 4,
+      "function_mode": "CORR"
+    },
+    {
+      "fsp_id": 2,
+      "frequency_slice_id": 2,
+      "function_mode": "CORR"
+    },
+    {
+      "fsp_id": 3,
+      "frequency_slice_id": 3,
+      "function_mode": "CORR"
+    }
+  ],
+  "noise_diode_transition_holdoff_seconds": 200,
+  "frequency_band_offset_stream_1": 111,
+  "frequency_band_offset_stream_2": 57
+}
