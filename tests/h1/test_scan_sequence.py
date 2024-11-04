@@ -516,7 +516,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
-   
+
     @pytest.mark.parametrize("initialize_with_indices", [[1, 2, 3, 4, 5, 6], [4, 1, 6, 5, 3, 2]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_split_config_6_stacks_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
@@ -527,7 +527,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         for fhs_vcc_idx in self.loaded_idxs:
             all_bands_proxy = all_bands_proxies[fhs_vcc_idx]
-            
+
             # Ensure emulators are reset before starting
             self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
@@ -584,7 +584,7 @@ class TestScanSequence(BaseTangoTestClass):
                 attribute_name="obsState",
                 attribute_value=ObsState.READY,
             )
-            
+
             vcc_123_state, vcc_123_active = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.VCC_123, "ACTIVE")
             wfs_state, wfs_active = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.WIDEBAND_FREQ_SHIFTER, "ACTIVE")
             fss_state, fss_active = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.FREQ_SLICE_SELECTION, "ACTIVE")
@@ -634,13 +634,13 @@ class TestScanSequence(BaseTangoTestClass):
             assert all(expected_gains[i] == pytest.approx(vcc_123_gains[i].get("gain")) for i in range(len(expected_gains)))
             assert wfs_status.get("shift_frequency") == expected_shift_frequency
             assert fss_status.get("band_select") == expected_band_select
-            
+
             self.logger.info(f"ConfigureScan completed successfully for FHS-VCC {fhs_vcc_idx}.")
-            
+
         # 3. Run Scan()'s in parallel
 
         scan_results = {}
-            
+
         for fhs_vcc_idx in self.loaded_idxs:
             all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
             eth_proxy = self.proxies[DeviceKey.ETHERNET][fhs_vcc_idx]
@@ -665,7 +665,7 @@ class TestScanSequence(BaseTangoTestClass):
             self.logger.debug(f"wib {fhs_vcc_idx} state before Scan: {wib_state}")
 
             scan_results[fhs_vcc_idx] = all_bands_proxy.command_read_write("Scan", 0)
-        
+
         for fhs_vcc_idx in reversed(self.loaded_idxs):
             all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
             emulator_url = self.emulator_urls[fhs_vcc_idx]
@@ -713,11 +713,11 @@ class TestScanSequence(BaseTangoTestClass):
             self.logger.debug(f"WIB obsState after Scan: {wib_obsState}")
 
             self.logger.info(f"Scan completed successfully for FHS-VCC {fhs_vcc_idx}.")
-       
+
         # 4. Teardown (sequential)
-        
+
         for fhs_vcc_idx in self.loaded_idxs:
-            
+
             # 5. Run EndScan()
 
             self.run_end_scan_and_assert_success(fhs_vcc_idx)
