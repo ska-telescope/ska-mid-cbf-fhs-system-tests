@@ -1,4 +1,5 @@
 import json
+import random
 from typing import Any
 
 import numpy as np
@@ -517,9 +518,8 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
-    @pytest.mark.dev
-    @pytest.mark.parametrize("initialize_with_indices", [[1, 2, 3, 4, 5, 6], [4, 1, 6, 5, 3, 2]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
-    def test_scan_sequence_split_config_6_stacks_single_scan_success(self, initialize_with_indices) -> None:
+    @pytest.mark.parametrize("initialize_with_indices", [[1, 2, 3, 4, 5, 6]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_scan_sequence_split_config_6_stacks_random_order_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
         all_bands_proxies = self.proxies[DeviceKey.ALL_BANDS]
@@ -527,7 +527,7 @@ class TestScanSequence(BaseTangoTestClass):
         config_dicts = {}
         scan_results = {}
 
-        for fhs_vcc_idx in self.loaded_idxs:
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
             all_bands_proxy = all_bands_proxies[fhs_vcc_idx]
 
             # Ensure emulators are reset before starting
@@ -562,7 +562,7 @@ class TestScanSequence(BaseTangoTestClass):
             config_str, config_dicts[fhs_vcc_idx] = self.get_configure_scan_config(f"test_parameters/configure_scan_valid_{fhs_vcc_idx}.json")
             configure_scan_results[fhs_vcc_idx] = self.run_configure_scan(fhs_vcc_idx, config_str)
 
-        for fhs_vcc_idx in reversed(self.loaded_idxs):
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
             all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
             emulator_url = self.emulator_urls[fhs_vcc_idx]
 
@@ -599,7 +599,7 @@ class TestScanSequence(BaseTangoTestClass):
             assert wfs_active
             assert fss_active
 
-        for fhs_vcc_idx in self.loaded_idxs:
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
             config_dict = config_dicts[fhs_vcc_idx]
             all_bands_proxy = all_bands_proxies[fhs_vcc_idx]
 
@@ -665,7 +665,7 @@ class TestScanSequence(BaseTangoTestClass):
 
             scan_results[fhs_vcc_idx] = all_bands_proxy.command_read_write("Scan", 0)
 
-        for fhs_vcc_idx in reversed(self.loaded_idxs):
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
             all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
             emulator_url = self.emulator_urls[fhs_vcc_idx]
 
@@ -697,7 +697,7 @@ class TestScanSequence(BaseTangoTestClass):
             assert pv_enabled
             assert wib_enabled
 
-        for fhs_vcc_idx in self.loaded_idxs:
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
             all_bands_opState = all_bands_proxy.read_attribute("State")
             assert all_bands_opState == DevState.ON
 
@@ -715,7 +715,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         # 4. Teardown (sequential)
 
-        for fhs_vcc_idx in self.loaded_idxs:
+        for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
 
             # 5. Run EndScan()
 
