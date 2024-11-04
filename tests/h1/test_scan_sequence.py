@@ -517,6 +517,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
+    @pytest.mark.dev
     @pytest.mark.parametrize("initialize_with_indices", [[1, 2, 3, 4, 5, 6], [4, 1, 6, 5, 3, 2]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_split_config_6_stacks_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
@@ -524,6 +525,7 @@ class TestScanSequence(BaseTangoTestClass):
         all_bands_proxies = self.proxies[DeviceKey.ALL_BANDS]
         configure_scan_results = {}
         config_dicts = {}
+        scan_results = {}
 
         for fhs_vcc_idx in self.loaded_idxs:
             all_bands_proxy = all_bands_proxies[fhs_vcc_idx]
@@ -637,11 +639,8 @@ class TestScanSequence(BaseTangoTestClass):
 
             self.logger.info(f"ConfigureScan completed successfully for FHS-VCC {fhs_vcc_idx}.")
 
-        # 3. Run Scan()'s in parallel
+            # 3. Run Scan()'s in parallel
 
-        scan_results = {}
-
-        for fhs_vcc_idx in self.loaded_idxs:
             all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
             eth_proxy = self.proxies[DeviceKey.ETHERNET][fhs_vcc_idx]
             pv_proxy = self.proxies[DeviceKey.PACKET_VALIDATION][fhs_vcc_idx]
@@ -690,9 +689,9 @@ class TestScanSequence(BaseTangoTestClass):
             pv_state, pv_enabled = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.PACKET_VALIDATION, "ENABLED")
             wib_state, wib_enabled = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, "ENABLED")
 
-            self.logger.debug(f"eth state after Scan: {eth_state}")
-            self.logger.debug(f"pv state after Scan: {pv_state}")
-            self.logger.debug(f"wib state after Scan: {wib_state}")
+            self.logger.debug(f"eth {fhs_vcc_idx} state after Scan: {eth_state}")
+            self.logger.debug(f"pv {fhs_vcc_idx} state after Scan: {pv_state}")
+            self.logger.debug(f"wib {fhs_vcc_idx} state after Scan: {wib_state}")
 
             assert eth_link
             assert pv_enabled
@@ -707,10 +706,10 @@ class TestScanSequence(BaseTangoTestClass):
             pv_obsState = pv_proxy.read_attribute("obsState")
             wib_obsState = wib_proxy.read_attribute("obsState")
 
-            self.logger.debug(f"allbands obsState after Scan: {all_bands_obsState}")
-            self.logger.debug(f"Ethernet obsState after Scan: {eth_obsState}")
-            self.logger.debug(f"Packet Validation obsState after Scan: {pv_obsState}")
-            self.logger.debug(f"WIB obsState after Scan: {wib_obsState}")
+            self.logger.debug(f"allbands {fhs_vcc_idx} obsState after Scan: {all_bands_obsState}")
+            self.logger.debug(f"Ethernet {fhs_vcc_idx} obsState after Scan: {eth_obsState}")
+            self.logger.debug(f"Packet Validation {fhs_vcc_idx} obsState after Scan: {pv_obsState}")
+            self.logger.debug(f"WIB {fhs_vcc_idx} obsState after Scan: {wib_obsState}")
 
             self.logger.info(f"Scan completed successfully for FHS-VCC {fhs_vcc_idx}.")
 
