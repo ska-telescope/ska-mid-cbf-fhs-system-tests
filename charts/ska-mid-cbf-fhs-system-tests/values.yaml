@@ -52,6 +52,7 @@ ska-mid-cbf-fhs-vcc:
     bitstreamId: agilex-vcc
     bitstreamVersion: 0.0.11
     bitstreamPath: /app/mnt/bitstream
+    gitlab_bitstream_url_override: "https://gitlab.com/ska-telescope/ska-mid-cbf-bitstreams/-/archive/cip-3104-injections/ska-mid-cbf-bitstreams-cip-3104-injections.tar.gz?path=raw/ska-mid-cbf-agilex-vcc"
   
   properties:
     - name: deviceId
@@ -106,14 +107,14 @@ ska-mid-cbf-emulators:
     app_label: ska-mid-cbf-fhs-system-tests
     image:
       repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-emulator
-      tag: 0.5.3
+      tag: 0.5.4
       pullPolicy: Always
     verbosity: 3
   injector:
     app_label: ska-mid-cbf-fhs-system-tests
     image:
       repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-injector
-      tag: 0.5.3
+      tag: 0.5.4
       pullPolicy: Always
   
   emulators:

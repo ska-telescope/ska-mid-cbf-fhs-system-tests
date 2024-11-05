@@ -78,8 +78,8 @@ HELM_INTERNAL_REPO=https://${CAR_REGISTRY}/repository/helm-internal
 
 
 # uncomment to force a specific hash & override the automatic hash lookup (e.g. for testing a commit to a non-main branch)
-# FHS_VCC_HASH_VERSION = "0.0.2-dev.c009cb50f"
-# EMULATORS_HASH_VERSION = "0.5.3-dev.c15f99f96"
+FHS_VCC_HASH_VERSION = "0.0.2-dev.c8689dac5"
+EMULATORS_HASH_VERSION = "0.5.4-dev.ccd87526a"
 
 # Use Gitlab API to extract latest tags and builds from the main branch for the various repositories, to extract the hash versions
 FHS_VCC_HELM_REPO=https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
@@ -138,7 +138,7 @@ ifneq (,$(wildcard $(VALUES)))
 	K8S_CHART_PARAMS += $(foreach f,$(wildcard $(VALUES)),--values $(f))
 endif
 
-PYTEST_MARKER = nightly
+PYTEST_MARKER = all
 
 PYTEST_LOG_LEVEL = INFO
 PYTHON_VARS_AFTER_PYTEST = -m "$(PYTEST_MARKER)" -s --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) -v -rA --no-cov --log-cli-level=$(PYTEST_LOG_LEVEL)
@@ -193,6 +193,16 @@ k8s-pre-install-chart:
 	@if [ "$(MINIKUBE)" = "true" ]; then make check-minikube-eval; fi;
 	rm -f charts/ska-mid-cbf-fhs-system-tests/Chart.lock
 	make update-chart FHS_VCC_HASH_VERSION=$(FHS_VCC_HASH_VERSION) EMULATORS_HASH_VERSION=$(EMULATORS_HASH_VERSION)
+
+k8s-deploy:
+	make k8s-install-chart MINIKUBE=$(MINIKUBE) USE_DEV_BUILD=$(USE_DEV_BUILD) BOOGIE=$(BOOGIE)
+	@echo "Waiting for all pods in namespace $(KUBE_NAMESPACE) to be ready..."
+	@time kubectl wait pod --all --for=condition=Ready --timeout=15m0s --namespace $(KUBE_NAMESPACE)
+
+
+k8s-deploy-dev: MINIKUBE=true
+k8s-deploy-dev:
+	make k8s-deploy MINIKUBE=$(MINIKUBE) USE_DEV_BUILD=true BOOGIE=true
 
 k8s-destroy:
 	make k8s-uninstall-chart
