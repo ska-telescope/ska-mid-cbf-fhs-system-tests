@@ -5,6 +5,7 @@ from typing import Any
 import requests
 from pytango_client_wrapper import PyTangoClientWrapper
 
+
 class DeviceKey(Enum):
     """Enum of device names for mapping to device FQDNs/etc."""
 
@@ -110,15 +111,8 @@ class InjectorAPIService:
 
     @staticmethod
     def send_events_to_ip_block(inject_url: str, fhs_vcc_idx: int, ip_block: EmulatorIPBlockId, events_json: dict):
-        event_groups = {
-            "injector_event_groups": [{
-                "emulator_id": get_emulator_id(fhs_vcc_idx),
-                "ip_block_id": ip_block.value,
-                "events": events_json
-            }]
-        }
-        print(event_groups)
+        event_groups = {"injector_event_groups": [{"emulator_id": get_emulator_id(fhs_vcc_idx), "ip_block_id": ip_block.value, "events": events_json}]}
         resp = requests.post(inject_url, json=event_groups)
         if resp.status_code >= 300:
             raise Exception(f"POST: {inject_url} failed: {resp.content}")
-        print(resp.json())
+        return resp.json()

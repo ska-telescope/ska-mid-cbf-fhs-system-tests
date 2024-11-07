@@ -78,8 +78,8 @@ HELM_INTERNAL_REPO=https://${CAR_REGISTRY}/repository/helm-internal
 
 
 # uncomment to force a specific hash & override the automatic hash lookup (e.g. for testing a commit to a non-main branch)
-FHS_VCC_HASH_VERSION = "0.0.2-dev.c718cd437"
-EMULATORS_HASH_VERSION = "0.5.4-dev.ccd87526a"
+FHS_VCC_HASH_VERSION = "0.0.2-dev.c1a028a51"
+# EMULATORS_HASH_VERSION = "0.5.4-dev.ccd87526a"
 
 # Use Gitlab API to extract latest tags and builds from the main branch for the various repositories, to extract the hash versions
 FHS_VCC_HELM_REPO=https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
@@ -138,7 +138,7 @@ ifneq (,$(wildcard $(VALUES)))
 	K8S_CHART_PARAMS += $(foreach f,$(wildcard $(VALUES)),--values $(f))
 endif
 
-PYTEST_MARKER = all
+PYTEST_MARKER = nightly
 
 PYTEST_LOG_LEVEL = INFO
 PYTHON_VARS_AFTER_PYTEST = -m "$(PYTEST_MARKER)" -s --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) -v -rA --no-cov --log-cli-level=$(PYTEST_LOG_LEVEL)

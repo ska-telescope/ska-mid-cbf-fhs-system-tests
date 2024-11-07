@@ -44,53 +44,38 @@ ska-mid-cbf-fhs-vcc:
       tag: 0.0.2-dev.ce8dc774e
       pullPolicy: Always
       
-  lowLevel:
-    bitstreamEmulatorConfigPath: "emulators/config.json"
-    emulatorBaseUrl: "ska-mid-cbf-fhs-system-tests.svc.cluster.local:5001"
-    firmwareRegistry: https://artefact.skao.int/repository/raw-internal
-    firmwareImage: ska-mid-cbf-agilex-vcc
-    bitstreamId: agilex-vcc
-    bitstreamVersion: 0.0.11
-    bitstreamPath: /app/mnt/bitstream
-    gitlab_bitstream_url_override: "https://gitlab.com/ska-telescope/ska-mid-cbf-bitstreams/-/archive/cip-3104-injections/ska-mid-cbf-bitstreams-cip-3104-injections.tar.gz?path=raw/ska-mid-cbf-agilex-vcc"
-  
+  gitlab_bitstream_url_override: "https://gitlab.com/ska-telescope/ska-mid-cbf-bitstreams/-/archive/cip-3104-injections/ska-mid-cbf-bitstreams-cip-3104-injections.tar.gz?path=raw/ska-mid-cbf-agilex-vcc"
+ 
+  bitstreamMountPath: "/app/mnt/bitstream"
+
   properties:
-    - name: deviceId
-    - name: deviceVersionNum
-      default: "0.0.2"
-    - name: deviceGitlabHash
-      default: "0"
-    - name: configLocation
-      default: "/app/mnt/lowLevelConfigMap"
-    - name: simulationMode
-      default: "0"
-    - name: emulationMode
-      default: "1"
-    - name: emulatorIpBlockId
-    - name: emulatorId
-    - name: firmwareIpBlockId
-    - name: healthMonitorPollInterval
-      default: "3"
+    deviceId: ""
+    deviceVersionNum: "0.0.2"
+    deviceGitlabHash: "0"
+    simulationMode: "0"
+    emulationMode: "1"
+    emulatorBaseUrl: "ska-mid-cbf-fhs-system-tests.svc.cluster.local:5001"
+    bitstreamPath: "/app/mnt/bitstream"
+    bitstreamId: "agilex-vcc"
+    bitstreamVersion: "0.0.11"
+    emulatorId: "fhs-vcc-emulator-<deviceId>"
+    emulatorIpBlockId: ""
+    firmwareIpBlockId: ""
+    healthMonitorPollInterval: "3"
 
   instances:
     - name: fhs-vcc-1
       deviceId: "1"
-      emulatorId: "fhs-vcc-emulator-1"
     - name: fhs-vcc-2
       deviceId: "2"
-      emulatorId: "fhs-vcc-emulator-2"
     - name: fhs-vcc-3
       deviceId: "3"
-      emulatorId: "fhs-vcc-emulator-3"
     - name: fhs-vcc-4
       deviceId: "4"
-      emulatorId: "fhs-vcc-emulator-4"
     - name: fhs-vcc-5
       deviceId: "5"
-      emulatorId: "fhs-vcc-emulator-5"
     - name: fhs-vcc-6
       deviceId: "6"
-      emulatorId: "fhs-vcc-emulator-6"
 
 
 ska-mid-cbf-fhs-vcc-boogie:
