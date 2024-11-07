@@ -410,12 +410,12 @@ class TestScanSequence(BaseTangoTestClass):
         assert wib_ready
 
         self.logger.info(f"EndScan completed successfully for FHS-VCC {fhs_vcc_idx}.")
-    
+
     def run_abort_and_assert_success(self, fhs_vcc_idx: int) -> Any:
 
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
         all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
-        
+
         all_bands_opState = all_bands_proxy.read_attribute("State")
         all_bands_obsState = all_bands_proxy.read_attribute("obsState")
         all_bands_lrcQ = all_bands_proxy.read_attribute("longRunningCommandsInQueue")
@@ -426,7 +426,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.logger.debug(f"allbands LRC in Q before AbortCommands: {all_bands_lrcQ}")
         self.logger.debug(f"allbands LRC in Prog before AbortCommands: {all_bands_lrcP}")
 
-        abort_result = all_bands_proxy.command_read_write("AbortCommands")
+        all_bands_proxy.command_read_write("AbortCommands")
 
         assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
             device_name=all_bands_fqdn,
@@ -440,7 +440,7 @@ class TestScanSequence(BaseTangoTestClass):
                 attribute_name="obsState",
                 attribute_value=ObsState.READY,
             )
-        
+
         assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
             device_name=all_bands_fqdn,
             attribute_name="longRunningCommandsInQueue",
@@ -462,7 +462,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.logger.debug(f"allbands obsState after AbortCommands: {all_bands_obsState}")
         self.logger.debug(f"allbands LRC in Q after AbortCommands: {all_bands_lrcQ}")
         self.logger.debug(f"allbands LRC in Prog after AbortCommands: {all_bands_lrcP}")
-        
+
         self.logger.info(f"AbortCommands completed successfully for FHS-VCC {fhs_vcc_idx}.")
 
     def run_go_to_idle_and_assert_success(self, fhs_vcc_idx: int) -> Any:
@@ -536,9 +536,8 @@ class TestScanSequence(BaseTangoTestClass):
         self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
-    
-    @pytest.mark.dev
-    @pytest.mark.parametrize("initialize_with_indices", [1], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+
+    @pytest.mark.parametrize("initialize_with_indices", [3, 6, 1], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_abort_mid_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
