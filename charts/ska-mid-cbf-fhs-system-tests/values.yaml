@@ -69,6 +69,8 @@ ska-mid-cbf-fhs-vcc:
     - name: emulatorIpBlockId
     - name: emulatorId
     - name: firmwareIpBlockId
+    - name: healthMonitorPollInterval
+      default: "3"
 
   instances:
     - name: fhs-vcc-1

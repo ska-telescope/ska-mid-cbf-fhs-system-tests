@@ -8,8 +8,9 @@ from assertpy import assert_that
 from base_tango_test_class import BaseTangoTestClass
 from connection_utils import DeviceKey, EmulatorAPIService, EmulatorIPBlockId, InjectorAPIService
 from scan_utils import frequency_band_map
-from ska_tango_base.control_model import AdminMode, CommunicationStatus, ObsState
+from ska_tango_base.control_model import AdminMode, CommunicationStatus, HealthState, ObsState
 from tango import DevState
+
 
 
 @pytest.mark.H1
@@ -967,23 +968,17 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
     
-    @pytest.mark.dev
-    @pytest.mark.parametrize("initialize_with_indices", [3], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [2, 3, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_inject_fault_then_reconfigure_success(self, initialize_with_indices, inject_url, reset_wib_dish_id) -> None:
         # 0. Initial setup
 
         fhs_vcc_idx = self.loaded_idxs[0]
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+        all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
 
         # Ensure emulators are reset before starting
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
-        with open("test_parameters/injection_change_dish_id_1.json") as ejf:
-            ej = json.loads(ejf.read())
-
-        InjectorAPIService.send_events_to_ip_block(inject_url, fhs_vcc_idx, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, ej)
-
-        return
         all_bands_state = all_bands_proxy.read_attribute("State")
         all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
 
@@ -994,23 +989,54 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.ONLINE)
 
-        # 2. Run ConfigureScan()
+        # 2. Run first ConfigureScan()
 
         self.run_configure_scan_and_assert_success(fhs_vcc_idx, "test_parameters/configure_scan_valid_1.json")
 
-        # 3. Run Scan()
+        # 3. Run first Scan()
 
         self.run_scan_and_assert_success(fhs_vcc_idx)
 
-        # 4. Run EndScan()
+        # 4. Inject new dish ID to the WIB to cause FAILED health state
+
+        with open("test_parameters/injection_change_dish_id_1.json") as event_json_file:
+            event_json = json.loads(event_json_file.read())
+
+        InjectorAPIService.send_events_to_ip_block(inject_url, fhs_vcc_idx, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, event_json)
+        
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="healthState",
+            attribute_value=HealthState.FAILED,
+        )
+
+        # 5. Run first EndScan()
+        
+        self.run_end_scan_and_assert_success(fhs_vcc_idx)
+        
+        # 6. Run second ConfigureScan() to match injected dish ID
+
+        self.run_configure_scan_and_assert_success(fhs_vcc_idx, "test_parameters/configure_scan_valid_1_changed_dish_id.json")
+
+        # 7. Run second Scan(), should now be in health state OK
+
+        self.run_scan_and_assert_success(fhs_vcc_idx)
+        
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="healthState",
+            attribute_value=HealthState.OK,
+        )
+
+        # 8. Run second EndScan()
 
         self.run_end_scan_and_assert_success(fhs_vcc_idx)
 
-        # 5. Run GoToIdle()
+        # 9. Run GoToIdle()
 
         self.run_go_to_idle_and_assert_success(fhs_vcc_idx)
 
-        # 6. Set AdminMode.OFFLINE
+        # 10. Set AdminMode.OFFLINE
 
         self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
 
