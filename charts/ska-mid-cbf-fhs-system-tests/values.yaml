@@ -44,8 +44,6 @@ ska-mid-cbf-fhs-vcc:
       tag: 0.0.2-dev.ce8dc774e
       pullPolicy: Always
       
-  gitlab_bitstream_url_override: "https://gitlab.com/ska-telescope/ska-mid-cbf-bitstreams/-/archive/cip-3104-injections/ska-mid-cbf-bitstreams-cip-3104-injections.tar.gz?path=raw/ska-mid-cbf-agilex-vcc"
- 
   bitstreamMountPath: "/app/mnt/bitstream"
 
   properties:
@@ -55,15 +53,15 @@ ska-mid-cbf-fhs-vcc:
     simulationMode: "0"
     emulationMode: "1"
     emulatorBaseUrl: "ska-mid-cbf-fhs-system-tests.svc.cluster.local:5001"
-    bitstreamPath: "/app/mnt/bitstream"
+    bitstreamPath: &bitstreamPath "/app/mnt/bitstream"
     bitstreamId: "agilex-vcc"
-    bitstreamVersion: "0.0.11"
-    emulatorId: "fhs-vcc-emulator-<deviceId>"
+    bitstreamVersion: "0.0.12"
+    emulatorId: &emulatorId "fhs-vcc-emulator-<deviceId>"
     emulatorIpBlockId: ""
     firmwareIpBlockId: ""
     healthMonitorPollInterval: "3"
 
-  instances:
+  instances: &deviceInstances
     - name: fhs-vcc-1
       deviceId: "1"
     - name: fhs-vcc-2
@@ -103,26 +101,14 @@ ska-mid-cbf-emulators:
       repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-injector
       tag: 0.5.4
       pullPolicy: Always
-  
-  emulators:
-    - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.11
-      deployment_id: fhs-vcc-emulator-1
-    - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.11
-      deployment_id: fhs-vcc-emulator-2
-    - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.11
-      deployment_id: fhs-vcc-emulator-3
-    - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.11
-      deployment_id: fhs-vcc-emulator-4
-    - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.11
-      deployment_id: fhs-vcc-emulator-5
-    - bitstream_emulator_id: agilex-vcc
-      bitstream_emulator_ver: 0.0.11
-      deployment_id: fhs-vcc-emulator-6
 
+  properties:
+    bitstreamPath: *bitstreamPath
+    bitstreamId: "agilex-vcc"
+    bitstreamVersion: "0.0.12"
+    emulatorId: *emulatorId
+
+  instances: *deviceInstances
+  
   rabbitmq:
     host: rabbitmq-service.ska-mid-cbf-fhs-system-tests.svc.cluster.local
