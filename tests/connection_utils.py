@@ -53,9 +53,13 @@ def create_proxy(fhs_vcc_idx: int, fqdn_key: DeviceKey) -> PyTangoClientWrapper:
     return proxy
 
 
+def get_emulator_id(fhs_vcc_idx: int) -> str:
+    return f"fhs-vcc-emulator-{fhs_vcc_idx}"
+
+
 def get_emulator_url(fhs_vcc_idx: int, emulator_base_url: str) -> str:
     """Get the emulator URL for a given device index and base URL."""
-    return f"fhs-vcc-emulator-{fhs_vcc_idx}.{emulator_base_url}"
+    return f"{get_emulator_id(fhs_vcc_idx)}.{emulator_base_url}"
 
 
 class EmulatorAPIService:
@@ -100,3 +104,15 @@ class EmulatorAPIService:
             if time.time() > start_time + timeout_sec:
                 return got_state, False
             time.sleep(poll_interval_sec)
+
+
+class InjectorAPIService:
+    """Service containing methods for interacting with the injector API."""
+
+    @staticmethod
+    def send_events_to_ip_block(inject_url: str, fhs_vcc_idx: int, ip_block: EmulatorIPBlockId, events_json: dict):
+        event_groups = {"injector_event_groups": [{"emulator_id": get_emulator_id(fhs_vcc_idx), "ip_block_id": ip_block.value, "events": events_json}]}
+        resp = requests.post(inject_url, json=event_groups)
+        if resp.status_code >= 300:
+            raise Exception(f"POST: {inject_url} failed: {resp.content}")
+        return resp.json()

@@ -1,7 +1,7 @@
 {
   "config_id": "4",
   "expected_dish_id": "MKT001",
-  "dish_sample_rate": 5654866770,
+  "dish_sample_rate": 3960000000,
   "samples_per_frame": 18,
   "vcc_gain": [
     1,

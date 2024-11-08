@@ -1,14 +1,15 @@
 import json
 import random
+import time
 from typing import Any
 
 import numpy as np
 import pytest
 from assertpy import assert_that
 from base_tango_test_class import BaseTangoTestClass
-from connection_utils import DeviceKey, EmulatorAPIService, EmulatorIPBlockId
+from connection_utils import DeviceKey, EmulatorAPIService, EmulatorIPBlockId, InjectorAPIService
 from scan_utils import frequency_band_map
-from ska_tango_base.control_model import AdminMode, CommunicationStatus, ObsState
+from ska_tango_base.control_model import AdminMode, CommunicationStatus, HealthState, ObsState
 from tango import DevState
 
 
@@ -24,11 +25,23 @@ class TestScanSequence(BaseTangoTestClass):
         for fhs_vcc_idx in self.loaded_idxs:
             self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx].command_read_write("Init")
 
+    @pytest.fixture()
+    def reset_wib_dish_id(self, initialize_with_indices, inject_url) -> None:
+        with open("test_parameters/injection_reset_dish_id_1.json") as reset_event_json_file:
+            reset_event_json = json.loads(reset_event_json_file.read())
+        for fhs_vcc_idx in self.loaded_idxs:
+            InjectorAPIService.send_events_to_ip_block(inject_url, fhs_vcc_idx, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, reset_event_json)
+        yield
+        for fhs_vcc_idx in self.loaded_idxs:
+            InjectorAPIService.send_events_to_ip_block(inject_url, fhs_vcc_idx, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, reset_event_json)
+
     def post_initialize(self) -> None:
         for i in self.loaded_idxs:
             self.event_tracer.subscribe_event(self.fqdns[DeviceKey.ETHERNET][i], "obsState")
             self.event_tracer.subscribe_event(self.fqdns[DeviceKey.PACKET_VALIDATION][i], "obsState")
             self.event_tracer.subscribe_event(self.fqdns[DeviceKey.WIDEBAND_INPUT_BUFFER][i], "obsState")
+            self.event_tracer.subscribe_event(self.fqdns[DeviceKey.ALL_BANDS][i], "longRunningCommandsInQueue")
+            self.event_tracer.subscribe_event(self.fqdns[DeviceKey.ALL_BANDS][i], "longRunningCommandInProgress")
 
     def reset_emulators_and_assert_successful(self, fhs_vcc_idx: int) -> None:
         emulator_url = self.emulator_urls[fhs_vcc_idx]
@@ -93,7 +106,7 @@ class TestScanSequence(BaseTangoTestClass):
 
     def run_configure_scan(self, fhs_vcc_idx: int, config_str: str) -> Any:
         configure_scan_result = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx].command_read_write("ConfigureScan", config_str)
-        self.logger.debug(f"configure scan result: {configure_scan_result[1][0]}")
+        self.logger.debug(f"configure scan result: {configure_scan_result}")
 
         return configure_scan_result
 
@@ -235,6 +248,12 @@ class TestScanSequence(BaseTangoTestClass):
                 attribute_name="longRunningCommandResult",
                 custom_matcher=lambda event: event.attribute_value[1].strip("[]").split(",")[0].strip() == f"{expected_code}",
             )
+
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="obsState",
+            attribute_value=ObsState.IDLE,
+        )
 
         all_bands_obsState = all_bands_proxy.read_attribute("obsState")
         all_bands_frequencyBand_after = all_bands_proxy.read_attribute("frequencyBand")
@@ -392,6 +411,60 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.logger.info(f"EndScan completed successfully for FHS-VCC {fhs_vcc_idx}.")
 
+    def run_abort_and_assert_success(self, fhs_vcc_idx: int) -> Any:
+
+        all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+        all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+
+        all_bands_opState = all_bands_proxy.read_attribute("State")
+        all_bands_obsState = all_bands_proxy.read_attribute("obsState")
+        all_bands_lrcQ = all_bands_proxy.read_attribute("longRunningCommandsInQueue")
+        all_bands_lrcP = all_bands_proxy.read_attribute("longRunningCommandInProgress")
+
+        self.logger.debug(f"allbands opState before AbortCommands: {all_bands_opState}")
+        self.logger.debug(f"allbands obsState before AbortCommands: {all_bands_obsState}")
+        self.logger.debug(f"allbands LRC in Q before AbortCommands: {all_bands_lrcQ}")
+        self.logger.debug(f"allbands LRC in Prog before AbortCommands: {all_bands_lrcP}")
+
+        all_bands_proxy.command_read_write("AbortCommands")
+
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="obsState",
+            attribute_value=ObsState.ABORTED,
+        )
+
+        for device_key in [DeviceKey.ALL_BANDS, DeviceKey.ETHERNET, DeviceKey.PACKET_VALIDATION, DeviceKey.WIDEBAND_INPUT_BUFFER]:
+            assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+                device_name=self.fqdns[device_key][fhs_vcc_idx],
+                attribute_name="obsState",
+                attribute_value=ObsState.READY,
+            )
+
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="longRunningCommandsInQueue",
+            attribute_value=(),
+        )
+
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="longRunningCommandInProgress",
+            attribute_value=(),
+        )
+
+        all_bands_opState = all_bands_proxy.read_attribute("State")
+        all_bands_obsState = all_bands_proxy.read_attribute("obsState")
+        all_bands_lrcQ = all_bands_proxy.read_attribute("longRunningCommandsInQueue")
+        all_bands_lrcP = all_bands_proxy.read_attribute("longRunningCommandInProgress")
+
+        self.logger.debug(f"allbands opState after AbortCommands: {all_bands_opState}")
+        self.logger.debug(f"allbands obsState after AbortCommands: {all_bands_obsState}")
+        self.logger.debug(f"allbands LRC in Q after AbortCommands: {all_bands_lrcQ}")
+        self.logger.debug(f"allbands LRC in Prog after AbortCommands: {all_bands_lrcP}")
+
+        self.logger.info(f"AbortCommands completed successfully for FHS-VCC {fhs_vcc_idx}.")
+
     def run_go_to_idle_and_assert_success(self, fhs_vcc_idx: int) -> Any:
 
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
@@ -459,6 +532,44 @@ class TestScanSequence(BaseTangoTestClass):
         self.run_go_to_idle_and_assert_success(fhs_vcc_idx)
 
         # 6. Set AdminMode.OFFLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
+
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+    @pytest.mark.parametrize("initialize_with_indices", [3, 6, 1], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_scan_sequence_abort_mid_scan_success(self, initialize_with_indices) -> None:
+        # 0. Initial setup
+
+        fhs_vcc_idx = self.loaded_idxs[0]
+        all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+
+        # Ensure emulators are reset before starting
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+        all_bands_state = all_bands_proxy.read_attribute("State")
+        all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
+
+        self.logger.debug(f"allbands initial OpState: {all_bands_state}")
+        self.logger.debug(f"allbands initial AdminMode: {all_bands_adminMode}")
+
+        # 1. Set AdminMode.ONLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.ONLINE)
+
+        # 2. Run ConfigureScan()
+
+        self.run_configure_scan_and_assert_success(fhs_vcc_idx, "test_parameters/configure_scan_valid_1.json")
+
+        # 3. Run Scan()
+
+        self.run_scan_and_assert_success(fhs_vcc_idx)
+
+        # 4. Run AbortCommands()
+
+        self.run_abort_and_assert_success(fhs_vcc_idx)
+
+        # 5. Set AdminMode.OFFLINE
 
         self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
 
@@ -805,6 +916,52 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
+    @pytest.mark.parametrize("initialize_with_indices", [2, 5, 1], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_scan_sequence_invalid_config_then_reconfigure_with_valid_config_single_scan_success(self, initialize_with_indices) -> None:
+        # 0. Initial setup
+
+        fhs_vcc_idx = self.loaded_idxs[0]
+        all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+
+        # Ensure emulators are reset before starting
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+        all_bands_state = all_bands_proxy.read_attribute("State")
+        all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
+
+        self.logger.debug(f"allbands initial OpState: {all_bands_state}")
+        self.logger.debug(f"allbands initial AdminMode: {all_bands_adminMode}")
+
+        # 1. Set AdminMode.ONLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.ONLINE)
+
+        # 2. Run first ConfigureScan()
+
+        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_invalid_schema_mismatch.json")
+        time.sleep(10)
+        # 3. Run second ConfigureScan()
+
+        self.run_configure_scan_and_assert_success(fhs_vcc_idx, "test_parameters/configure_scan_valid_1.json")
+
+        # 4. Run Scan()
+
+        self.run_scan_and_assert_success(fhs_vcc_idx)
+
+        # 5. Run EndScan()
+
+        self.run_end_scan_and_assert_success(fhs_vcc_idx)
+
+        # 6. Run GoToIdle()
+
+        self.run_go_to_idle_and_assert_success(fhs_vcc_idx)
+
+        # 7. Set AdminMode.OFFLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
+
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
     @pytest.mark.parametrize("initialize_with_indices", [1, 3, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_commands_out_of_order_error(self, initialize_with_indices) -> None:
         # 0. Initial setup
@@ -846,6 +1003,136 @@ class TestScanSequence(BaseTangoTestClass):
         self.run_go_to_idle_and_assert_success(fhs_vcc_idx)
 
         # 7. Set AdminMode.OFFLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
+
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+    @pytest.mark.parametrize("initialize_with_indices", [5, 1, 4], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_scan_sequence_inject_bad_dish_id_sets_health_state_failed(self, initialize_with_indices, inject_url, reset_wib_dish_id) -> None:
+        # 0. Initial setup
+
+        fhs_vcc_idx = self.loaded_idxs[0]
+        all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+        all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+
+        # Ensure emulators are reset before starting
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+        all_bands_state = all_bands_proxy.read_attribute("State")
+        all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
+
+        self.logger.debug(f"allbands initial OpState: {all_bands_state}")
+        self.logger.debug(f"allbands initial AdminMode: {all_bands_adminMode}")
+
+        # 1. Set AdminMode.ONLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.ONLINE)
+
+        # 2. Run ConfigureScan()
+
+        self.run_configure_scan_and_assert_success(fhs_vcc_idx, "test_parameters/configure_scan_valid_1.json")
+
+        # 3. Run Scan()
+
+        self.run_scan_and_assert_success(fhs_vcc_idx)
+
+        # 4. Inject new dish ID to the WIB to cause FAILED health state
+
+        with open("test_parameters/injection_change_dish_id_1.json") as event_json_file:
+            event_json = json.loads(event_json_file.read())
+
+        InjectorAPIService.send_events_to_ip_block(inject_url, fhs_vcc_idx, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, event_json)
+
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="healthState",
+            attribute_value=HealthState.FAILED,
+        )
+
+        # 5. Run EndScan()
+
+        self.run_end_scan_and_assert_success(fhs_vcc_idx)
+
+        # 6. Run GoToIdle()
+
+        self.run_go_to_idle_and_assert_success(fhs_vcc_idx)
+
+        # 7. Set AdminMode.OFFLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
+
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+    @pytest.mark.parametrize("initialize_with_indices", [2, 3, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_scan_sequence_inject_fault_then_reconfigure_success(self, initialize_with_indices, inject_url, reset_wib_dish_id) -> None:
+        # 0. Initial setup
+
+        fhs_vcc_idx = self.loaded_idxs[0]
+        all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+        all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+
+        # Ensure emulators are reset before starting
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+        all_bands_state = all_bands_proxy.read_attribute("State")
+        all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
+
+        self.logger.debug(f"allbands initial OpState: {all_bands_state}")
+        self.logger.debug(f"allbands initial AdminMode: {all_bands_adminMode}")
+
+        # 1. Set AdminMode.ONLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.ONLINE)
+
+        # 2. Run first ConfigureScan()
+
+        self.run_configure_scan_and_assert_success(fhs_vcc_idx, "test_parameters/configure_scan_valid_1.json")
+
+        # 3. Run first Scan()
+
+        self.run_scan_and_assert_success(fhs_vcc_idx)
+
+        # 4. Inject new dish ID to the WIB to cause FAILED health state
+
+        with open("test_parameters/injection_change_dish_id_1.json") as event_json_file:
+            event_json = json.loads(event_json_file.read())
+
+        InjectorAPIService.send_events_to_ip_block(inject_url, fhs_vcc_idx, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, event_json)
+
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="healthState",
+            attribute_value=HealthState.FAILED,
+        )
+
+        # 5. Run first EndScan()
+
+        self.run_end_scan_and_assert_success(fhs_vcc_idx)
+
+        # 6. Run second ConfigureScan() to match injected dish ID
+
+        self.run_configure_scan_and_assert_success(fhs_vcc_idx, "test_parameters/configure_scan_valid_1_changed_dish_id.json")
+
+        # 7. Run second Scan(), should now be in health state OK
+
+        self.run_scan_and_assert_success(fhs_vcc_idx)
+
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="healthState",
+            attribute_value=HealthState.OK,
+        )
+
+        # 8. Run second EndScan()
+
+        self.run_end_scan_and_assert_success(fhs_vcc_idx)
+
+        # 9. Run GoToIdle()
+
+        self.run_go_to_idle_and_assert_success(fhs_vcc_idx)
+
+        # 10. Set AdminMode.OFFLINE
 
         self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
 

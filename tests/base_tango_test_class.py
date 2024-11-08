@@ -28,6 +28,7 @@ class BaseTangoTestClass:
             self.event_tracer.subscribe_event(all_bands_fqdn, "state")
             self.event_tracer.subscribe_event(all_bands_fqdn, "obsState")
             self.event_tracer.subscribe_event(all_bands_fqdn, "communicationState")
+            self.event_tracer.subscribe_event(all_bands_fqdn, "healthState")
 
         self.post_initialize()
 

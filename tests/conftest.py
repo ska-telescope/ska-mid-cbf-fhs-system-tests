@@ -67,6 +67,11 @@ def emulator_base_url(namespace: str, cluster_domain: str) -> str:
 
 
 @pytest.fixture(scope="session")
+def inject_url(namespace: str, cluster_domain: str) -> str:
+    return f"http://injector-service.{namespace}.svc.{cluster_domain}:5002/inject"
+
+
+@pytest.fixture(scope="session")
 def tango_host(request) -> str:
     return request.config.getoption("--tango_host")
 
