@@ -495,6 +495,49 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.logger.info(f"GoToIdle completed successfully for FHS-VCC {fhs_vcc_idx}.")
 
+    def run_obsreset_and_assert_success(self, fhs_vcc_idx: int) -> Any:
+
+        all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+        all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+        emulator_url = self.emulator_urls[fhs_vcc_idx]
+
+        obsreset_result = all_bands_proxy.command_read_write("ObsReset")
+
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="longRunningCommandResult",
+            attribute_value=(
+                f"{obsreset_result[1][0]}",
+                '[0, "ObsReset completed OK"]',
+            ),
+        )
+
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="obsState",
+            attribute_value=ObsState.IDLE,
+        )
+        
+        eth_state, eth_reset = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.ETHERNET_200G, "RESET")
+        pv_state, pv_reset = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.PACKET_VALIDATION, "RESET")
+        wib_state, wib_ready = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, "READY")
+
+        self.logger.debug(f"eth state after ObsReset: {eth_state}")
+        self.logger.debug(f"pv state after ObsReset: {pv_state}")
+        self.logger.debug(f"wib state after ObsReset: {wib_state}")
+
+        assert eth_reset
+        assert pv_reset
+        assert wib_ready
+
+        all_bands_opState = all_bands_proxy.read_attribute("State")
+        all_bands_obsState = all_bands_proxy.read_attribute("obsState")
+
+        self.logger.debug(f"allbands opState after GoToIdle: {all_bands_opState}")
+        self.logger.debug(f"allbands obsState after GoToIdle: {all_bands_obsState}")
+
+        self.logger.info(f"ObsReset completed successfully for FHS-VCC {fhs_vcc_idx}.")
+
     @pytest.mark.parametrize("initialize_with_indices", [1, 3, 5], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_valid_config_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
@@ -575,6 +618,48 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
+    @pytest.mark.parametrize("initialize_with_indices", [5, 2, 4], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_scan_sequence_obsreset_from_aborted_success(self, initialize_with_indices) -> None:
+        # 0. Initial setup
+
+        fhs_vcc_idx = self.loaded_idxs[0]
+        all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+
+        # Ensure emulators are reset before starting
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+        all_bands_state = all_bands_proxy.read_attribute("State")
+        all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
+
+        self.logger.debug(f"allbands initial OpState: {all_bands_state}")
+        self.logger.debug(f"allbands initial AdminMode: {all_bands_adminMode}")
+
+        # 1. Set AdminMode.ONLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.ONLINE)
+
+        # 2. Run ConfigureScan()
+
+        self.run_configure_scan_and_assert_success(fhs_vcc_idx, "test_parameters/configure_scan_valid_1.json")
+
+        # 3. Run Scan()
+
+        self.run_scan_and_assert_success(fhs_vcc_idx)
+
+        # 4. Run AbortCommands()
+
+        self.run_abort_and_assert_success(fhs_vcc_idx)
+
+        # 5. Run ObsReset()
+
+        self.run_obsreset_and_assert_success(fhs_vcc_idx)
+
+        # 6. Set AdminMode.OFFLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
+
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+    
     @pytest.mark.parametrize("initialize_with_indices", [2, 4, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_valid_config_two_scans_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
