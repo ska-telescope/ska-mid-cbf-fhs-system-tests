@@ -517,7 +517,7 @@ class TestScanSequence(BaseTangoTestClass):
             attribute_name="obsState",
             attribute_value=ObsState.IDLE,
         )
-        
+
         eth_state, eth_reset = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.ETHERNET_200G, "RESET")
         pv_state, pv_reset = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.PACKET_VALIDATION, "RESET")
         wib_state, wib_ready = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, "READY")
@@ -659,7 +659,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
-    
+
     @pytest.mark.parametrize("initialize_with_indices", [2, 4, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_valid_config_two_scans_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
