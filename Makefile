@@ -78,8 +78,8 @@ HELM_INTERNAL_REPO=https://${CAR_REGISTRY}/repository/helm-internal
 
 
 # uncomment to force a specific hash & override the automatic hash lookup (e.g. for testing a commit to a non-main branch)
-# FHS_VCC_HASH_VERSION = "0.0.2-dev.c5d2f7b23"
-# EMULATORS_HASH_VERSION = "0.5.4-dev.c872ddf84"
+# FHS_VCC_HASH_VERSION = "0.1.0-dev.cc5d87970"
+# EMULATORS_HASH_VERSION = "0.6.0-dev.c66fe6b8d"
 
 # Use Gitlab API to extract latest tags and builds from the main branch for the various repositories, to extract the hash versions
 FHS_VCC_HELM_REPO=https://gitlab.com/api/v4/projects/58443798/packages/helm/dev

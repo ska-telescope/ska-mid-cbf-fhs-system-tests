@@ -41,14 +41,14 @@ ska-mid-cbf-fhs-vcc:
     image:
       registry: registry.gitlab.com/ska-telescope/ska-mid-cbf-fhs-vcc
       image: ska-mid-cbf-fhs-vcc
-      tag: 0.0.2-dev.ce8dc774e
+      tag: 0.1.0-dev.cc5d87970
       pullPolicy: Always
       
   bitstreamMountPath: "/app/mnt/bitstream"
 
   properties:
     deviceId: ""
-    deviceVersionNum: "0.0.2"
+    deviceVersionNum: "0.1.0"
     deviceGitlabHash: "0"
     simulationMode: "0"
     emulationMode: "1"
@@ -83,7 +83,7 @@ ska-mid-cbf-fhs-vcc-boogie:
   image:
     repository: docker.io/library
     image: ska-mid-cbf-fhs-vcc-boogie
-    tag: 0.0.2
+    tag: 0.1.0
     pullPolicy: IfNotPresent
 
 ska-mid-cbf-emulators:
@@ -92,14 +92,14 @@ ska-mid-cbf-emulators:
     app_label: ska-mid-cbf-fhs-system-tests
     image:
       repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-emulator
-      tag: 0.5.4
+      tag: 0.6.0
       pullPolicy: Always
     verbosity: 3
   injector:
     app_label: ska-mid-cbf-fhs-system-tests
     image:
       repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-injector
-      tag: 0.5.4
+      tag: 0.6.0
       pullPolicy: Always
 
   properties:
