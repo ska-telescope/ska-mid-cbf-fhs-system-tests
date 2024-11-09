@@ -2,8 +2,8 @@ apiVersion: v2
 name: ska-mid-cbf-fhs-system-tests
 description: A Helm chart for Kubernetes Mid.CBF FHS H-level tests.
 type: application
-version: 0.0.4
-appVersion: 0.0.4
+version: 0.1.0
+appVersion: 0.1.0
 icon: https://www.skatelescope.org/wp-content/uploads/2016/07/09545_NEW_LOGO_2014.png
 dependencies:
   # Tango
