@@ -4,9 +4,13 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
-0.0.4
+0.1.0
 *****
 * CIP-3105 Split/parallel configuration test
+* CIP-3104 Reconfigure from failure test
+* CIP-2921 HealthState Dish ID failure test
+* CIP-3103 Abort test
+* CIP-3107 ObsReset test
 
 0.0.3
 *****

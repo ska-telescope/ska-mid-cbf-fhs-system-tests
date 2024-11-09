@@ -37,7 +37,7 @@ Other supported levels are `CRITICAL`, `ERROR`, `WARNING`, `INFO`, `DEBUG`.
 
 ---
 
-To test locally with a custom bitstream (i.e. a branch in ska-mid-cbf-bitstreams), add e.g. the following under `ska-mid-cbf-fhs-vcc.lowLevel` in values.yaml:
+To test locally with a custom bitstream (i.e. a branch in ska-mid-cbf-bitstreams), add e.g. the following under `ska-mid-cbf-fhs-vcc` in values.yaml:
 ```yaml
 gitlab_bitstream_url_override: "https://gitlab.com/ska-telescope/ska-mid-cbf-bitstreams/-/archive/cip-2957/ska-mid-cbf-bitstreams-cip-2957.tar.gz?path=raw/ska-mid-cbf-agilex-vcc"
 ```

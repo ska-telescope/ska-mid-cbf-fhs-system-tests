@@ -78,8 +78,8 @@ HELM_INTERNAL_REPO=https://${CAR_REGISTRY}/repository/helm-internal
 
 
 # uncomment to force a specific hash & override the automatic hash lookup (e.g. for testing a commit to a non-main branch)
-# FHS_VCC_HASH_VERSION = "0.0.2-dev.c8ec14460"
-# EMULATORS_HASH_VERSION = "0.5.4-dev.c872ddf84"
+# FHS_VCC_HASH_VERSION = "0.1.0-dev.cc5d87970"
+# EMULATORS_HASH_VERSION = "0.6.0-dev.c66fe6b8d"
 
 # Use Gitlab API to extract latest tags and builds from the main branch for the various repositories, to extract the hash versions
 FHS_VCC_HELM_REPO=https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
@@ -105,7 +105,7 @@ K8S_CHART_PARAMS = --set global.minikube=$(MINIKUBE) \
 	--set global.cluster_domain=$(CLUSTER_DOMAIN) \
 	--set global.operator=$(SKA_TANGO_OPERATOR) \
 	--set ska-mid-cbf-fhs-vcc.hostInfo.clusterDomain=$(CLUSTER_DOMAIN) \
-	--set ska-mid-cbf-fhs-vcc.lowLevel.emulatorBaseUrl="$(KUBE_NAMESPACE).svc.$(CLUSTER_DOMAIN):5001" \
+	--set ska-mid-cbf-fhs-vcc.properties.emulatorBaseUrl="$(KUBE_NAMESPACE).svc.$(CLUSTER_DOMAIN):5001" \
 	--set ska-mid-cbf-fhs-vcc-boogie.enabled=$(BOOGIE) \
 	--set global.labels.app=$(KUBE_APP) \
 	--set ska-mid-cbf-emulators.emulator.labels.app=$(KUBE_APP) \
