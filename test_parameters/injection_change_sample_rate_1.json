@@ -1,0 +1,20 @@
+[
+	{
+		"severity": "GENERAL",
+		"value": {
+			"injection_type": "force_register_value",
+			"register_name": "meta_transport_sample_rate",
+			"register_value": 11891998000
+		},
+		"offset": 0
+	},
+	{
+		"severity": "GENERAL",
+		"value": {
+			"injection_type": "force_register_value",
+			"register_name": "rx_sample_rate",
+			"register_value": 11891998000
+		},
+		"offset": 0
+	}
+]
