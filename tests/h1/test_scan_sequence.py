@@ -1222,3 +1222,59 @@ class TestScanSequence(BaseTangoTestClass):
         self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+    @pytest.mark.parametrize("initialize_with_indices", [5, 1, 4], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_scan_sequence_inject_bad_sample_rate_sets_health_state_failed(self, initialize_with_indices, inject_url, reset_wib_dish_id) -> None:
+        # 0. Initial setup
+
+        fhs_vcc_idx = self.loaded_idxs[0]
+        all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+        all_bands_fqdn = self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx]
+
+        # Ensure emulators are reset before starting
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
+
+        all_bands_state = all_bands_proxy.read_attribute("State")
+        all_bands_adminMode = all_bands_proxy.read_attribute("adminMode")
+
+        self.logger.debug(f"allbands initial OpState: {all_bands_state}")
+        self.logger.debug(f"allbands initial AdminMode: {all_bands_adminMode}")
+
+        # 1. Set AdminMode.ONLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.ONLINE)
+
+        # 2. Run ConfigureScan()
+
+        self.run_configure_scan_and_assert_success(fhs_vcc_idx, "test_parameters/configure_scan_valid_1.json")
+
+        # 3. Run Scan()
+
+        self.run_scan_and_assert_success(fhs_vcc_idx)
+
+        # 4. Inject new dish ID to the WIB to cause FAILED health state
+
+        with open("test_parameters/injection_change_sample_rate_1.json") as event_json_file:
+            event_json = json.loads(event_json_file.read())
+
+        InjectorAPIService.send_events_to_ip_block(inject_url, fhs_vcc_idx, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, event_json)
+
+        assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
+            device_name=all_bands_fqdn,
+            attribute_name="healthState",
+            attribute_value=HealthState.FAILED,
+        )
+
+        # 5. Run EndScan()
+
+        self.run_end_scan_and_assert_success(fhs_vcc_idx)
+
+        # 6. Run GoToIdle()
+
+        self.run_go_to_idle_and_assert_success(fhs_vcc_idx)
+
+        # 7. Set AdminMode.OFFLINE
+
+        self.set_admin_mode_and_assert_change_events_occurred(fhs_vcc_idx, AdminMode.OFFLINE)
+
+        self.reset_emulators_and_assert_successful(fhs_vcc_idx)
