@@ -26,8 +26,8 @@ class TestScanSequence(BaseTangoTestClass):
             self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx].command_read_write("Init")
 
     @pytest.fixture()
-    def reset_wib_dish_id(self, initialize_with_indices, inject_url) -> None:
-        with open("test_parameters/injection_reset_dish_id_1.json") as reset_event_json_file:
+    def reset_wib_registers(self, initialize_with_indices, inject_url) -> None:
+        with open("test_parameters/injection_reset_registers_1.json") as reset_event_json_file:
             reset_event_json = json.loads(reset_event_json_file.read())
         for fhs_vcc_idx in self.loaded_idxs:
             InjectorAPIService.send_events_to_ip_block(inject_url, fhs_vcc_idx, EmulatorIPBlockId.WIDEBAND_INPUT_BUFFER, reset_event_json)
@@ -1094,7 +1094,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
     @pytest.mark.parametrize("initialize_with_indices", [5, 1, 4], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
-    def test_scan_sequence_inject_bad_dish_id_sets_health_state_failed(self, initialize_with_indices, inject_url, reset_wib_dish_id) -> None:
+    def test_scan_sequence_inject_bad_dish_id_sets_health_state_failed(self, initialize_with_indices, inject_url, reset_wib_registers) -> None:
         # 0. Initial setup
 
         fhs_vcc_idx = self.loaded_idxs[0]
@@ -1150,7 +1150,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
     @pytest.mark.parametrize("initialize_with_indices", [2, 3, 6], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
-    def test_scan_sequence_inject_fault_then_reconfigure_success(self, initialize_with_indices, inject_url, reset_wib_dish_id) -> None:
+    def test_scan_sequence_inject_fault_then_reconfigure_success(self, initialize_with_indices, inject_url, reset_wib_registers) -> None:
         # 0. Initial setup
 
         fhs_vcc_idx = self.loaded_idxs[0]
@@ -1224,7 +1224,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
     @pytest.mark.parametrize("initialize_with_indices", [5, 1, 4], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
-    def test_scan_sequence_inject_bad_sample_rate_sets_health_state_failed(self, initialize_with_indices, inject_url, reset_wib_dish_id) -> None:
+    def test_scan_sequence_inject_bad_sample_rate_sets_health_state_failed(self, initialize_with_indices, inject_url, reset_wib_registers) -> None:
         # 0. Initial setup
 
         fhs_vcc_idx = self.loaded_idxs[0]
