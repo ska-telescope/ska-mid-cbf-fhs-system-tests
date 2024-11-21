@@ -78,7 +78,7 @@ HELM_INTERNAL_REPO=https://${CAR_REGISTRY}/repository/helm-internal
 
 
 # uncomment to force a specific hash & override the automatic hash lookup (e.g. for testing a commit to a non-main branch)
-# FHS_VCC_HASH_VERSION = "0.1.0-dev.cc5d87970"
+FHS_VCC_HASH_VERSION = "0.1.0-dev.cabd26286"
 # EMULATORS_HASH_VERSION = "0.6.0-dev.c66fe6b8d"
 
 # Use Gitlab API to extract latest tags and builds from the main branch for the various repositories, to extract the hash versions
@@ -175,6 +175,8 @@ update-chart:
 		echo "Updating Chart.yaml to change ska-mid-cbf-fhs-vcc version to $(FHS_VCC_HASH_VERSION) and repository to $(FHS_VCC_HELM_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").version) = "$(FHS_VCC_HASH_VERSION)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").repository) = "$(FHS_VCC_HELM_REPO)"' $(CHART_FILE); \
+		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").version) = "$(FHS_VCC_HASH_VERSION)"' $(CHART_FILE); \
+		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").repository) = "$(FHS_VCC_HELM_REPO)"' $(CHART_FILE); \
 		echo "Updating Chart.yaml to change ska-mid-cbf-emulators version to $(EMULATORS_HASH_VERSION) and repository to $(EMULATORS_HELM_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").version) = "$(EMULATORS_HASH_VERSION)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").repository) = "$(EMULATORS_HELM_REPO)"' $(CHART_FILE); \
