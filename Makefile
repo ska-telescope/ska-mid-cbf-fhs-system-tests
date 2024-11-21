@@ -175,6 +175,8 @@ update-chart:
 		echo "Updating Chart.yaml to change ska-mid-cbf-fhs-vcc version to $(FHS_VCC_HASH_VERSION) and repository to $(FHS_VCC_HELM_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").version) = "$(FHS_VCC_HASH_VERSION)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").repository) = "$(FHS_VCC_HELM_REPO)"' $(CHART_FILE); \
+		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").version) = "$(FHS_VCC_HASH_VERSION)"' $(CHART_FILE); \
+		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").repository) = "$(FHS_VCC_HELM_REPO)"' $(CHART_FILE); \
 		echo "Updating Chart.yaml to change ska-mid-cbf-emulators version to $(EMULATORS_HASH_VERSION) and repository to $(EMULATORS_HELM_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").version) = "$(EMULATORS_HASH_VERSION)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").repository) = "$(EMULATORS_HELM_REPO)"' $(CHART_FILE); \
