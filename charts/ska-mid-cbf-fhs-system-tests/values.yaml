@@ -79,11 +79,6 @@ ska-mid-cbf-fhs-vcc-boogie:
   enabled: true
   boogie:
     tango_host: databaseds-tango-base:10000
-  image:
-    pullPolicy: IfNotPresent
-    repository: registry.gitlab.com
-    image: ska-telescope/ska-tango-images/ska-tango-images-tango-boogie
-    tag: 0.1.0
 
 ska-mid-cbf-emulators:
   enabled: true
