@@ -121,6 +121,8 @@ DEV_BUILD_PARAMS =  --set ska-mid-cbf-fhs-vcc.midcbf.image.tag=$(FHS_VCC_HASH_VE
 					
 TAG_BUILD_PARAMS =  --set ska-mid-cbf-fhs-vcc.midcbf.image.tag=$(FHS_VCC_LATEST_TAG) \
 					--set ska-mid-cbf-fhs-vcc.midcbf.image.registry=$(CAR_REGISTRY) \
+					--set ska-mid-cbf-fhs-vcc-boogie.image.tag=$(FHS_VCC_LATEST_TAG) \
+					--set ska-mid-cbf-fhs-vcc-boogie.image.registry=$(CAR_REGISTRY) \
 					--set ska-mid-cbf-emulators.emulator.image.tag=$(EMULATORS_LATEST_TAG) \
 					--set ska-mid-cbf-emulators.emulator.image.registry=$(CAR_REGISTRY) \
 					--set ska-mid-cbf-emulators.injector.image.tag=$(EMULATORS_LATEST_TAG) \
@@ -164,6 +166,8 @@ update-chart:
 		echo "Updating Chart.yaml to change ska-mid-cbf-fhs-vcc version to $(FHS_VCC_LATEST_TAG) and repository to $(HELM_INTERNAL_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").version) = "$(FHS_VCC_LATEST_TAG)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc").repository) = "$(HELM_INTERNAL_REPO)"' $(CHART_FILE); \
+		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").version) = "$(FHS_VCC_LATEST_TAG)"' $(CHART_FILE); \
+		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-fhs-vcc-boogie").repository) = "$(HELM_INTERNAL_REPO)"' $(CHART_FILE); \
 		echo "Updating Chart.yaml to change ska-mid-cbf-emulators version to $(EMULATORS_LATEST_TAG) and repository to $(HELM_INTERNAL_REPO)"; \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").version) = "$(EMULATORS_LATEST_TAG)"' $(CHART_FILE); \
 		yq eval -i '(.dependencies[] | select(.name == "ska-mid-cbf-emulators").repository) = "$(HELM_INTERNAL_REPO)"' $(CHART_FILE); \
