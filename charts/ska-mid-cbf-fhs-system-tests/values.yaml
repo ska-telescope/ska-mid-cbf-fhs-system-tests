@@ -4,13 +4,13 @@ xauthority: "~/.Xauthority"
 global:
   minikube: false
   operator: true
-  exposeAllDS: true  # Expose All Tango Services to the external network (enable Loadbalancer service)
+  exposeAllDS: true # Expose All Tango Services to the external network (enable Loadbalancer service)
   annotations:
     app.gitlab.com/app: ska-mid-cbf-fhs-system-tests
     app.gitlab.com/env: ska
   sub-system:
     ska-tango-base:
-      enabled: false  # disabled to prevent deployment conflicts
+      enabled: false # disabled to prevent deployment conflicts
     boogie:
       enabled: false
   retry:
@@ -43,7 +43,7 @@ ska-mid-cbf-fhs-vcc:
       image: ska-mid-cbf-fhs-vcc
       tag: 0.1.0-dev.cc5d87970
       pullPolicy: Always
-      
+
   bitstreamMountPath: "/app/mnt/bitstream"
 
   properties:
@@ -75,16 +75,10 @@ ska-mid-cbf-fhs-vcc:
     - name: fhs-vcc-6
       deviceId: "6"
 
-
 ska-mid-cbf-fhs-vcc-boogie:
-  enabled: false  # TODO figure out boogie deployment/registry
+  enabled: true
   boogie:
     tango_host: databaseds-tango-base:10000
-  image:
-    repository: docker.io/library
-    image: ska-mid-cbf-fhs-vcc-boogie
-    tag: 0.1.0
-    pullPolicy: IfNotPresent
 
 ska-mid-cbf-emulators:
   enabled: true
@@ -109,6 +103,6 @@ ska-mid-cbf-emulators:
     emulatorId: *emulatorId
 
   instances: *deviceInstances
-  
+
   rabbitmq:
     host: rabbitmq-service.ska-mid-cbf-fhs-system-tests.svc.cluster.local
