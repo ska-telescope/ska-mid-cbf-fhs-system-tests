@@ -29,7 +29,7 @@ for LOGFILE in *; do
 		if [ $x == 0 ]; then
 			echo "Logfile CRITICAL ERROR WARNING INFO DEBUG"
 		fi
-		echo "$LOGFILE $(grep "|CRITICAL|" $LOGFILE | wc -l) $(grep "|ERROR|" $LOGFILE | wc -l) $(grep "|WARNING|" $LOGFILE | wc -l) $(grep "|INFO|" $LOGFILE | wc -l) $(grep "|DEBUG|" $LOGFILE | wc -l)"
+		echo "$LOGFILE $(grep "[CRITICAL]" $LOGFILE | wc -l) $(grep "[ERROR]" $LOGFILE | wc -l) $(grep "[WARNING]" $LOGFILE | wc -l) $(grep "[INFO]" $LOGFILE | wc -l) $(grep "[DEBUG]" $LOGFILE | wc -l)"
 		x=1
 	fi
 done | column -t >>log_level_summary.txt
