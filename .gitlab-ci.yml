@@ -151,11 +151,10 @@ log-collector:
   stage: log-collector
   extends:
     - .k8s_base
-  before_script:
+  script:
     - apt update
     - apt install -y bsdmainutils
     - apt install -y util-linux
-  script:
     - mkdir -p logs
     - echo "$CI_JOB_ID">>logs/log_collector_id.txt
     - POD_LIST=$(kubectl get pods -n $KUBE_NAMESPACE --no-headers -o custom-columns=":metadata.name")
