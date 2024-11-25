@@ -23,7 +23,7 @@ done | column -t >>log_level_summary.txt
 # Log file names starting with fhs-vcc-emulator- are assumed to be emulator logs.
 # Log level counts for each device server are populated in the device server table.
 x=0
-echo "\nEMULATOR LOGS" >>log_level_summary.txt
+echo -e "\nEMULATOR LOGS" >>log_level_summary.txt
 for LOGFILE in *; do
 	if echo "$LOGFILE" | grep -q '^fhs-vcc-emulator-'; then
 		if [ $x == 0 ]; then
