@@ -16,6 +16,7 @@ stages:
   - build
   - on_demand_k8s
   - test
+  - log-collector
   - cleanup
 
 include:
@@ -145,6 +146,30 @@ python-test:
       - build/reports/test-results.xml
       - build/reports/assets/*
   allow_failure: true
+
+log-collector:
+  stage: log-collector
+  extends:
+    - .k8s_base
+  before_script:
+    - apt update
+    - apt install -y bsdmainutils
+    - apt install -y util-linux
+  script:
+    - mkdir -p logs
+    - echo "$CI_JOB_ID">>logs/log_collector_id.txt
+    - POD_LIST=$(kubectl get pods -n $KUBE_NAMESPACE --no-headers -o custom-columns=":metadata.name")
+    - for pod in ${POD_LIST[@]}; do echo "kubectl logs $pod -n $KUBE_NAMESPACE --since=3h &> logs/${pod}.log" ; kubectl logs $pod -n $KUBE_NAMESPACE --since=3h &> logs/${pod}.log ; done
+    - ./log_utils/log_level_summary.sh
+  needs:
+    - job: python-test
+  artifacts:
+    paths:
+    - logs/*.log
+    - logs/log_level_summary.txt
+    - logs/log_collector_id.txt
+  allow_failure: true
+
 
 k8s-scheduled-destroy:
   stage: cleanup

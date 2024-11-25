@@ -1,0 +1,7 @@
+log_file: talondxlogconsumer-5-May-2023.log
+log_out:  filtered.log
+time_start: 2023-05-05T11:12:00.000Z
+time_end:   2023-05-05T11:15:00.000Z
+tango_device: vcc|slim|lstv
+severity: INFO|DEBUG
+message: ""

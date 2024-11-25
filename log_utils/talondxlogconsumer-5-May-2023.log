@@ -1,0 +1,761 @@
+1|2023-05-05T01:24:00.589Z|INFO|MainThread|update_logging_handlers|base_device.py#368|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Logging targets set to ['console::cout']
+1|2023-05-05T01:24:00.589Z|INFO|MainThread|update_logging_handlers|base_device.py#368|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Logging targets set to ['console::cout']
+1|2023-05-05T01:24:00.589Z|DEBUG|MainThread|_init_logging|base_device.py#500|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Logger initialised
+1|2023-05-05T01:24:00.589Z|DEBUG|MainThread|_init_logging|base_device.py#500|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Logger initialised
+1|2023-05-05T01:24:00.658Z|INFO|MainThread|exit|core.py#135||Finished processing state _UNINITIALISED exit callbacks.
+1|2023-05-05T01:24:00.658Z|INFO|MainThread|enter|core.py#129||Finished processing state INIT_DISABLE enter callbacks.
+1|2023-05-05T01:24:00.658Z|INFO|MainThread|_update_state|base_device.py#710|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Device state changed from UNKNOWN to INIT
+1|2023-05-05T01:24:00.658Z|INFO|MainThread|_update_state|base_device.py#710|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Device state changed from UNKNOWN to INIT
+1|2023-05-05T01:24:00.658Z|INFO|MainThread|callbacks|core.py#1124||Executed callback '<bound method _OpStateMachine._state_changed of <ska_tango_base.base.op_state_model._OpStateMachine object at 0x7fdc7f4a5b00>>'
+1|2023-05-05T01:24:00.658Z|DEBUG|MainThread|do|base_device.py#437|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Groups definitions: None
+1|2023-05-05T01:24:00.658Z|DEBUG|MainThread|do|base_device.py#437|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Groups definitions: None
+1|2023-05-05T01:24:00.658Z|DEBUG|MainThread|do|base_device.py#445|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|No Groups loaded for device: mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001
+1|2023-05-05T01:24:00.658Z|DEBUG|MainThread|do|base_device.py#445|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|No Groups loaded for device: mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001
+1|2023-05-05T01:24:00.658Z|INFO|MainThread|do|base_device.py#449|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|SKABaseDevice Init command completed OK
+1|2023-05-05T01:24:00.658Z|INFO|MainThread|do|base_device.py#449|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|SKABaseDevice Init command completed OK
+1|2023-05-05T01:24:00.658Z|INFO|MainThread|_call_do|commands.py#366|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Exiting command InitCommand with return_code ResultCode.OK, message: 'SKABaseDevice Init command completed OK'.
+1|2023-05-05T01:24:00.658Z|INFO|MainThread|_call_do|commands.py#366|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Exiting command InitCommand with return_code ResultCode.OK, message: 'SKABaseDevice Init command completed OK'.
+1|2023-05-05T01:24:00.659Z|INFO|MainThread|exit|core.py#135||Finished processing state INIT_DISABLE exit callbacks.
+1|2023-05-05T01:24:00.659Z|INFO|MainThread|enter|core.py#129||Finished processing state DISABLE enter callbacks.
+1|2023-05-05T01:24:00.659Z|INFO|MainThread|_update_state|base_device.py#710|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Device state changed from INIT to DISABLE
+1|2023-05-05T01:24:00.659Z|INFO|MainThread|_update_state|base_device.py#710|tango-device:mid_csp_cbf/talondx_log_consumer/talondxlogconsumer-001|Device state changed from INIT to DISABLE
+1|2023-05-05T01:24:00.659Z|INFO|MainThread|callbacks|core.py#1124||Executed callback '<bound method _OpStateMachine._state_changed of <ska_tango_base.base.op_state_model._OpStateMachine object at 0x7fdc7f4a5b00>>'
+Ready to accept request
+1|2023-05-05T11:12:51.937Z|DEBUG|@ffff9c2b48c0 [0]||#0|tango-device:talondx-003/hpsmaster/hps-3|DsHpsMaster::init_device() create device talondx-003/hpsmaster/hps-3
+1|2023-05-05T11:12:51.898Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:51.937Z|DEBUG|@ffff9c2b48c0 [0]||DsHpsMaster.cpp#202|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::init_device(): Set device state to INIT talondx-003/hpsmaster/hps-3
+1|2023-05-05T11:12:51.898Z|INFO|Dummy-2|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.214Z|DEBUG|@ffff91fbeec0 [8]||#0|tango-device:talondx-003/hpsmaster/hps-3|DsHpsMaster::always_executed_hook()  talondx-003/hpsmaster/hps-3
+1|2023-05-05T11:12:56.175Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.215Z|DEBUG|@ffff91fbeec0 [8]||#0|tango-device:talondx-003/hpsmaster/hps-3|DsHpsMaster::configure()  - talondx-003/hpsmaster/hps-3
+1|2023-05-05T11:12:56.175Z|INFO|Dummy-2|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.215Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#323|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'dsPath' = /lib/firmware/hps_software/bite_vcc_test
+1|2023-05-05T11:12:56.175Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.215Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#331|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'fpgaDtbName' = talon_dx-tdc_base-tdc_vcc_processing.dtb
+1|2023-05-05T11:12:56.176Z|INFO|Dummy-2|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.215Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#311|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: the received configure string is = {"description": "Configures Talon DX to run BITE/VCC firmware and devices.", "target": "talon3", "ip_address": "192.168.8.3", "talon_first_connect_timeout": 90, "ds_hps_master_fqdn": "talondx-003/hpsmaster/hps-3", "fpga_path": "/lib/firmware", "fpga_dtb_name": "talon_dx-tdc_base-tdc_vcc_processing.dtb", "fpga_rbf_name": "talon_dx-tdc_base-tdc_vcc_processing-hps_first.core.rbf", "fpga_label": "base", "ds_path": "/lib/firmware/hps_software/bite_vcc_test", "server_instance": "talon3_test", "talon_lru_fqdn": "mid_csp_cbf/talon_lru/002", "ds_rdma_rx_fqdn": "dell/dsrdmarx/rx3", "devices": ["ska-mid-cbf-vcc-app", "dsvcc", "dscircuitswitch", "dsdct", "dsfinechannelizer", "dstalondxrdma", "dsgaussiannoisegen", "ska-mid-spfrx-packetizer-ds", "dslstvbandpassfilter", "dslstvgen", "dslstvplayback", "dslstvtonegenerator", "dspolarizationcoupler", "ska-talondx-100-gigabit-ethernet-ds", "ska-talondx-status-ds", "dswbstatecount", "dswbinputbuffer", "ds-resampler-delay-tracker", "dscorrelator", "dsspeaddescriptor", "dshostlutstage1", "dshostlutstage2", "ska-mid-cbf-fsp-app", "dsslimlink", "dsslimtxrx"]}
+1|2023-05-05T11:12:56.176Z|INFO|Dummy-3|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.216Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#339|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'fpgaLabel' = base
+1|2023-05-05T11:12:56.176Z|INFO|Dummy-4|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.216Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#347|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'fpgaPath' = /lib/firmware
+1|2023-05-05T11:12:56.177Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.216Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#355|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'serverInstance' = talon3_test
+1|2023-05-05T11:12:56.177Z|INFO|Dummy-2|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.217Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dsvcc
+1|2023-05-05T11:12:56.177Z|INFO|Dummy-4|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.216Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = ska-mid-cbf-vcc-app
+1|2023-05-05T11:12:56.177Z|INFO|Dummy-3|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.217Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dscircuitswitch
+1|2023-05-05T11:12:56.177Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.217Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dsfinechannelizer
+1|2023-05-05T11:12:56.177Z|INFO|Dummy-2|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.217Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dsgaussiannoisegen
+1|2023-05-05T11:12:56.178Z|INFO|Dummy-4|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.217Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dsdct
+1|2023-05-05T11:12:56.178Z|INFO|Dummy-5|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.217Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dslstvbandpassfilter
+1|2023-05-05T11:12:56.178Z|INFO|Dummy-3|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.217Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dstalondxrdma
+1|2023-05-05T11:12:56.178Z|INFO|Dummy-6|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.218Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dslstvgen
+1|2023-05-05T11:12:56.178Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.217Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = ska-mid-spfrx-packetizer-ds
+1|2023-05-05T11:12:56.178Z|INFO|Dummy-7|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.218Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dslstvtonegenerator
+1|2023-05-05T11:12:56.178Z|INFO|Dummy-2|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.218Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = ska-talondx-status-ds
+1|2023-05-05T11:12:56.179Z|INFO|Dummy-3|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.218Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = ska-talondx-100-gigabit-ethernet-ds
+1|2023-05-05T11:12:56.179Z|INFO|Dummy-4|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.218Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dslstvplayback
+1|2023-05-05T11:12:56.179Z|INFO|Dummy-8|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.218Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dswbinputbuffer
+1|2023-05-05T11:12:56.179Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.218Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dswbstatecount
+1|2023-05-05T11:12:56.179Z|INFO|Dummy-5|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.219Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = ds-resampler-delay-tracker
+1|2023-05-05T11:12:56.179Z|INFO|Dummy-6|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.219Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dscorrelator
+1|2023-05-05T11:12:56.179Z|INFO|Dummy-7|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.219Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dshostlutstage1
+1|2023-05-05T11:12:56.180Z|INFO|Dummy-2|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.219Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dshostlutstage2
+1|2023-05-05T11:12:56.180Z|INFO|Dummy-3|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.219Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dsspeaddescriptor
+1|2023-05-05T11:12:56.180Z|INFO|Dummy-9|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.219Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = ska-mid-cbf-fsp-app
+1|2023-05-05T11:12:56.180Z|INFO|Dummy-4|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.219Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dsslimlink
+1|2023-05-05T11:12:56.180Z|INFO|Dummy-10|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.219Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dsslimtxrx
+1|2023-05-05T11:12:56.180Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.220Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#373|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'GetBitstreamName' = /lib/firmware
+1|2023-05-05T11:12:56.180Z|INFO|Dummy-2|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.220Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#374|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'GetRegion' = 
+1|2023-05-05T11:12:56.181Z|INFO|Dummy-3|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.220Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#378|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'GetJsonName' = 
+1|2023-05-05T11:12:56.181Z|INFO|Dummy-7|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.220Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#376|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'GetRbfName' = 
+1|2023-05-05T11:12:56.181Z|INFO|Dummy-6|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.220Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#377|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'GetDtbName' = talon_dx-tdc_base-tdc_vcc_processing.dtb
+1|2023-05-05T11:12:56.181Z|INFO|Dummy-4|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.220Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#375|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'GetLabel' = base
+1|2023-05-05T11:12:56.181Z|INFO|Dummy-5|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:56.218Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#366|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: 'device name' = dspolarizationcoupler
+1|2023-05-05T11:12:56.181Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.253Z|INFO|@ffff91fbeec0 [8]||DsHpsMaster.cpp#394|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: Configured bitstream
+1|2023-05-05T11:12:59.214Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.253Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/ska-mid-cbf-vcc-app
+1|2023-05-05T11:12:59.214Z|INFO|Dummy-2|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.255Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dsvcc
+1|2023-05-05T11:12:59.216Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.258Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dscircuitswitch
+1|2023-05-05T11:12:59.219Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.260Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dsdct
+1|2023-05-05T11:12:59.221Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.264Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dsfinechannelizer
+1|2023-05-05T11:12:59.224Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.267Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dstalondxrdma
+1|2023-05-05T11:12:59.227Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.269Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dsgaussiannoisegen
+1|2023-05-05T11:12:59.230Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.272Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/ska-mid-spfrx-packetizer-ds
+1|2023-05-05T11:12:59.232Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.290Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dslstvbandpassfilter
+1|2023-05-05T11:12:59.251Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.293Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dslstvgen
+1|2023-05-05T11:12:59.254Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.296Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dslstvplayback
+1|2023-05-05T11:12:59.257Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.311Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dslstvtonegenerator
+1|2023-05-05T11:12:59.272Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.314Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dspolarizationcoupler
+1|2023-05-05T11:12:59.275Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.317Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/ska-talondx-100-gigabit-ethernet-ds
+1|2023-05-05T11:12:59.277Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.344Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/ska-talondx-status-ds
+1|2023-05-05T11:12:59.304Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.362Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dswbstatecount
+1|2023-05-05T11:12:59.323Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.379Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dswbinputbuffer
+1|2023-05-05T11:12:59.340Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.390Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/ds-resampler-delay-tracker
+1|2023-05-05T11:12:59.351Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.399Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dscorrelator
+1|2023-05-05T11:12:59.370Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.413Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dsspeaddescriptor
+1|2023-05-05T11:12:59.373Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.440Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dshostlutstage1
+1|2023-05-05T11:12:59.401Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.459Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dshostlutstage2
+1|2023-05-05T11:12:59.426Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.475Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/ska-mid-cbf-fsp-app
+1|2023-05-05T11:12:59.435Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.478Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dsslimlink
+1|2023-05-05T11:12:59.438Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.496Z|DEBUG|@ffff91fbeec0 [8]||DsHpsMaster.cpp#564|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::spawnTangoDs: Spawn Tango DS exectable -> /lib/firmware/hps_software/bite_vcc_test/dsslimtxrx
+1|2023-05-05T11:12:59.457Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:12:59.523Z|INFO|@ffff91fbeec0 [8]||DsHpsMaster.cpp#438|tango-device:talondx-003/hpsmaster/hps-3| DsHpsMaster::configure: All HPS Tango device servers have been created. State updated to 'ON' talondx-003/hpsmaster/hps-3
+1|2023-05-05T11:12:59.484Z|INFO|Dummy-1|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:04.493Z|INFO|@ffff8a9c9440 [0]||DsVcc.cpp#202|tango-device:talondx-003/vcc/vcc| DsVcc::init_device() - device initialized
+1|2023-05-05T11:13:04.454Z|INFO|Dummy-11|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:04.874Z|INFO|@ffffa89e48c0 [0]||#0|tango-device:talondx-003/ska-mid-spfrx-packetizer/spfrx_pkt|SkaMidSpfrxPacketizerDs:: INIT
+1|2023-05-05T11:13:04.835Z|INFO|Dummy-12|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:05.289Z|INFO|@ffff87471440 [0]||#0|tango-device:talondx-003/vcc-app/vcc-controller|DsVccController::init_device() - device initialized
+1|2023-05-05T11:13:05.250Z|INFO|Dummy-13|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:05.472Z|INFO|@ffff87471440 [0]||#0|tango-device:talondx-003/vcc-app/vcc-band-1-and-2|DsVccBand1And2::init_device() - device initialized
+1|2023-05-05T11:13:05.433Z|INFO|Dummy-13|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:06.695Z|INFO|@ffffbccc7440 [0]||DsTalonDxRDMA.cpp#219|tango-device:talondx-003/talondxrdma/chan0| DsTalonDxRDMA::init_device() - device initialized
+1|2023-05-05T11:13:06.657Z|INFO|Dummy-14|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.296Z|INFO|@ffff940b5440 [0]||DsLstvGen.cpp#259|tango-device:talondx-003/lstvgen/lstv_gen| DsVcc::init_device() - device initialized
+1|2023-05-05T11:13:08.257Z|INFO|Dummy-15|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.397Z|INFO|@ffff9ce1a020 [0]||DsSLIMLink.cpp#238|tango-device:talondx-003/slim-link/slim-link| DsSLIMLink::init_device() - device initialized
+1|2023-05-05T11:13:08.359Z|INFO|Dummy-16|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.473Z|INFO|@ffffb1194440 [0]||SkaTalondx100GigabitEthernetDs.cpp#391|tango-device:talondx-003/ska-talondx-100-gigabit-ethernet/100g_eth_0| SkaTalondx100GigabitEthernetDs:: INIT
+1|2023-05-05T11:13:08.435Z|INFO|Dummy-17|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.476Z|INFO|@ffffb1194440 [0]||SkaTalondx100GigabitEthernetDs.cpp#476|tango-device:talondx-003/ska-talondx-100-gigabit-ethernet/100g_eth_0| SkaTalondx100GigabitEthernetDs::init_device() - device initialized
+1|2023-05-05T11:13:08.447Z|INFO|Dummy-17|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.572Z|INFO|@ffffb1194440 [0]||SkaTalondx100GigabitEthernetDs.cpp#391|tango-device:talondx-003/ska-talondx-100-gigabit-ethernet/100g_eth_1| SkaTalondx100GigabitEthernetDs:: INIT
+1|2023-05-05T11:13:08.532Z|INFO|Dummy-17|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.572Z|INFO|@ffffb1194440 [0]||SkaTalondx100GigabitEthernetDs.cpp#476|tango-device:talondx-003/ska-talondx-100-gigabit-ethernet/100g_eth_1| SkaTalondx100GigabitEthernetDs::init_device() - device initialized
+1|2023-05-05T11:13:08.534Z|INFO|Dummy-18|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.575Z|INFO|@ffff9d222440 [0]||DsSLIMTx.cpp#254|tango-device:talondx-003/slim-tx-rx/tx0| DsSLIMTx::init_device() - device initialized
+1|2023-05-05T11:13:08.536Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.597Z|INFO|@ffff9d222440 [0]||DsSLIMTx.cpp#254|tango-device:talondx-003/slim-tx-rx/tx1| DsSLIMTx::init_device() - device initialized
+1|2023-05-05T11:13:08.558Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.620Z|INFO|@ffff9d222440 [0]||DsSLIMTx.cpp#254|tango-device:talondx-003/slim-tx-rx/tx2| DsSLIMTx::init_device() - device initialized
+1|2023-05-05T11:13:08.580Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.641Z|INFO|@ffff9d222440 [0]||DsSLIMTx.cpp#254|tango-device:talondx-003/slim-tx-rx/tx3| DsSLIMTx::init_device() - device initialized
+1|2023-05-05T11:13:08.601Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.696Z|INFO|@ffff9d222440 [0]||DsSLIMRx.cpp#275|tango-device:talondx-003/slim-tx-rx/rx0| DsSLIMRx::init_device() - device initialized
+1|2023-05-05T11:13:08.657Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.721Z|INFO|@ffff9d222440 [0]||DsSLIMRx.cpp#275|tango-device:talondx-003/slim-tx-rx/rx1| DsSLIMRx::init_device() - device initialized
+1|2023-05-05T11:13:08.681Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.746Z|INFO|@ffff9d222440 [0]||DsSLIMRx.cpp#275|tango-device:talondx-003/slim-tx-rx/rx2| DsSLIMRx::init_device() - device initialized
+1|2023-05-05T11:13:08.706Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:08.770Z|INFO|@ffff9d222440 [0]||DsSLIMRx.cpp#275|tango-device:talondx-003/slim-tx-rx/rx3| DsSLIMRx::init_device() - device initialized
+1|2023-05-05T11:13:08.731Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:09.996Z|INFO|@ffff8b7eeec0 [7]||DsSLIMTx.cpp#433|tango-device:talondx-003/slim-tx-rx/tx1| always_executed_hook(): generated idle_ctrl_word = 2522716245 for device talondx-003/slim-tx-rx/tx1
+1|2023-05-05T11:13:09.957Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:11.217Z|INFO|@ffff8b7eeec0 [7]||DsSLIMTx.cpp#433|tango-device:talondx-003/slim-tx-rx/tx2| always_executed_hook(): generated idle_ctrl_word = 4100493560 for device talondx-003/slim-tx-rx/tx2
+1|2023-05-05T11:13:11.178Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:12.438Z|INFO|@ffff8b7eeec0 [7]||DsSLIMTx.cpp#433|tango-device:talondx-003/slim-tx-rx/tx3| always_executed_hook(): generated idle_ctrl_word = 2326560650 for device talondx-003/slim-tx-rx/tx3
+1|2023-05-05T11:13:12.399Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:13.659Z|INFO|@ffff8b7eeec0 [7]||DsSLIMRx.cpp#457|tango-device:talondx-003/slim-tx-rx/rx0| DsSLIMTRx::always_executed_hook() SLIMRxController::init_connection successful
+1|2023-05-05T11:13:13.620Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:14.880Z|INFO|@ffff8b7eeec0 [7]||DsSLIMRx.cpp#457|tango-device:talondx-003/slim-tx-rx/rx1| DsSLIMTRx::always_executed_hook() SLIMRxController::init_connection successful
+1|2023-05-05T11:13:14.841Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:16.101Z|INFO|@ffff8b7eeec0 [7]||DsSLIMRx.cpp#457|tango-device:talondx-003/slim-tx-rx/rx2| DsSLIMTRx::always_executed_hook() SLIMRxController::init_connection successful
+1|2023-05-05T11:13:16.062Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:17.322Z|INFO|@ffff8b7eeec0 [7]||DsSLIMRx.cpp#457|tango-device:talondx-003/slim-tx-rx/rx3| DsSLIMTRx::always_executed_hook() SLIMRxController::init_connection successful
+1|2023-05-05T11:13:17.283Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:18.587Z|INFO|@ffff8b7eeec0 [7]||DsSLIMTx.cpp#433|tango-device:talondx-003/slim-tx-rx/tx0| always_executed_hook(): generated idle_ctrl_word = 660766688 for device talondx-003/slim-tx-rx/tx0
+1|2023-05-05T11:13:18.548Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:23.471Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 1907660754
+1|2023-05-05T11:13:23.432Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:32.777Z|INFO|@ffff8afdeec0 [7]||DsLstvGen.cpp#1217|tango-device:talondx-003/lstvgen/lstv_gen| tone_select: 0x0
+1|2023-05-05T11:13:32.738Z|INFO|Dummy-15|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:32.782Z|INFO|@ffff8afdeec0 [7]||DsLstvGen.cpp#1266|tango-device:talondx-003/lstvgen/lstv_gen| source_select: 0x1
+1|2023-05-05T11:13:32.742Z|INFO|Dummy-15|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:32.783Z|INFO|@ffff8afdeec0 [7]||DsLstvGen.cpp#1316|tango-device:talondx-003/lstvgen/lstv_gen| receiver_select: 0x0
+1|2023-05-05T11:13:32.743Z|INFO|Dummy-15|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:33.282Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 5739679216
+1|2023-05-05T11:13:33.244Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:43.095Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 9572092966
+1|2023-05-05T11:13:43.056Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:13:52.923Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 13410723564
+1|2023-05-05T11:13:52.884Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:14:02.735Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 17243086174
+1|2023-05-05T11:14:02.696Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:14:12.547Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 21075418700
+1|2023-05-05T11:14:12.508Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:14:22.359Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 24907345091
+1|2023-05-05T11:14:22.320Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:14:32.171Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 28739694463
+1|2023-05-05T11:14:32.132Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:14:41.983Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 32572051016
+1|2023-05-05T11:14:41.944Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:14:51.795Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 36404116218
+1|2023-05-05T11:14:51.756Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:01.607Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 40236483940
+1|2023-05-05T11:15:01.568Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:09.124Z|INFO|@ffff977eeec0 [8]||#0|tango-device:talondx-003/ska-mid-spfrx-packetizer/spfrx_pkt|SkaMidSpfrxPacketizerDs: Packetizer bringup.
+1|2023-05-05T11:15:09.086Z|INFO|Dummy-20|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:09.125Z|INFO|@ffff977eeec0 [8]||#0|tango-device:talondx-003/ska-mid-spfrx-packetizer/spfrx_pkt|SkaMidSpfrxPacketizerDs: Setting band 1/2 sample rate to 3960000000
+1|2023-05-05T11:15:09.086Z|INFO|Dummy-21|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:09.125Z|INFO|@ffff977eeec0 [8]||#0|tango-device:talondx-003/ska-mid-spfrx-packetizer/spfrx_pkt|SkaMidSpfrxPacketizerDs: Setting Dish ID to: SKA123 (numerical: 4219)
+1|2023-05-05T11:15:09.087Z|INFO|Dummy-22|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:09.125Z|INFO|@ffff977eeec0 [8]||#0|tango-device:talondx-003/ska-mid-spfrx-packetizer/spfrx_pkt|SkaMidSpfrxPacketizerDs: Setting band 3 sample rate to 3168000000
+1|2023-05-05T11:15:09.087Z|INFO|Dummy-23|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:09.125Z|INFO|@ffff977eeec0 [8]||#0|tango-device:talondx-003/ska-mid-spfrx-packetizer/spfrx_pkt|SkaMidSpfrxPacketizerDs: Setting band 4/5b sample rate to 5940000000
+1|2023-05-05T11:15:09.087Z|INFO|Dummy-20|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:09.127Z|INFO|@ffff977eeec0 [8]||#0|tango-device:talondx-003/ska-mid-spfrx-packetizer/spfrx_pkt|SkaMidSpfrxPacketizerDs: Setting band 5a sample rate to 5940000000
+1|2023-05-05T11:15:09.087Z|INFO|Dummy-21|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:09.131Z|INFO|@ffff9fffeec0 [8]||SkaTalondx100GigabitEthernetDs.cpp#2485|tango-device:talondx-003/ska-talondx-100-gigabit-ethernet/100g_eth_0| 100G Ethernet: Bringing up 100 Gigabit Ethernet interface instance 2 device talondx-003/ska-talondx-100-gigabit-ethernet/100g_eth_0
+1|2023-05-05T11:15:09.092Z|INFO|Dummy-16|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:09.131Z|INFO|@ffff9fffeec0 [8]||SkaTalondx100GigabitEthernetDs.cpp#2520|tango-device:talondx-003/ska-talondx-100-gigabit-ethernet/100g_eth_0| 100G Ethernet: setting loopback mode to 1
+1|2023-05-05T11:15:09.092Z|INFO|Dummy-24|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:09.182Z|INFO|@ffff9fffeec0 [8]||SkaTalondx100GigabitEthernetDs.cpp#2571|tango-device:talondx-003/ska-talondx-100-gigabit-ethernet/100g_eth_0| 100G Ethernet: Bringup complete.
+1|2023-05-05T11:15:09.142Z|INFO|Dummy-16|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:11.419Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 44068850728
+1|2023-05-05T11:15:11.380Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:21.232Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 47901230595
+1|2023-05-05T11:15:21.192Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:31.043Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 51733223009
+1|2023-05-05T11:15:31.004Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:40.855Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 55565562707
+1|2023-05-05T11:15:40.816Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:15:50.667Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 59397900025
+1|2023-05-05T11:15:50.628Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:16:00.479Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 63230219358
+1|2023-05-05T11:16:00.440Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:16:10.292Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 67062548409
+1|2023-05-05T11:16:10.252Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:16:20.103Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 70895688759
+1|2023-05-05T11:16:20.067Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:16:29.915Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 74730572227
+1|2023-05-05T11:16:29.885Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:16:39.727Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 78565133993
+1|2023-05-05T11:16:39.703Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:16:49.539Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 82399369068
+1|2023-05-05T11:16:49.520Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:16:59.351Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 86233415997
+1|2023-05-05T11:16:59.337Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:17:09.163Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 90067272750
+1|2023-05-05T11:17:09.153Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:17:18.976Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 93900944033
+1|2023-05-05T11:17:18.969Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:17:28.787Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 97734068061
+1|2023-05-05T11:17:28.783Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:17:38.599Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 101567437245
+1|2023-05-05T11:17:38.598Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:17:48.411Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 105400712589
+1|2023-05-05T11:17:48.413Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:17:58.223Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 109233648078
+1|2023-05-05T11:17:58.256Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:18:08.035Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 113066376942
+1|2023-05-05T11:18:08.040Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:18:17.847Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 116898670338
+1|2023-05-05T11:18:17.852Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:18:27.659Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 120731391282
+1|2023-05-05T11:18:27.665Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:18:37.471Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 124564077310
+1|2023-05-05T11:18:37.478Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:18:47.283Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 128396701175
+1|2023-05-05T11:18:47.291Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:18:57.095Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 132229329111
+1|2023-05-05T11:18:57.104Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:19:06.907Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 136061633569
+1|2023-05-05T11:19:06.916Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:19:16.719Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 139894316703
+1|2023-05-05T11:19:16.729Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:19:26.531Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 143726971696
+1|2023-05-05T11:19:26.542Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:19:36.343Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 147559599802
+1|2023-05-05T11:19:36.355Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:19:46.155Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 151392261988
+1|2023-05-05T11:19:46.168Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:19:55.967Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 155224530687
+1|2023-05-05T11:19:55.980Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:20:05.779Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 159057204523
+1|2023-05-05T11:20:05.793Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:20:15.591Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 162889866637
+1|2023-05-05T11:20:15.606Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:20:25.403Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 166722499033
+1|2023-05-05T11:20:25.419Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:20:35.216Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 170555032973
+1|2023-05-05T11:20:35.232Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:20:45.027Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 174386905428
+1|2023-05-05T11:20:45.044Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:20:54.839Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 178219155839
+1|2023-05-05T11:20:54.856Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:21:04.651Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 182051426325
+1|2023-05-05T11:21:04.668Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:21:14.463Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 185884055711
+1|2023-05-05T11:21:14.481Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:21:24.275Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 189716340299
+1|2023-05-05T11:21:24.293Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:21:34.087Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 193548980965
+1|2023-05-05T11:21:34.106Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:21:43.899Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 197381656842
+1|2023-05-05T11:21:43.919Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:21:53.711Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 201214277818
+1|2023-05-05T11:21:53.732Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:22:03.523Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 205046886998
+1|2023-05-05T11:22:03.545Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:22:13.335Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 208879521778
+1|2023-05-05T11:22:13.358Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:22:23.148Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 212712151676
+1|2023-05-05T11:22:23.171Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:22:32.959Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 216544373283
+1|2023-05-05T11:22:32.983Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:22:42.771Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 220377022910
+1|2023-05-05T11:22:42.796Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:22:52.583Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 224209653686
+1|2023-05-05T11:22:52.609Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:23:02.395Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 228042324737
+1|2023-05-05T11:23:02.422Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:23:12.208Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 231875033473
+1|2023-05-05T11:23:12.235Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:23:22.019Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 235707298358
+1|2023-05-05T11:23:22.047Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:23:31.831Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 239539967097
+1|2023-05-05T11:23:31.860Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:23:41.643Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 243372606095
+1|2023-05-05T11:23:41.673Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:23:51.455Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 247205260376
+1|2023-05-05T11:23:51.486Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:24:01.268Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 251037906344
+1|2023-05-05T11:24:01.299Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:24:11.079Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 254870112599
+1|2023-05-05T11:24:11.111Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:24:20.891Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 258702725104
+1|2023-05-05T11:24:20.924Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:24:30.703Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 262535314582
+1|2023-05-05T11:24:30.737Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:24:40.515Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 266368003457
+1|2023-05-05T11:24:40.550Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:24:50.327Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 270200678546
+1|2023-05-05T11:24:50.363Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:25:00.138Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 274032932353
+1|2023-05-05T11:25:00.175Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:25:09.951Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 277865567770
+1|2023-05-05T11:25:09.988Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:25:19.763Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 281698202827
+1|2023-05-05T11:25:19.801Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:25:29.575Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 285530830213
+1|2023-05-05T11:25:29.614Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:25:39.387Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 289363490934
+1|2023-05-05T11:25:39.427Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:25:49.199Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 293196089078
+1|2023-05-05T11:25:49.240Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:25:59.011Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 297028709281
+1|2023-05-05T11:25:59.053Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:26:08.822Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 300860960971
+1|2023-05-05T11:26:08.866Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:26:18.635Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 304693665637
+1|2023-05-05T11:26:18.679Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:26:28.447Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 308526354625
+1|2023-05-05T11:26:28.492Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:26:38.259Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 312359062490
+1|2023-05-05T11:26:38.305Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:26:48.070Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 316191300368
+1|2023-05-05T11:26:48.117Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:26:57.883Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 320023927996
+1|2023-05-05T11:26:57.930Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:27:07.695Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 323856557473
+1|2023-05-05T11:27:07.743Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:27:17.507Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 327689187052
+1|2023-05-05T11:27:17.556Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:27:27.319Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 331521796405
+1|2023-05-05T11:27:27.369Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:27:37.131Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 335354446328
+1|2023-05-05T11:27:37.182Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:27:46.943Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 339187088043
+1|2023-05-05T11:27:46.995Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:27:56.754Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 343019352554
+1|2023-05-05T11:27:56.807Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:28:06.567Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 346852038720
+1|2023-05-05T11:28:06.620Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:28:16.379Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 350684690505
+1|2023-05-05T11:28:16.433Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:28:26.191Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 354517337906
+1|2023-05-05T11:28:26.246Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:28:36.003Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 358349986356
+1|2023-05-05T11:28:36.059Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:28:45.815Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 362182283144
+1|2023-05-05T11:28:45.871Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:28:55.627Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 366014890218
+1|2023-05-05T11:28:55.684Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:29:05.439Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 369847320600
+1|2023-05-05T11:29:05.497Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:29:15.251Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 373678165634
+1|2023-05-05T11:29:15.305Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:29:25.063Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 377509476789
+1|2023-05-05T11:29:25.115Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:29:34.875Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 381340470856
+1|2023-05-05T11:29:34.924Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:29:44.687Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 385172569610
+1|2023-05-05T11:29:44.735Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:29:54.499Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 389005191732
+1|2023-05-05T11:29:54.548Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:30:04.311Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 392837824372
+1|2023-05-05T11:30:04.361Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:30:14.123Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 396670410386
+1|2023-05-05T11:30:14.174Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:30:23.935Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 400502967193
+1|2023-05-05T11:30:23.987Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:30:33.747Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 404335601963
+1|2023-05-05T11:30:33.800Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:30:43.559Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 408167834700
+1|2023-05-05T11:30:43.612Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:30:53.371Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 412000443554
+1|2023-05-05T11:30:53.425Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:31:03.183Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 415833034867
+1|2023-05-05T11:31:03.238Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:31:12.995Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 419665640473
+1|2023-05-05T11:31:13.051Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:31:22.807Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 423498271126
+1|2023-05-05T11:31:22.864Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:31:32.619Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 427330875478
+1|2023-05-05T11:31:32.677Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:31:42.430Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 431163099975
+1|2023-05-05T11:31:42.489Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:31:52.243Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 434995714615
+1|2023-05-05T11:31:52.301Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:32:02.055Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 438828337884
+1|2023-05-05T11:32:02.114Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:32:11.867Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 442660954587
+1|2023-05-05T11:32:11.928Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:32:21.679Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 446493561006
+1|2023-05-05T11:32:21.740Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:32:31.491Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 450326208939
+1|2023-05-05T11:32:31.553Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:32:41.303Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 454158443072
+1|2023-05-05T11:32:41.366Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:32:51.115Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 457991083667
+1|2023-05-05T11:32:51.179Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:33:00.927Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 461823724838
+1|2023-05-05T11:33:00.992Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:33:10.739Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 465656379631
+1|2023-05-05T11:33:10.805Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:33:20.551Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 469488961470
+1|2023-05-05T11:33:20.617Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:33:30.362Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 473321154892
+1|2023-05-05T11:33:30.429Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:33:40.175Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 477153792413
+1|2023-05-05T11:33:40.242Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:33:49.987Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 480986419411
+1|2023-05-05T11:33:50.055Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:33:59.799Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 484818999643
+1|2023-05-05T11:33:59.868Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:34:09.611Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 488651609246
+1|2023-05-05T11:34:09.681Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:34:19.423Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 492484233590
+1|2023-05-05T11:34:19.494Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:34:29.235Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 496316533349
+1|2023-05-05T11:34:29.306Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:34:39.047Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 500149225792
+1|2023-05-05T11:34:39.119Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:34:48.859Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 503981881844
+1|2023-05-05T11:34:48.933Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:34:58.671Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 507814148347
+1|2023-05-05T11:34:58.745Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:35:08.483Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 511646791667
+1|2023-05-05T11:35:08.558Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:35:18.295Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 515479414303
+1|2023-05-05T11:35:18.371Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:35:28.107Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 519312023459
+1|2023-05-05T11:35:28.184Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:35:37.919Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 523144683492
+1|2023-05-05T11:35:37.997Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:35:47.731Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 526976907727
+1|2023-05-05T11:35:47.809Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:35:57.543Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 530809532997
+1|2023-05-05T11:35:57.622Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:36:07.355Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 534642179657
+1|2023-05-05T11:36:07.435Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:36:17.167Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 538474827927
+1|2023-05-05T11:36:17.248Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:36:26.978Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 542307103506
+1|2023-05-05T11:36:27.060Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:36:36.791Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 546139757047
+1|2023-05-05T11:36:36.873Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:36:46.603Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 549972417034
+1|2023-05-05T11:36:46.686Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:36:56.415Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 553805025183
+1|2023-05-05T11:36:56.499Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:37:06.227Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 557637615079
+1|2023-05-05T11:37:06.312Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:37:16.038Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 561469859758
+1|2023-05-05T11:37:16.124Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:37:25.851Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 565302466951
+1|2023-05-05T11:37:25.937Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:37:35.663Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 569135080736
+1|2023-05-05T11:37:35.750Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:37:45.475Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 572965195162
+1|2023-05-05T11:37:45.556Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:37:55.287Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 576795470856
+1|2023-05-05T11:37:55.363Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:38:05.099Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 580625870591
+1|2023-05-05T11:38:05.170Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:38:14.911Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 584457464857
+1|2023-05-05T11:38:14.981Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:38:24.723Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 588290010379
+1|2023-05-05T11:38:24.794Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:38:34.535Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 592122598895
+1|2023-05-05T11:38:34.606Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:38:44.347Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 595955175126
+1|2023-05-05T11:38:44.419Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:38:54.159Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 599787741065
+1|2023-05-05T11:38:54.232Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:39:03.971Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 603619960146
+1|2023-05-05T11:39:04.044Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:39:13.783Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 607452530016
+1|2023-05-05T11:39:13.857Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:39:23.595Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 611285152055
+1|2023-05-05T11:39:23.670Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:39:33.407Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 615117776618
+1|2023-05-05T11:39:33.483Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:39:43.218Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 618950001890
+1|2023-05-05T11:39:43.295Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:39:53.031Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 622782639095
+1|2023-05-05T11:39:53.108Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:40:02.843Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 626615225171
+1|2023-05-05T11:40:02.921Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:40:12.655Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 630447799788
+1|2023-05-05T11:40:12.733Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:40:22.467Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 634280341790
+1|2023-05-05T11:40:22.546Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:40:32.279Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 638112567491
+1|2023-05-05T11:40:32.358Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:40:42.091Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 641945159375
+1|2023-05-05T11:40:42.171Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:40:51.903Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 645777743467
+1|2023-05-05T11:40:51.984Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:41:01.715Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 649610367459
+1|2023-05-05T11:41:01.797Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:41:11.527Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 653442615692
+1|2023-05-05T11:41:11.609Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:41:21.339Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 657275207551
+1|2023-05-05T11:41:21.422Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:41:31.151Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 661107778161
+1|2023-05-05T11:41:31.235Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:41:40.963Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 664940332669
+1|2023-05-05T11:41:41.047Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:41:50.775Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 668772891675
+1|2023-05-05T11:41:50.860Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:42:00.587Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 672605449336
+1|2023-05-05T11:42:00.673Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:42:10.398Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 676437641520
+1|2023-05-05T11:42:10.485Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:42:20.210Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 680270138036
+1|2023-05-05T11:42:20.297Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:42:30.023Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 684102724182
+1|2023-05-05T11:42:30.111Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:42:39.835Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 687935350424
+1|2023-05-05T11:42:39.923Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:42:49.647Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 691767950147
+1|2023-05-05T11:42:49.736Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:42:59.459Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 695600550824
+1|2023-05-05T11:42:59.549Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:43:09.270Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 699432752332
+1|2023-05-05T11:43:09.361Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:43:19.083Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 703265317353
+1|2023-05-05T11:43:19.174Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:43:28.895Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 707097882066
+1|2023-05-05T11:43:28.987Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:43:38.707Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 710930449375
+1|2023-05-05T11:43:38.800Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:43:48.519Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 714763042336
+1|2023-05-05T11:43:48.612Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:43:58.331Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 718595635007
+1|2023-05-05T11:43:58.425Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:44:08.142Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 722427808602
+1|2023-05-05T11:44:08.237Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:44:17.955Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 726260429678
+1|2023-05-05T11:44:18.050Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:44:27.767Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 730093039688
+1|2023-05-05T11:44:27.863Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:44:37.579Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 733925675664
+1|2023-05-05T11:44:37.676Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:44:47.391Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 737757887677
+1|2023-05-05T11:44:47.488Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:44:57.203Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 741590495216
+1|2023-05-05T11:44:57.301Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:45:07.015Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 745423122415
+1|2023-05-05T11:45:07.114Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:45:16.827Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 749255735395
+1|2023-05-05T11:45:16.927Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:45:26.639Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 753087939115
+1|2023-05-05T11:45:26.739Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:45:36.451Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 756920523369
+1|2023-05-05T11:45:36.552Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:45:46.263Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 760753116004
+1|2023-05-05T11:45:46.365Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:45:56.075Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 764585759171
+1|2023-05-05T11:45:56.178Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:46:05.887Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 768418001361
+1|2023-05-05T11:46:05.989Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:46:15.699Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 772248719836
+1|2023-05-05T11:46:15.798Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:46:25.511Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 776078292820
+1|2023-05-05T11:46:25.603Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:46:35.323Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 779908119726
+1|2023-05-05T11:46:35.409Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:46:45.134Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 783738934631
+1|2023-05-05T11:46:45.217Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:46:54.947Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 787571448572
+1|2023-05-05T11:46:55.030Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:47:04.759Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 791403970946
+1|2023-05-05T11:47:04.842Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:47:14.571Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 795236508342
+1|2023-05-05T11:47:14.655Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:47:24.383Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 799069035488
+1|2023-05-05T11:47:24.468Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:47:34.195Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 802901587060
+1|2023-05-05T11:47:34.281Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:47:44.007Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 806733748573
+1|2023-05-05T11:47:44.092Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:47:53.819Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 810566268982
+1|2023-05-05T11:47:53.905Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:48:03.631Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 814398791929
+1|2023-05-05T11:48:03.718Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:48:13.443Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 818231320635
+1|2023-05-05T11:48:13.531Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:48:23.255Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 822063853228
+1|2023-05-05T11:48:23.343Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:48:33.067Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 825896407378
+1|2023-05-05T11:48:33.156Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:48:42.879Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 829728558171
+1|2023-05-05T11:48:42.968Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:48:52.691Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 833561070394
+1|2023-05-05T11:48:52.781Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:49:02.503Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 837393572472
+1|2023-05-05T11:49:02.593Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:49:12.315Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 841226136399
+1|2023-05-05T11:49:12.406Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:49:22.127Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 845058681247
+1|2023-05-05T11:49:22.219Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:49:31.939Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 848890877464
+1|2023-05-05T11:49:32.031Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:49:41.751Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 852723454942
+1|2023-05-05T11:49:41.844Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:49:51.563Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 856556012969
+1|2023-05-05T11:49:51.656Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:50:01.375Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 860388550833
+1|2023-05-05T11:50:01.469Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:50:11.186Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 864220668126
+1|2023-05-05T11:50:11.281Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:50:20.999Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 868053186819
+1|2023-05-05T11:50:21.094Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:50:30.811Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 871885701324
+1|2023-05-05T11:50:30.906Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:50:40.623Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 875718204476
+1|2023-05-05T11:50:40.719Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:50:50.435Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 879550789735
+1|2023-05-05T11:50:50.532Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:51:00.246Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 883382982683
+1|2023-05-05T11:51:00.344Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:51:10.059Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 887215513713
+1|2023-05-05T11:51:10.157Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:51:19.871Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 891048048039
+1|2023-05-05T11:51:19.969Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:51:29.683Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 894880571663
+1|2023-05-05T11:51:29.782Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:51:39.495Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 898713114910
+1|2023-05-05T11:51:39.595Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:51:49.307Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 902545654535
+1|2023-05-05T11:51:49.407Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:51:59.118Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 906377793675
+1|2023-05-05T11:51:59.219Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:52:08.931Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 910210325557
+1|2023-05-05T11:52:09.032Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:52:18.743Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 914042851072
+1|2023-05-05T11:52:18.845Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:52:28.555Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 917875387814
+1|2023-05-05T11:52:28.658Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:52:38.367Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 921707917346
+1|2023-05-05T11:52:38.470Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:52:48.178Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 925540095326
+1|2023-05-05T11:52:48.282Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:52:57.991Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 929372619080
+1|2023-05-05T11:52:58.095Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:53:07.803Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 933205168878
+1|2023-05-05T11:53:07.907Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:53:17.615Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 937037689406
+1|2023-05-05T11:53:17.720Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:53:27.427Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 940870185295
+1|2023-05-05T11:53:27.533Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:53:37.239Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 944702687432
+1|2023-05-05T11:53:37.345Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:53:47.050Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 948534863952
+1|2023-05-05T11:53:47.157Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:53:56.863Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 952367379591
+1|2023-05-05T11:53:56.970Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:54:06.675Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 956199930693
+1|2023-05-05T11:54:06.783Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:54:16.487Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 960032494489
+1|2023-05-05T11:54:16.596Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:54:26.299Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 963865096738
+1|2023-05-05T11:54:26.409Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:54:36.110Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 967697212360
+1|2023-05-05T11:54:36.220Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:54:45.923Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 971528265863
+1|2023-05-05T11:54:46.029Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:54:55.735Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 975357416135
+1|2023-05-05T11:54:55.833Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:55:05.547Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 979187209464
+1|2023-05-05T11:55:05.639Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:55:15.359Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 983017558962
+1|2023-05-05T11:55:15.446Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:55:25.171Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 986850030219
+1|2023-05-05T11:55:25.259Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:55:34.983Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 990682502499
+1|2023-05-05T11:55:35.071Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:55:44.795Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 994514691141
+1|2023-05-05T11:55:44.883Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:55:54.607Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 998347226702
+1|2023-05-05T11:55:54.696Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
+1|2023-05-05T11:56:04.419Z|ERROR|@ffff8b7eeec0 [7]||#0|tango-device:talondx-003/slim-tx-rx/rx0|DsSLIMRx::read_read_counters(Tango::Attribute &attr) ... idle_error_count is not zero got: 1002179695743
+1|2023-05-05T11:56:04.509Z|INFO|Dummy-19|_call_do|commands.py#156||Exiting command LogCommand
