@@ -3,6 +3,7 @@ xauthority: "~/.Xauthority"
 
 global:
   minikube: false
+  k3d: false
   operator: true
   exposeAllDS: true # Expose All Tango Services to the external network (enable Loadbalancer service)
   annotations:
@@ -95,6 +96,9 @@ ska-mid-cbf-emulators:
       repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-injector
       tag: 0.6.0
       pullPolicy: Always
+  bitstreamPv:
+    enabled: false
+  
 
   properties:
     bitstreamPath: *bitstreamPath
