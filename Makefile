@@ -80,7 +80,7 @@ HELM_INTERNAL_REPO=https://${CAR_REGISTRY}/repository/helm-internal
 
 # uncomment to force a specific hash & override the automatic hash lookup (e.g. for testing a commit to a non-main branch)
 FHS_VCC_HASH_VERSION = "0.1.0-dev.c6be720ae"
-EMULATORS_HASH_VERSION = "0.6.0-dev.c4b357b25"
+EMULATORS_HASH_VERSION = "0.6.0-dev.cfe4f2e42"
 
 # Use Gitlab API to extract latest tags and builds from the main branch for the various repositories, to extract the hash versions
 FHS_VCC_HELM_REPO=https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
@@ -119,7 +119,7 @@ USE_DEV_BUILD ?= true
 
 DEV_BUILD_PARAMS =  --set ska-mid-cbf-fhs-vcc.midcbf.image.tag=$(FHS_VCC_HASH_VERSION) \
 					--set ska-mid-cbf-emulators.emulator.image.tag=$(EMULATORS_HASH_VERSION) \
-					--set ska-mid-cbf-emulators.injector.image.tag=$(EMULATORS_HASH_VERSION)
+					--set ska-mid-cbf-emulators.injector.image.tag=$(EMULATORS_HASH_VERSION) \
 					
 TAG_BUILD_PARAMS =  --set ska-mid-cbf-fhs-vcc.midcbf.image.tag=$(FHS_VCC_LATEST_TAG) \
 					--set ska-mid-cbf-fhs-vcc.midcbf.image.registry=$(CAR_REGISTRY) \
@@ -128,8 +128,7 @@ TAG_BUILD_PARAMS =  --set ska-mid-cbf-fhs-vcc.midcbf.image.tag=$(FHS_VCC_LATEST_
 					--set ska-mid-cbf-emulators.emulator.image.tag=$(EMULATORS_LATEST_TAG) \
 					--set ska-mid-cbf-emulators.emulator.image.registry=$(CAR_REGISTRY) \
 					--set ska-mid-cbf-emulators.injector.image.tag=$(EMULATORS_LATEST_TAG) \
-					--set ska-mid-cbf-emulators.injector.image.registry=$(CAR_REGISTRY)
-
+					--set ska-mid-cbf-emulators.injector.image.registry=$(CAR_REGISTRY) \
 
 ifeq ($(USE_DEV_BUILD),true)
 	K8S_CHART_PARAMS += $(DEV_BUILD_PARAMS)
