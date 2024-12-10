@@ -3,6 +3,7 @@ image: $SKA_K8S_TOOLS_BUILD_DEPLOY
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   MINIKUBE: "false"
+  K3D: "false"
   TANGO_HOST: databaseds-tango-base:10000
   CLUSTER_DOMAIN: "cluster.local"
   K8S_TIMEOUT: 800s

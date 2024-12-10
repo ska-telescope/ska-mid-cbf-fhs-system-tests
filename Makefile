@@ -20,6 +20,7 @@ KUBE_APP ?= ska-mid-cbf-fhs-system-tests
 TARANTA ?= false
 BOOGIE ?= false
 MINIKUBE ?= false
+K3D ?= false
 
 # Expose All Tango Services to the external network (enable Loadbalancer service)
 EXPOSE_All_DS ?= true
@@ -78,8 +79,8 @@ HELM_INTERNAL_REPO=https://${CAR_REGISTRY}/repository/helm-internal
 
 
 # uncomment to force a specific hash & override the automatic hash lookup (e.g. for testing a commit to a non-main branch)
-# FHS_VCC_HASH_VERSION = "0.1.0-dev.cc5d87970"
-# EMULATORS_HASH_VERSION = "0.6.0-dev.c66fe6b8d"
+FHS_VCC_HASH_VERSION = "0.1.0-dev.cf2800d9b"
+EMULATORS_HASH_VERSION = "0.6.0-dev.c9401e8a9"
 
 # Use Gitlab API to extract latest tags and builds from the main branch for the various repositories, to extract the hash versions
 FHS_VCC_HELM_REPO=https://gitlab.com/api/v4/projects/58443798/packages/helm/dev
@@ -100,6 +101,7 @@ CURR_INTERNAL_SCHEMA_VERSION:=$(shell grep ska-mid-cbf-internal-schemas pyprojec
 
 
 K8S_CHART_PARAMS = --set global.minikube=$(MINIKUBE) \
+	--set global.k3d=$(K3D) \
 	--set global.exposeAllDS=$(EXPOSE_All_DS) \
 	--set global.tango_host=$(TANGO_HOST) \
 	--set global.cluster_domain=$(CLUSTER_DOMAIN) \
@@ -197,14 +199,15 @@ k8s-pre-install-chart:
 	make update-chart FHS_VCC_HASH_VERSION=$(FHS_VCC_HASH_VERSION) EMULATORS_HASH_VERSION=$(EMULATORS_HASH_VERSION)
 
 k8s-deploy:
-	make k8s-install-chart MINIKUBE=$(MINIKUBE) USE_DEV_BUILD=$(USE_DEV_BUILD) BOOGIE=$(BOOGIE)
+	make k8s-install-chart MINIKUBE=$(MINIKUBE) K3D=$(K3D) USE_DEV_BUILD=$(USE_DEV_BUILD) BOOGIE=$(BOOGIE)
 	@echo "Waiting for all pods in namespace $(KUBE_NAMESPACE) to be ready..."
 	@time kubectl wait pod --all --for=condition=Ready --timeout=15m0s --namespace $(KUBE_NAMESPACE)
 
 
 k8s-deploy-dev: MINIKUBE=true
+K8s-deploy-dev: K3D=false
 k8s-deploy-dev:
-	make k8s-deploy MINIKUBE=$(MINIKUBE) USE_DEV_BUILD=true BOOGIE=true
+	make k8s-deploy MINIKUBE=$(MINIKUBE) K3D=$(K3D) USE_DEV_BUILD=true BOOGIE=true
 
 k8s-destroy:
 	make k8s-uninstall-chart
