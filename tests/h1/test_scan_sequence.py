@@ -118,6 +118,7 @@ class TestScanSequence(BaseTangoTestClass):
         vcc_123_proxy = self.proxies[DeviceKey.VCC_123][fhs_vcc_idx]
         wfs_proxy = self.proxies[DeviceKey.WIDEBAND_FREQ_SHIFTER][fhs_vcc_idx]
         fss_proxy = self.proxies[DeviceKey.FREQ_SLICE_SELECTION][fhs_vcc_idx]
+        packetizer_proxy = self.proxies[DeviceKey.PACKETIZER][fhs_vcc_idx]
         emulator_url = self.emulator_urls[fhs_vcc_idx]
 
         all_bands_obsState = all_bands_proxy.read_attribute("obsState")
@@ -126,6 +127,7 @@ class TestScanSequence(BaseTangoTestClass):
         vcc_123_status = json.loads(vcc_123_proxy.command_read_write("GetStatus", False)[1][0])
         wfs_status = json.loads(wfs_proxy.command_read_write("GetStatus", False)[1][0])
         fss_status = json.loads(fss_proxy.command_read_write("GetStatus", False)[1][0])
+        packetizer_status = json.loads(packetizer_proxy.command_read_write("GetStatus", False)[1][0])
 
         self.logger.debug(f"allbands ObsState before ConfigureScan: {all_bands_obsState}")
         self.logger.debug(f"allbands frequencyBand before ConfigureScan: {all_bands_frequencyBand}")
@@ -133,6 +135,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.logger.debug(f"vcc status before ConfigureScan: {vcc_123_status}")
         self.logger.debug(f"wfs status before ConfigureScan: {wfs_status}")
         self.logger.debug(f"fss status before ConfigureScan: {fss_status}")
+        self.logger.debug(f"packetizer status before ConfigureScan: {packetizer_status}")
 
         configure_scan_result = self.run_configure_scan(fhs_vcc_idx, config_str)
 
@@ -163,6 +166,7 @@ class TestScanSequence(BaseTangoTestClass):
         vcc_123_status = json.loads(vcc_123_proxy.command_read_write("GetStatus", False)[1][0])
         wfs_status = json.loads(wfs_proxy.command_read_write("GetStatus", False)[1][0])
         fss_status = json.loads(fss_proxy.command_read_write("GetStatus", False)[1][0])
+        packetizer_status = json.loads(packetizer_proxy.command_read_write("GetStatus", False)[1][0])
 
         self.logger.debug(f"allbands ObsState after ConfigureScan: {all_bands_obsState}")
         self.logger.debug(f"allbands frequencyBand after ConfigureScan: {all_bands_frequencyBand}")
@@ -170,6 +174,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.logger.debug(f"vcc status after ConfigureScan: {vcc_123_status}")
         self.logger.debug(f"wfs status after ConfigureScan: {wfs_status}")
         self.logger.debug(f"fss status after ConfigureScan: {fss_status}")
+        self.logger.debug(f"packetizer status after ConfigureScan: {packetizer_status}")
 
         vcc_123_state, vcc_123_active = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.VCC_123, "ACTIVE")
         wfs_state, wfs_active = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.WIDEBAND_FREQ_SHIFTER, "ACTIVE")
@@ -203,6 +208,9 @@ class TestScanSequence(BaseTangoTestClass):
         assert wfs_status.get("shift_frequency") == expected_shift_frequency
         assert fss_status.get("band_select") == expected_band_select
 
+        expected_packetizer_vid = config_dict.get("fs_lanes")[0].get("vlan_id")
+        assert packetizer_status.get("vid_register") == expected_packetizer_vid
+
         self.logger.info(f"ConfigureScan completed successfully for FHS-VCC {fhs_vcc_idx}.")
 
     def run_configure_scan_and_assert_failure(self, fhs_vcc_idx: int, config_path: str, expected_code: int = 5, expected_error_msg: str | None = None) -> Any:
@@ -212,6 +220,7 @@ class TestScanSequence(BaseTangoTestClass):
         vcc_123_proxy = self.proxies[DeviceKey.VCC_123][fhs_vcc_idx]
         wfs_proxy = self.proxies[DeviceKey.WIDEBAND_FREQ_SHIFTER][fhs_vcc_idx]
         fss_proxy = self.proxies[DeviceKey.FREQ_SLICE_SELECTION][fhs_vcc_idx]
+        packetizer_proxy = self.proxies[DeviceKey.PACKETIZER][fhs_vcc_idx]
         emulator_url = self.emulator_urls[fhs_vcc_idx]
 
         config_str, _ = self.get_configure_scan_config(config_path)
@@ -222,6 +231,7 @@ class TestScanSequence(BaseTangoTestClass):
         vcc_123_status_before = json.loads(vcc_123_proxy.command_read_write("GetStatus", False)[1][0])
         wfs_status_before = json.loads(wfs_proxy.command_read_write("GetStatus", False)[1][0])
         fss_status_before = json.loads(fss_proxy.command_read_write("GetStatus", False)[1][0])
+        packetizer_status_before = json.loads(packetizer_proxy.command_read_write("GetStatus", False)[1][0])
 
         self.logger.debug(f"allbands ObsState before ConfigureScan: {all_bands_obsState}")
         self.logger.debug(f"allbands frequencyBand before ConfigureScan: {all_bands_frequencyBand_before}")
@@ -229,6 +239,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.logger.debug(f"vcc status before ConfigureScan: {vcc_123_status_before}")
         self.logger.debug(f"wfs status before ConfigureScan: {wfs_status_before}")
         self.logger.debug(f"fss status before ConfigureScan: {fss_status_before}")
+        self.logger.debug(f"packetizer status before ConfigureScan: {packetizer_status_before}")
 
         configure_scan_result = self.run_configure_scan(fhs_vcc_idx, config_str)
 
@@ -261,6 +272,7 @@ class TestScanSequence(BaseTangoTestClass):
         vcc_123_status_after = json.loads(vcc_123_proxy.command_read_write("GetStatus", False)[1][0])
         wfs_status_after = json.loads(wfs_proxy.command_read_write("GetStatus", False)[1][0])
         fss_status_after = json.loads(fss_proxy.command_read_write("GetStatus", False)[1][0])
+        packetizer_status_after = json.loads(packetizer_proxy.command_read_write("GetStatus", False)[1][0])
 
         self.logger.debug(f"allbands ObsState after ConfigureScan: {all_bands_obsState}")
         self.logger.debug(f"allbands frequencyBand after ConfigureScan: {all_bands_frequencyBand_after}")
@@ -268,6 +280,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.logger.debug(f"vcc status after ConfigureScan: {vcc_123_status_after}")
         self.logger.debug(f"wfs status after ConfigureScan: {wfs_status_after}")
         self.logger.debug(f"fss status after ConfigureScan: {fss_status_after}")
+        self.logger.debug(f"packetizer status after ConfigureScan: {packetizer_status_after}")
 
         vcc_123_state, vcc_123_active = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.VCC_123, "ACTIVE")
         wfs_state, wfs_active = EmulatorAPIService.wait_for_state(emulator_url, EmulatorIPBlockId.WIDEBAND_FREQ_SHIFTER, "ACTIVE")
@@ -291,6 +304,8 @@ class TestScanSequence(BaseTangoTestClass):
         assert all(vcc_123_gains_before[i].get("gain") == pytest.approx(vcc_123_gains_after[i].get("gain")) for i in range(len(vcc_123_gains_before)))
         assert wfs_status_after.get("shift_frequency") == wfs_status_before.get("shift_frequency")
         assert fss_status_after.get("band_select") == fss_status_before.get("band_select")
+
+        assert packetizer_status_after.get("vid_register") == packetizer_status_before.get("vid_register")
 
         self.logger.info(f"ConfigureScan failed as expected for FHS-VCC {fhs_vcc_idx}.")
 
