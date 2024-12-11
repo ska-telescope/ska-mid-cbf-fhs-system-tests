@@ -3,28 +3,7 @@
   "expected_dish_id": "MKT001",
   "dish_sample_rate": 3960000000,
   "samples_per_frame": 18,
-  "vcc_gain": [
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    0.1
-  ],
+  "vcc_gain": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.1],
   "frequency_band": "1",
   "fsp": [
     {
@@ -50,5 +29,9 @@
   ],
   "noise_diode_transition_holdoff_seconds": 9876,
   "frequency_band_offset_stream_1": 12345678,
-  "frequency_band_offset_stream_2": 23456789
+  "frequency_band_offset_stream_2": 23456789,
+  "b123_pwrm": { "averaging_time": 1, "flagging": 0 },
+  "b45a_pwrm": { "averaging_time": 1, "flagging": 0 },
+  "b5b_pwrm": { "averaging_time": 1, "flagging": 0 },
+  "fs_lanes": [{ "vlan_id": 2, "fs_id": 1, "averaging_time": 1, "flagging": 0 }]
 }
