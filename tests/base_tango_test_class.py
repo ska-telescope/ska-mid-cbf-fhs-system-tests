@@ -7,7 +7,7 @@ from ska_tango_testing.integration import TangoEventTracer
 
 class BaseTangoTestClass:
 
-    @pytest.fixture(scope="session") 
+    @pytest.fixture(scope="session")
     def all_proxies(self, logger: Logger):
         """Cache all device proxies"""
         proxies_cache = {}
@@ -16,13 +16,10 @@ class BaseTangoTestClass:
         logger.info("Creating proxies for all devices...")
         for idx in range(1, 7):
             cache_key = (idx,)
-            proxies_cache[cache_key] = {
-                k: {idx: create_proxy(idx, k)} for k in DeviceKey
-            }
-        
+            proxies_cache[cache_key] = {k: {idx: create_proxy(idx, k)} for k in DeviceKey}
+
         logger.info("Proxies created.")
         return proxies_cache
-
 
     @pytest.fixture()
     def initialize_with_indices(self, request, logger: Logger, emulator_base_url: str, all_proxies) -> None:

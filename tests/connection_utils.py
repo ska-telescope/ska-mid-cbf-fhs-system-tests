@@ -21,12 +21,7 @@ class DeviceKey(Enum):
     B5B_WIDEBAND_POWER_METER = "b5b_wideband_power_meter"
     PACKETIZER = "packetizer"
 
-    locals().update(
-        {
-            f"FS{i}_WIDEBAND_POWER_METER": f"fs{i}_wideband_power_meter"
-            for i in range(1, 27)
-        }
-    )
+    locals().update({f"FS{i}_WIDEBAND_POWER_METER": f"fs{i}_wideband_power_meter" for i in range(1, 27)})
 
 
 class EmulatorIPBlockId(Enum):
@@ -43,12 +38,7 @@ class EmulatorIPBlockId(Enum):
     B5B_WIDEBAND_POWER_METER = "b5b_wideband_power_meter"
     PACKETIZER = "packetizer"
 
-    locals().update(
-        {
-            f"FS{i}_WIDEBAND_POWER_METER": f"fs{i}_wideband_power_meter"
-            for i in range(1, 27)
-        }
-    )
+    locals().update({f"FS{i}_WIDEBAND_POWER_METER": f"fs{i}_wideband_power_meter" for i in range(1, 27)})
 
 
 base_fqdn_map = {
@@ -65,10 +55,7 @@ base_fqdn_map = {
     DeviceKey.PACKETIZER: "fhs/packetizer/",
 }
 
-fs_fqdn_map = {
-    getattr(DeviceKey, f"FS{i}_WIDEBAND_POWER_METER"): f"fhs/fs{i}wpm/"
-    for i in range(1, 27)
-}
+fs_fqdn_map = {getattr(DeviceKey, f"FS{i}_WIDEBAND_POWER_METER"): f"fhs/fs{i}wpm/" for i in range(1, 27)}
 
 fqdn_map = {**base_fqdn_map, **fs_fqdn_map}
 
