@@ -32,8 +32,6 @@ ska-tango-base:
 ska-tango-util:
   enabled: true
 
-gitlab_bitstream_url_override: "https://gitlab.com/ska-telescope/ska-mid-cbf-bitstreams/-/archive/cip-3172-packetizer/ska-mid-cbf-bitstreams-cip-3172-packetizer.tar.gz?path=raw/ska-mid-cbf-agilex-vcc"
-
 # Note: Versions and repository links defined here do not necessarily reflect what will be
 # deployed to the namespace. These values can be overwritten by Makefile processing at runtime
 # based on USE_DEV_BUILD and <repo>_HASH_VERSION variables.
@@ -47,7 +45,6 @@ ska-mid-cbf-fhs-vcc:
       pullPolicy: Always
 
   bitstreamMountPath: "/app/mnt/bitstream"
-  gitlab_bitstream_url_override: "https://gitlab.com/ska-telescope/ska-mid-cbf-bitstreams/-/archive/cip-3172-packetizer/ska-mid-cbf-bitstreams-cip-3172-packetizer.tar.gz?path=raw/ska-mid-cbf-agilex-vcc"
 
   properties:
     deviceId: ""
@@ -98,8 +95,6 @@ ska-mid-cbf-emulators:
       repository: registry.gitlab.com/ska-telescope/ska-mid-cbf-emulators/ska-mid-cbf-emulators-injector
       tag: 0.6.0
       pullPolicy: Always
-
-  gitlab_bitstream_url_override: "https://gitlab.com/ska-telescope/ska-mid-cbf-bitstreams/-/archive/cip-3172-packetizer/ska-mid-cbf-bitstreams-cip-3172-packetizer.tar.gz?path=raw/ska-mid-cbf-agilex-vcc"
 
   properties:
     bitstreamPath: *bitstreamPath
