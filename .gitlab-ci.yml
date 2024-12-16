@@ -111,14 +111,17 @@ k8s-on-demand-destroy:
   rules:
     - when: manual
   script:
+    - kubectl delete clusterrole emulator-sa
     - 
       if [[ $(kubectl get clusterroles | grep emulator-sa) ]]; then
         kubectl delete clusterrole emulator-sa
       fi
+    - kubectl get clusterrolebindings
     -
       if [[ $(kubectl get clusterrolebindings | grep emulator-sa) ]]; then
         kubectl delete clusterrolebinding emulator-sa
       fi
+    - kubectl get serviceaccounts
     - 
       if [[ $(kubectl get serviceaccounts | grep emulator-sa) ]]; then
         kubectl delete serviceaccount emulator-sa
