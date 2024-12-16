@@ -111,7 +111,6 @@ k8s-on-demand-destroy:
   rules:
     - when: manual
   script:
-    - kubectl delete clusterrole emulator-sa
     - kubectl delete clusterrolebinding emulator-sa
     - kubectl delete serviceaccount emulator-sa
     - make k8s-uninstall-chart
