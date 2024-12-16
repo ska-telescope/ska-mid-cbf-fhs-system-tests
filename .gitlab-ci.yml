@@ -123,7 +123,6 @@ k8s-on-demand-destroy:
       if [[ $(kubectl get serviceaccounts | grep emulator-sa) ]]; then
         kubectl delete serviceaccount emulator-sa
       fi
-
     - make k8s-uninstall-chart
     - make k8s-delete-namespace
   allow_failure: true
