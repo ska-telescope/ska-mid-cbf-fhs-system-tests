@@ -114,6 +114,8 @@ k8s-on-demand-destroy:
     - kubectl delete clusterrole emulator-sa
     - kubectl delete clusterrolebinding emulator-sa
     - kubectl delete serviceaccount emulator-sa
+    - make k8s-uninstall-chart
+    - make k8s-delete-namespace
   allow_failure: true
 
 python-test:
