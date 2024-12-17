@@ -55,8 +55,8 @@ ska-mid-cbf-fhs-vcc:
     emulatorBaseUrl: "ska-mid-cbf-fhs-system-tests.svc.cluster.local:5001"
     bitstreamPath: &bitstreamPath "/app/mnt/bitstream"
     bitstreamId: "agilex-vcc"
-    bitstreamVersion: "0.0.12"
-    emulatorId: &emulatorId "fhs-vcc-emulator-<deviceId>"
+    bitstreamVersion: "0.0.15"
+    emulatorId: &emulatorId "fhs-vcc-emulator-{{.deviceId}}"
     emulatorIpBlockId: ""
     firmwareIpBlockId: ""
     healthMonitorPollInterval: "3"
@@ -99,7 +99,7 @@ ska-mid-cbf-emulators:
   properties:
     bitstreamPath: *bitstreamPath
     bitstreamId: "agilex-vcc"
-    bitstreamVersion: "0.0.12"
+    bitstreamVersion: "0.0.15"
     emulatorId: *emulatorId
 
   instances: *deviceInstances
