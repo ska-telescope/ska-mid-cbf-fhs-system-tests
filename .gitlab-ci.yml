@@ -17,6 +17,7 @@ stages:
   - on_demand_k8s
   - test
   - log-collector
+  - scan
   - cleanup
 
 include:

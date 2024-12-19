@@ -156,8 +156,8 @@ class InjectorAPIService:
         event_groups = {
             "injector_event_groups": [
                 {
-                    "emulator_id": get_emulator_id(fhs_vcc_idx),
-                    "ip_block_id": ip_block.value,
+                    "bitstream_emulator_id": get_emulator_id(fhs_vcc_idx),
+                    "ip_block_emulator_id": ip_block.value,
                     "events": events_json,
                 }
             ]
