@@ -196,6 +196,16 @@ k8s-pre-install-chart:
 	rm -f charts/ska-mid-cbf-fhs-system-tests/Chart.lock
 	make update-chart FHS_VCC_HASH_VERSION=$(FHS_VCC_HASH_VERSION) EMULATORS_HASH_VERSION=$(EMULATORS_HASH_VERSION)
 
+
+k8s-do-install-chart: k8s-clean k8s-dep-build k8s-namespace
+	@echo "install-chart: install $(K8S_UMBRELLA_CHART_PATH) release: $(HELM_RELEASE) in Namespace: $(KUBE_NAMESPACE) with params: $(K8S_CHART_PARAMS)"
+	@du -sh charts/ska-mid-cbf-fhs-system-tests
+	@ls -la charts/ska-mid-cbf-fhs-system-tests
+	@ls -la charts/ska-mid-cbf-fhs-system-tests/charts
+	helm upgrade --install $(HELM_RELEASE) \
+	$(K8S_CHART_PARAMS) \
+	$(K8S_UMBRELLA_CHART_PATH) --namespace $(KUBE_NAMESPACE)
+
 k8s-deploy:
 	make k8s-install-chart MINIKUBE=$(MINIKUBE) USE_DEV_BUILD=$(USE_DEV_BUILD) BOOGIE=$(BOOGIE)
 	@echo "Waiting for all pods in namespace $(KUBE_NAMESPACE) to be ready..."
