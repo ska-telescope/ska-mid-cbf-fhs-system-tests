@@ -554,7 +554,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.logger.info(f"ObsReset completed successfully for FHS-VCC {fhs_vcc_idx}.")
 
     @pytest.mark.dev
-    @pytest.mark.parametrize("initialize_with_indices", [1, 3, 5], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [1, 3, 5, 2, 4, 6] * 6, ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_valid_config_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
@@ -732,7 +732,7 @@ class TestScanSequence(BaseTangoTestClass):
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
     @pytest.mark.dev
-    @pytest.mark.parametrize("initialize_with_indices", [[2, 4, 6]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    @pytest.mark.parametrize("initialize_with_indices", [[1, 2, 3, 4, 5, 6]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_parallel_random_order_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
