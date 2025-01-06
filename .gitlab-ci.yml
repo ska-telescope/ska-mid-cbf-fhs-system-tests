@@ -128,7 +128,7 @@ python-test:
         - job: k8s-on-demand-deploy
     - when: never
   variables:
-    PYTEST_MARKER: nightly
+    PYTEST_MARKER: dev
   script:
     - export KUBE_NAMESPACE=$(echo "ci-$CI_PROJECT_NAME-$CI_PIPELINE_ID-$GITLAB_USER_LOGIN" | tr '[:upper:]' '[:lower:]')
     - poetry config virtualenvs.create false
