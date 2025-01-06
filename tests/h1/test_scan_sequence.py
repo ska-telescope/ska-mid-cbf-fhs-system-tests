@@ -558,9 +558,8 @@ class TestScanSequence(BaseTangoTestClass):
     def test_scan_sequence_valid_config_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
-        self.logger.info(f"SEQUENTIAL TEST [IDX={fhs_vcc_idx}] STARTED AT: {time.ctime()}")
-
         fhs_vcc_idx = self.loaded_idxs[0]
+        self.logger.info(f"SEQUENTIAL TEST [IDX={fhs_vcc_idx}] STARTED AT: {time.ctime()}")
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
 
         # Ensure emulators are reset before starting
@@ -776,7 +775,7 @@ class TestScanSequence(BaseTangoTestClass):
             self.logger.debug(f"wfs {fhs_vcc_idx} status before ConfigureScan: {wfs_status}")
             self.logger.debug(f"fss {fhs_vcc_idx} status before ConfigureScan: {fss_status}")
 
-            config_str, config_dicts[fhs_vcc_idx] = self.get_configure_scan_config(f"test_parameters/configure_scan_valid_1.json")
+            config_str, config_dicts[fhs_vcc_idx] = self.get_configure_scan_config("test_parameters/configure_scan_valid_1.json")
             configure_scan_results[fhs_vcc_idx] = self.run_configure_scan(fhs_vcc_idx, config_str)
 
         for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
