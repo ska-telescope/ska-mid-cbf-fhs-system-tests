@@ -138,7 +138,7 @@ ifneq (,$(wildcard $(VALUES)))
 	K8S_CHART_PARAMS += $(foreach f,$(wildcard $(VALUES)),--values $(f))
 endif
 
-PYTEST_MARKER = nightly
+PYTEST_MARKER = dev
 
 PYTEST_LOG_LEVEL = INFO
 PYTHON_VARS_AFTER_PYTEST = -m "$(PYTEST_MARKER)" -s --namespace $(KUBE_NAMESPACE) --cluster_domain $(CLUSTER_DOMAIN) --tango_host $(TANGO_HOST) -v -rA --no-cov --log-cli-level=$(PYTEST_LOG_LEVEL)

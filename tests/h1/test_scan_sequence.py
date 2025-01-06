@@ -553,6 +553,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.logger.info(f"ObsReset completed successfully for FHS-VCC {fhs_vcc_idx}.")
 
+    @pytest.mark.dev
     @pytest.mark.parametrize("initialize_with_indices", [1, 3, 5], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
     def test_scan_sequence_valid_config_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
