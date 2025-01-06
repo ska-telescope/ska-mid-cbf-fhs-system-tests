@@ -558,7 +558,7 @@ class TestScanSequence(BaseTangoTestClass):
     def test_scan_sequence_valid_config_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
-        self.logger.info(f'SEQUENTIAL TEST [IDX={fhs_vcc_idx}] STARTED AT: {time.ctime()}')
+        self.logger.info(f"SEQUENTIAL TEST [IDX={fhs_vcc_idx}] STARTED AT: {time.ctime()}")
 
         fhs_vcc_idx = self.loaded_idxs[0]
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
@@ -737,7 +737,7 @@ class TestScanSequence(BaseTangoTestClass):
     def test_scan_sequence_parallel_random_order_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
-        self.logger.info(f'PARALLEL TEST STARTED AT: {time.ctime()}')
+        self.logger.info(f"PARALLEL TEST STARTED AT: {time.ctime()}")
 
         all_bands_proxies = self.proxies[DeviceKey.ALL_BANDS]
         configure_scan_results = {}
