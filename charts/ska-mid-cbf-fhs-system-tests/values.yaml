@@ -74,6 +74,66 @@ ska-mid-cbf-fhs-vcc:
       deviceId: "5"
     - name: fhs-vcc-6
       deviceId: "6"
+    - name: fhs-vcc-7
+      deviceId: "7"
+    - name: fhs-vcc-8
+      deviceId: "8"
+    - name: fhs-vcc-9
+      deviceId: "9"
+    - name: fhs-vcc-10
+      deviceId: "10"
+    - name: fhs-vcc-11
+      deviceId: "11"
+    - name: fhs-vcc-12
+      deviceId: "12"
+    - name: fhs-vcc-13
+      deviceId: "13"
+    - name: fhs-vcc-14
+      deviceId: "14"
+    - name: fhs-vcc-15
+      deviceId: "15"
+    - name: fhs-vcc-16
+      deviceId: "16"
+    - name: fhs-vcc-17
+      deviceId: "17"
+    - name: fhs-vcc-18
+      deviceId: "18"
+    - name: fhs-vcc-19
+      deviceId: "19"
+    - name: fhs-vcc-20
+      deviceId: "20"
+    - name: fhs-vcc-21
+      deviceId: "21"
+    - name: fhs-vcc-22
+      deviceId: "22"
+    - name: fhs-vcc-23
+      deviceId: "23"
+    - name: fhs-vcc-24
+      deviceId: "24"
+    - name: fhs-vcc-25
+      deviceId: "25"
+    - name: fhs-vcc-26
+      deviceId: "26"
+    - name: fhs-vcc-27
+      deviceId: "27"
+    - name: fhs-vcc-28
+      deviceId: "28"
+    - name: fhs-vcc-29
+      deviceId: "29"
+    - name: fhs-vcc-30
+      deviceId: "30"
+    - name: fhs-vcc-31
+      deviceId: "31"
+    - name: fhs-vcc-32
+      deviceId: "32"
+    - name: fhs-vcc-33
+      deviceId: "33"
+    - name: fhs-vcc-34
+      deviceId: "34"
+    - name: fhs-vcc-35
+      deviceId: "35"
+    - name: fhs-vcc-36
+      deviceId: "36"
 
 ska-mid-cbf-fhs-vcc-boogie:
   enabled: true
