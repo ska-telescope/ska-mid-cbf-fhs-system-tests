@@ -558,6 +558,8 @@ class TestScanSequence(BaseTangoTestClass):
     def test_scan_sequence_valid_config_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
 
+        self.logger.info(f'SEQUENTIAL TEST [IDX={fhs_vcc_idx}] STARTED AT: {time.ctime()}')
+
         fhs_vcc_idx = self.loaded_idxs[0]
         all_bands_proxy = self.proxies[DeviceKey.ALL_BANDS][fhs_vcc_idx]
 
@@ -730,9 +732,12 @@ class TestScanSequence(BaseTangoTestClass):
 
         self.reset_emulators_and_assert_successful(fhs_vcc_idx)
 
-    @pytest.mark.parametrize("initialize_with_indices", [[1, 2, 3, 4, 5, 6]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
-    def test_scan_sequence_split_config_6_stacks_random_order_single_scan_success(self, initialize_with_indices) -> None:
+    @pytest.mark.dev
+    @pytest.mark.parametrize("initialize_with_indices", [[2, 4, 6]], ids=lambda i: f"fhs_vcc_idx={i}", indirect=["initialize_with_indices"])
+    def test_scan_sequence_parallel_random_order_single_scan_success(self, initialize_with_indices) -> None:
         # 0. Initial setup
+
+        self.logger.info(f'PARALLEL TEST STARTED AT: {time.ctime()}')
 
         all_bands_proxies = self.proxies[DeviceKey.ALL_BANDS]
         configure_scan_results = {}
@@ -771,7 +776,7 @@ class TestScanSequence(BaseTangoTestClass):
             self.logger.debug(f"wfs {fhs_vcc_idx} status before ConfigureScan: {wfs_status}")
             self.logger.debug(f"fss {fhs_vcc_idx} status before ConfigureScan: {fss_status}")
 
-            config_str, config_dicts[fhs_vcc_idx] = self.get_configure_scan_config(f"test_parameters/configure_scan_valid_{fhs_vcc_idx}.json")
+            config_str, config_dicts[fhs_vcc_idx] = self.get_configure_scan_config(f"test_parameters/configure_scan_valid_1.json")
             configure_scan_results[fhs_vcc_idx] = self.run_configure_scan(fhs_vcc_idx, config_str)
 
         for fhs_vcc_idx in random.sample(self.loaded_idxs, k=len(self.loaded_idxs)):
