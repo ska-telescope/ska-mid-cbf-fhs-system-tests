@@ -11,7 +11,7 @@ class BaseTangoTestClass:
     def all_proxies(self, logger: Logger):
         # Pre-load all combinations for indices 1-6
         logger.info("Creating proxies for all devices...")
-        proxies_cache = {(i,): {k: {i: create_proxy(i, k)} for k in DeviceKey} for i in range(1, 7)}
+        proxies_cache = {(i,): {k: {i: create_proxy(i, k)} for k in DeviceKey} for i in range(1, 24)}
         logger.info("Proxies created.")
         return proxies_cache
 
