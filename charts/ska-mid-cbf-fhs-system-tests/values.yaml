@@ -86,28 +86,6 @@ ska-mid-cbf-fhs-vcc:
       deviceId: "11"
     - name: fhs-vcc-12
       deviceId: "12"
-    - name: fhs-vcc-13
-      deviceId: "13"
-    - name: fhs-vcc-14
-      deviceId: "14"
-    - name: fhs-vcc-15
-      deviceId: "15"
-    - name: fhs-vcc-16
-      deviceId: "16"
-    - name: fhs-vcc-17
-      deviceId: "17"
-    - name: fhs-vcc-18
-      deviceId: "18"
-    - name: fhs-vcc-19
-      deviceId: "19"
-    - name: fhs-vcc-20
-      deviceId: "20"
-    - name: fhs-vcc-21
-      deviceId: "21"
-    - name: fhs-vcc-22
-      deviceId: "22"
-    - name: fhs-vcc-23
-      deviceId: "23"
 
 ska-mid-cbf-fhs-vcc-boogie:
   enabled: true
