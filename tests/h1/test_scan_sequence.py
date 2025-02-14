@@ -1002,7 +1002,7 @@ class TestScanSequence(BaseTangoTestClass):
 
         # 2. Run ConfigureScan()
 
-        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_invalid_wrong_num_gains.json", 3)
+        self.run_configure_scan_and_assert_failure(fhs_vcc_idx, "test_parameters/configure_scan_invalid_wrong_num_gains.json")
 
         assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
             device_name=self.fqdns[DeviceKey.ALL_BANDS][fhs_vcc_idx],
