@@ -965,7 +965,7 @@ class TestScanSequence(BaseTangoTestClass):
         # 2. Run ConfigureScan()
 
         self.run_configure_scan_and_assert_failure(
-            fhs_vcc_idx, "test_parameters/configure_scan_invalid_schema_mismatch.json", 5, "Arg provided does not match schema for ConfigureScan"
+            fhs_vcc_idx, "test_parameters/configure_scan_invalid_schema_mismatch.json"
         )
 
         assert_that(self.event_tracer).within_timeout(60).has_change_event_occurred(
